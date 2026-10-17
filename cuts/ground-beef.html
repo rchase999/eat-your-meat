@@ -31,15 +31,16 @@
   <filter id="ink"><feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="1" seed="9" result="t"/><feColorMatrix in="t" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.6 2.1" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter>
 </svg>
 <header class="header">
+  <p class="cutbar" data-cutbar>Courier Tue–Sun, order by 2 PM · Pickup in 2 hours · Ships Mon–Wed · Free courier on $100</p>
   <button class="iconbtn header__menu" data-open="menu" aria-label="Open menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <a class="logo" href="../index.html"><span class="logo__name">Eat Your Meat</span><span class="logo__tag" data-status>Kent Ave &amp; N 4th St<span class="logo__where">, Brooklyn</span></span></a>
   <nav class="nav" aria-label="Main">
-    <a href="../index.html#board">The board</a><a href="../index.html#box">Butcher’s Box</a><a href="../delivery.html">Delivery</a><a href="../about.html">About</a>
+    <a href="../index.html#board">The board</a><a href="../index.html#box">Butcher’s Box</a><a href="../delivery.html">Delivery</a><a href="../about.html">About</a><a href="../account.html">Account</a>
   </nav>
   <div class="sample" role="note" aria-label="About this site"><p>Sample shop: nothing is charged or sent.</p><button type="button" class="link" data-sample-ok>Got it</button></div>
   <div class="header__tools">
     <button class="tool" data-open="search"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><span class="tool__label">Search</span></button>
-    <button class="tool tool--cart" data-open="cart"><span class="tool__t">Ticket</span> <span data-ticket-no></span><span class="tool__count" data-cart-count>0</span><span class="sr-only" data-cart-unit> items</span></button>
+    <button class="tool tool--cart" data-open="cart"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Zm4 0V6a3 3 0 0 1 6 0v2"/></svg><span class="tool__t">Ticket</span> <span data-ticket-no></span><span class="tool__count" data-cart-count>0</span><span class="sr-only" data-cart-unit> items</span></button>
   </div>
 </header>
 <main id="main">
@@ -57,17 +58,18 @@
         <p class="pdp__src">Steer #2186 · Kittle Hollow Farm, Delhi, NY</p>
         <h1 class="pdp__name">Ground beef, 80/20</h1>
         
-        <p class="pdp__price"><b>$10/lb</b> <span>about <span data-pdp-weight>1 lb</span>, so about <span data-pdp-est>$10.00</span></span></p>
+        <p class="pdp__price"><b>$10/lb</b> <span>about <span data-pdp-weight>1 lb</span>, so about <span data-pdp-est>$10.00</span>, never more than <span data-pdp-max>$11.00</span></span></p>
         <fieldset class="opt"><legend>Pack</legend><div class="opt__row"><label><input type="radio" name="opt0" value="0" checked><span>1 lb pack<small>≈ $10.00</small></span></label><label><input type="radio" name="opt0" value="1" ><span>4 × ¼ lb patties<small>≈ $10.00</small></span></label></div></fieldset>
         <details class="note"><summary>Add a note for the counter</summary><label><span class="sr-only">Note for the counter</span><textarea name="note" maxlength="200" rows="2" placeholder="e.g. Trim the fat to a quarter inch"></textarea></label></details>
-        <div class="pdp__buy"><label class="qty"><span class="sr-only">Quantity</span><select name="qty" data-pdp-qty><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></label><button class="btn btn--red" type="submit">Put it on my ticket</button></div>
+        <div class="pdp__buy"><label class="qty"><span class="sr-only">Quantity</span><select name="qty" data-pdp-qty><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></label><button class="btn btn--red" type="submit">Add to ticket</button></div>
         <p class="stock " data-pdp-stock>30 left</p>
-        <p class="fine">We weigh it after we cut it. You pay that weight, never more than 10% over the estimate. <a href="../faq.html#what-does-charged-by-actual-weight-mean">How weighing works</a></p>
+        <p class="fine">Final price by weight. Spoiled, warm or the wrong cut? We replace it or refund it. <a href="../refunds.html">Refunds</a></p>
         <dl class="pdp__specs"><div><dt>Bone</dt><dd>Boneless</dd></div><div><dt>Feeds</dt><dd>3–4</dd></div></dl>
       </form>
-    </div>
-    <div class="pdp__more">
+      
+    </div><div class="pdp__more">
       <p class="pdp__desc">Trim from this steer, ground twice. 80% lean.</p>
+      <p class="pdp__good"><b>Good for:</b> skillet, grill.</p>
       <section class="pdp__sec"><h2>Take it off at</h2><ul class="temps"><li><b>160°F</b><span>Safe minimum</span></li></ul></section>
       <p class="pdp__store"><b>Keeping it.</b> Fridge, 1 to 2 days. Freezer, vacuum-sealed, up to 6 months. <a href="../food-safety.html">Storage and safety</a></p>
       

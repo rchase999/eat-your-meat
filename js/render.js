@@ -17,6 +17,8 @@
     if (left <= 0) return { text: 'All on your ticket', cls: 'is-low' };
     return { text: left === 1 ? 'Last one' : `${left} left`, cls: left <= 2 ? 'is-low' : '' };
   }
+  const GOOD = { steak: ['grill', 'skillet'], pork: ['skillet', 'oven'], lamb: ['oven', 'grill'], low: ['braise', 'smoke'], ground: ['skillet', 'grill'], poultry: ['oven'], breast: ['skillet', 'oven'], thigh: ['skillet', 'oven'], wings: ['oven', 'grill'] };
+  const goodFor = (item) => GOOD[item.cook] || (item.id === 'bacon' ? ['skillet'] : []);
   const notFresh = (item) => item.kept || (item.frozen ? 'Frozen' : null); // fresh is the default, so only the exceptions are shown
   const facts = (item) => [item.bone, notFresh(item), item.feeds].filter(Boolean).join(' · ');
 
@@ -50,10 +52,12 @@
     const sub = D.speciesOrder.map((sp) => D.animals[sp].chalk).filter(Boolean).join(' · ');
     const cols = D.chalkCols.map((sps) => `<div>${sps.map((sp) => `<h3 class="chalk__h">${esc(D.chalkLabel[sp])}${D.chalkNote[sp] ? ` <small>${esc(D.chalkNote[sp])}</small>` : ''}</h3>
       <ul class="chalk__list">${D.items.filter((i) => i.species === sp && i.chalk).map((it) => chalkLine(it, root, reserved)).join('')}</ul>`).join('')}</div>`).join('');
+    const pins = D.items.filter((i) => i.pin).map((it) => `<li class="pin" style="--tilt:${tilt(it.id)}deg"><a href="${root}cuts/${it.id}.html"><img src="${root}assets/draw/${it.id}.svg" alt="A drawing of ${esc(it.name.toLowerCase())}" width="400" height="300" loading="lazy"><span class="pin__name">${esc(it.chalk || it.short)}</span><span class="pin__price">${chalkPrice(it)}${it.unit === 'lb' ? '/lb' : ''}</span></a>${it.stock && reserved(it.id) < it.stock ? `<button class="add" data-add="${it.id}" aria-label="Add ${esc(it.name)} to your ticket">Add</button>` : ''}</li>`).join('');
     return `<div class="chalk">
       <div class="chalk__head"><div><h2 class="chalk__title" id="board-title">On the block</h2><p class="chalk__sub">${esc(sub)}</p></div><p class="chalk__upd">updated ${esc(D.clock.updated)}</p></div>
+      <ul class="pins">${pins}<li class="pin pin--all"><button type="button" data-view="labels">Every cut, with pictures<b>${D.items.length} →</b></button></li></ul>
       <div class="chalk__cols">${cols}</div>
-      <p class="chalk__foot"><a class="chalk__more" href="#full-list" data-view="list"><span>+ ${D.items.filter((i) => !i.chalk).length} more on the full list</span></a><span aria-hidden="true">— ${esc(D.shop.butcher[0])}.</span></p>
+      <p class="chalk__foot"><a class="chalk__more" href="#full-list" data-view="labels"><span>+ ${D.items.filter((i) => !i.chalk).length} more, with pictures</span></a><span aria-hidden="true">— ${esc(D.shop.butcher[0])}.</span></p>
     </div>`;
   }
 
@@ -131,8 +135,8 @@
       ${it.stock ? `<p class="pc__foot"><span class="stock ${st.cls}">${esc(st.text)}</span>${reserved(it.id) < it.stock ? `<button class="add" data-add="${it.id}" aria-label="Add ${esc(it.name)} to your ticket">Add</button>` : ''}</p>` : ''}</li>`;
   }
   const cardsHTML = (D, root, f = {}, reserved) => {
-    const items = sortItems(D.items.filter((i) => (!f.species || i.species === f.species) && (!f.primal || i.primal === f.primal)), f.sort);
-    return items.length ? `<ul class="pcs">${items.map((i) => labelCard(D, i, root, reserved)).join('')}</ul>` : boardHTML(D, root, f, reserved);
+    const items = sortItems(D.items.filter((i) => (!f.species || i.species === f.species) && (!f.primal || i.primal === f.primal) && (!f.good || goodFor(i).includes(f.good))), f.sort);
+    return items.length ? `<ul class="pcs">${items.map((i) => labelCard(D, i, root, reserved)).join('')}</ul>` : `<p class="board__empty">Nothing on the board matches that. <button class="link" data-clear>Show every cut</button></p>`;
   };
 
   // ---------------- primal diagrams ----------------
@@ -212,6 +216,7 @@
       .sort((a, b) => (!a.stock - !b.stock) || Math.abs(a.price - it.price) - Math.abs(b.price - it.price)).slice(0, 3);
   }
   const noteHTML = (n) => `<span class="drawn__note${n.by === 'DO' ? ' drawn__note--do' : ''}" style="left:${n.left}%;top:${n.top}%;width:${n.width}%">${esc(n.text)}</span>`;
+  const hasRegion = (it) => SHAPES[it.species] && it.primal && (SHAPES[it.species].regions[it.primal] || SHAPES[it.species].extra[it.primal]);
   function pdpHTML(D, it, root, notes = []) {
     const cfg = S.defaultCfg(it), a = D.animals[it.species], farm = a.farm ? D.farms[a.farm] : null, st = stockText(it);
     const first = D.shop.butcher.split(' ')[0];
@@ -223,32 +228,36 @@
     const store = it.storage || (it.frozen ? 'Thaw it in the fridge overnight.' : it.unit === 'each' ? 'Keep it in the fridge once opened.' : `Fridge, ${it.cook === 'ground' || it.species === 'chicken' ? '1 to 2 days' : '3 to 5 days'}. Freezer, vacuum-sealed, up to 6 months.`);
     const specs = [it.bone && ['Bone', it.bone], notFresh(it) && ['Kept', notFresh(it)], it.feeds && ['Feeds', it.feeds.replace('Feeds ', '')]].filter(Boolean); // the cut or made date is on the label
     const src = farm ? `${esc(a.label)} · ${esc(farm.name)}, ${esc(farm.place)}` : esc(D.speciesLabel[it.species]);
-    return `<nav class="crumbs" aria-label="Breadcrumb"><a href="${root}index.html#board">The board</a> <span aria-hidden="true">/</span> <a href="${root}index.html?species=${it.species}#board">${esc(D.speciesLabel[it.species])}</a> <span aria-hidden="true">/</span> <span aria-current="page">${esc(it.name)}</span></nav>
+    const html = `<nav class="crumbs" aria-label="Breadcrumb"><a href="${root}index.html#board">The board</a> <span aria-hidden="true">/</span> <a href="${root}index.html?species=${it.species}#board">${esc(D.speciesLabel[it.species])}</a> <span aria-hidden="true">/</span> <span aria-current="page">${esc(it.name)}</span></nav>
     <div class="pdp">
       <div class="pdp__media counter" style="--tilt:${tilt(it.id)}deg">${drawnHTML(it, root, true, tagHTML(D, it, { heading: 'p', link: false, priced: false }) + (it.stock ? '' : stampHTML(it)), notes.map(noteHTML).join(''))}</div>
       <form class="pdp__label" data-pdp="${it.id}">
         <p class="pdp__src">${src}</p>
         <h1 class="pdp__name">${esc(it.name)}</h1>
         ${it.says ? `<blockquote class="says"><p>“${esc(it.says)}”</p><footer>${esc(first)}</footer></blockquote>` : ''}
-        <p class="pdp__price"><b>${esc(perUnit(it))}</b> <span>${it.unit === 'lb' ? `about <span data-pdp-weight>${lb(S.weightOf(it, cfg))}</span>, so about <span data-pdp-est>${S.money(S.unitPrice(it, cfg))}</span>` : esc(it.size)}</span></p>
+        <p class="pdp__price"><b>${esc(perUnit(it))}</b> <span>${it.unit === 'lb' ? `about <span data-pdp-weight>${lb(S.weightOf(it, cfg))}</span>, so about <span data-pdp-est>${S.money(S.unitPrice(it, cfg))}</span>, never more than <span data-pdp-max>${S.money(S.round(S.unitPrice(it, cfg) * (1 + S.VARIANCE)))}</span>` : esc(it.size)}</span></p>
         ${it.stock ? `${opts}
         <details class="note"><summary>Add a note for the counter</summary><label><span class="sr-only">Note for the counter</span><textarea name="note" maxlength="200" rows="2" placeholder="e.g. Trim the fat to a quarter inch"></textarea></label></details>
-        <div class="pdp__buy"><label class="qty"><span class="sr-only">Quantity</span><select name="qty" data-pdp-qty>${Array.from({ length: Math.min(it.stock, 10) }, (_, i) => `<option>${i + 1}</option>`).join('')}</select></label><button class="btn btn--red" type="submit">Put it on my ticket</button></div>
+        <div class="pdp__buy"><label class="qty"><span class="sr-only">Quantity</span><select name="qty" data-pdp-qty>${Array.from({ length: Math.min(it.stock, 10) }, (_, i) => `<option>${i + 1}</option>`).join('')}</select></label><button class="btn btn--red" type="submit">Add to ticket</button></div>
         <p class="stock ${st.cls}" data-pdp-stock>${esc(st.text)}</p>
-        ${it.unit === 'lb' ? `<p class="fine">We weigh it after we cut it. You pay that weight, never more than 10% over the estimate. <a href="${root}faq.html#what-does-charged-by-actual-weight-mean">How weighing works</a></p>` : ''}`
-        : `<p class="pdp__soldout"><span class="stock is-out">Sold out <span data-when="sold" data-id="${it.id}">${esc(it.soldText || '')}</span>.</span> <a href="${root}contact.html">Ask us</a> when the next ${it.species === 'beef' ? 'steer' : 'animal'} comes in.</p>`}
+        <p class="fine">${it.unit === 'lb' ? `Final price by weight. ` : ''}Spoiled, warm or the wrong cut? We replace it or refund it. <a href="${root}refunds.html">Refunds</a></p>`
+        : `<p class="pdp__soldout"><span class="stock is-out">Sold out <span data-when="sold" data-id="${it.id}">${esc(it.soldText || '')}</span>.</span> Next ${esc({ beef: 'steer', pork: 'pigs', lamb: 'lambs', chicken: 'chickens' }[it.species] || 'batch')} Monday.</p>`}
         <dl class="pdp__specs">${specs.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
       </form>
-    </div>
-    <div class="pdp__more">
+      ${it.stock ? '' : `<form class="notify" data-notify="${it.id}" novalidate><label class="field">Tell me when it’s back<input type="email" name="email" autocomplete="email" required placeholder="you@example.com"></label><button class="btn btn--ink" type="submit">Tell me</button><p class="fine" data-notify-msg aria-live="polite"></p></form>`}
+    </div>`;
+    const good = goodFor(it), region = hasRegion(it);
+    const where = region ? `<section class="pdp__sec pdp__where"><h2>Where it comes from</h2><div class="pdp__where__row">${diagramSVG(D, it.species, it.primal, true)}<p>From the ${esc(D.primals[it.species][it.primal].toLowerCase())}.${good.length ? ` <b>Good for:</b> ${esc(good.join(', '))}.` : ''}</p></div></section>` : good.length ? `<p class="pdp__good"><b>Good for:</b> ${esc(good.join(', '))}.</p>` : '';
+    return html + `<div class="pdp__more">
       <p class="pdp__desc">${esc(it.desc)}</p>
+      ${where}
       ${temps}
       <p class="pdp__store"><b>Keeping it.</b> ${esc(store)} <a href="${root}food-safety.html">Storage and safety</a></p>
       ${sim.length ? `<section class="pdp__sec"><h2>Similar cuts</h2><ul class="pairs">${sim.map((p) => `<li><a href="${root}cuts/${p.id}.html">${esc(p.name)}</a><span>${esc(perUnit(p))}${p.stock ? '' : ' · sold out'}</span></li>`).join('')}</ul></section>` : ''}
     </div>`;
   }
 
-  const api = { shapeOf, esc, lb, weightText, perUnit, chalkPrice, stockText, facts, stampTimes, chalkHTML, boardHTML, cardsHTML, labelCard, tagHTML, diagramSVG, pdpHTML, similar, SHAPES };
+  const api = { goodFor, shapeOf, esc, lb, weightText, perUnit, chalkPrice, stockText, facts, stampTimes, chalkHTML, boardHTML, cardsHTML, labelCard, tagHTML, diagramSVG, pdpHTML, similar, SHAPES };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.EYM_RENDER = api;
 })(this);

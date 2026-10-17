@@ -31,15 +31,16 @@
   <filter id="ink"><feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="1" seed="9" result="t"/><feColorMatrix in="t" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.6 2.1" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter>
 </svg>
 <header class="header">
+  <p class="cutbar" data-cutbar>Courier Tue–Sun, order by 2 PM · Pickup in 2 hours · Ships Mon–Wed · Free courier on $100</p>
   <button class="iconbtn header__menu" data-open="menu" aria-label="Open menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <a class="logo" href="../index.html"><span class="logo__name">Eat Your Meat</span><span class="logo__tag" data-status>Kent Ave &amp; N 4th St<span class="logo__where">, Brooklyn</span></span></a>
   <nav class="nav" aria-label="Main">
-    <a href="../index.html#board">The board</a><a href="../index.html#box">Butcher’s Box</a><a href="../delivery.html">Delivery</a><a href="../about.html">About</a>
+    <a href="../index.html#board">The board</a><a href="../index.html#box">Butcher’s Box</a><a href="../delivery.html">Delivery</a><a href="../about.html">About</a><a href="../account.html">Account</a>
   </nav>
   <div class="sample" role="note" aria-label="About this site"><p>Sample shop: nothing is charged or sent.</p><button type="button" class="link" data-sample-ok>Got it</button></div>
   <div class="header__tools">
     <button class="tool" data-open="search"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><span class="tool__label">Search</span></button>
-    <button class="tool tool--cart" data-open="cart"><span class="tool__t">Ticket</span> <span data-ticket-no></span><span class="tool__count" data-cart-count>0</span><span class="sr-only" data-cart-unit> items</span></button>
+    <button class="tool tool--cart" data-open="cart"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Zm4 0V6a3 3 0 0 1 6 0v2"/></svg><span class="tool__t">Ticket</span> <span data-ticket-no></span><span class="tool__count" data-cart-count>0</span><span class="sr-only" data-cart-unit> items</span></button>
   </div>
 </header>
 <main id="main">
@@ -57,17 +58,20 @@
         <p class="pdp__src">3 pigs · Two Creeks Farm, Kutztown, PA</p>
         <h1 class="pdp__name">Fresh ham, half</h1>
         
-        <p class="pdp__price"><b>$7/lb</b> <span>about <span data-pdp-weight>8 lb</span>, so about <span data-pdp-est>$56.00</span></span></p>
+        <p class="pdp__price"><b>$7/lb</b> <span>about <span data-pdp-weight>8 lb</span>, so about <span data-pdp-est>$56.00</span>, never more than <span data-pdp-max>$61.60</span></span></p>
         
         <details class="note"><summary>Add a note for the counter</summary><label><span class="sr-only">Note for the counter</span><textarea name="note" maxlength="200" rows="2" placeholder="e.g. Trim the fat to a quarter inch"></textarea></label></details>
-        <div class="pdp__buy"><label class="qty"><span class="sr-only">Quantity</span><select name="qty" data-pdp-qty><option>1</option><option>2</option></select></label><button class="btn btn--red" type="submit">Put it on my ticket</button></div>
+        <div class="pdp__buy"><label class="qty"><span class="sr-only">Quantity</span><select name="qty" data-pdp-qty><option>1</option><option>2</option></select></label><button class="btn btn--red" type="submit">Add to ticket</button></div>
         <p class="stock is-low" data-pdp-stock>2 left</p>
-        <p class="fine">We weigh it after we cut it. You pay that weight, never more than 10% over the estimate. <a href="../faq.html#what-does-charged-by-actual-weight-mean">How weighing works</a></p>
+        <p class="fine">Final price by weight. Spoiled, warm or the wrong cut? We replace it or refund it. <a href="../refunds.html">Refunds</a></p>
         <dl class="pdp__specs"><div><dt>Bone</dt><dd>Bone-in</dd></div><div><dt>Feeds</dt><dd>10–12</dd></div></dl>
       </form>
-    </div>
-    <div class="pdp__more">
+      
+    </div><div class="pdp__more">
       <p class="pdp__desc">The back leg, uncured, skin on. Score the skin and roast it low for five hours.</p>
+      <section class="pdp__sec pdp__where"><h2>Where it comes from</h2><div class="pdp__where__row"><svg class="cuts" viewBox="0 0 640 340" role="img" aria-label="Pork diagram, Leg highlighted">
+      <defs><clipPath id="clip-pork-leg"><path d="M30 148 L30 176 C40 186 54 192 70 198 C88 206 104 212 118 218 C126 228 132 240 136 252 L138 300 L134 318 L160 318 L162 290 L164 264 C200 268 250 274 300 274 C350 274 404 270 448 258 C454 270 460 284 462 300 L458 318 L486 318 L490 296 C498 280 510 262 520 244 C530 220 536 192 536 164 C536 148 532 136 526 126 C510 110 470 100 420 98 L300 94 C250 94 220 96 196 100 C176 102 158 106 146 104 L134 74 L114 96 C100 104 86 112 72 120 C56 128 42 136 30 148 Z"/></clipPath></defs>
+      <g class="region  "><title>Head</title><path d="M0 0 L116 0 L116 284 L0 284 Z" clip-path="url(#clip-pork-leg)"/><text x="72" y="166">Head</text></g><g class="region  "><title>Shoulder</title><path d="M116 0 L214 0 L214 270 L116 220 Z" clip-path="url(#clip-pork-leg)"/><text x="164" y="168">Shoulder</text></g><g class="region  "><title>Loin</title><path d="M214 0 L424 0 L424 180 L214 184 Z" clip-path="url(#clip-pork-leg)"/><text x="318" y="140">Loin</text></g><g class="region  "><title>Belly</title><path d="M214 184 L424 180 L440 284 L214 284 Z" clip-path="url(#clip-pork-leg)"/><text x="320" y="232">Belly</text></g><g class="region  is-active"><title>Leg</title><path d="M424 0 L640 0 L640 280 L440 284 L424 180 Z" clip-path="url(#clip-pork-leg)"/><text x="482" y="176">Leg</text></g><g class="region  "><title>Hock</title><path d="M120 284 L196 284 L196 340 L120 340 Z M440 284 L500 284 L500 340 L440 340 Z" clip-path="url(#clip-pork-leg)"/></g><path class="cuts__outline" d="M30 148 L30 176 C40 186 54 192 70 198 C88 206 104 212 118 218 C126 228 132 240 136 252 L138 300 L134 318 L160 318 L162 290 L164 264 C200 268 250 274 300 274 C350 274 404 270 448 258 C454 270 460 284 462 300 L458 318 L486 318 L490 296 C498 280 510 262 520 244 C530 220 536 192 536 164 C536 148 532 136 526 126 C510 110 470 100 420 98 L300 94 C250 94 220 96 196 100 C176 102 158 106 146 104 L134 74 L114 96 C100 104 86 112 72 120 C56 128 42 136 30 148 Z"/><path class="cuts__deco" d="M528 124 C540 112 552 120 546 130 C540 140 554 146 560 136"/><text class="cuts__leg" x="74" y="300">Hock</text><path class="cuts__lead" d="M100 296 L134 292"/></svg><p>From the leg. <b>Good for:</b> skillet, oven.</p></div></section>
       <section class="pdp__sec"><h2>Take it off at</h2><ul class="temps"><li><b>140°F</b><span>Medium</span></li><li><b>145°F</b><span>Medium-well</span></li></ul><p class="fine">Chef’s temperatures. The <a href="../food-safety.html">USDA’s</a> are higher.</p></section>
       <p class="pdp__store"><b>Keeping it.</b> Fridge, 3 to 5 days. Freezer, vacuum-sealed, up to 6 months. <a href="../food-safety.html">Storage and safety</a></p>
       <section class="pdp__sec"><h2>Similar cuts</h2><ul class="pairs"><li><a href="../cuts/pork-chops.html">Pork loin chops, boneless</a><span>$15/lb</span></li><li><a href="../cuts/pork-tenderloin.html">Pork tenderloin</a><span>$16/lb · sold out</span></li></ul></section>

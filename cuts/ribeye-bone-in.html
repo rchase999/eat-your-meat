@@ -31,15 +31,16 @@
   <filter id="ink"><feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="1" seed="9" result="t"/><feColorMatrix in="t" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.6 2.1" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter>
 </svg>
 <header class="header">
+  <p class="cutbar" data-cutbar>Courier Tue–Sun, order by 2 PM · Pickup in 2 hours · Ships Mon–Wed · Free courier on $100</p>
   <button class="iconbtn header__menu" data-open="menu" aria-label="Open menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <a class="logo" href="../index.html"><span class="logo__name">Eat Your Meat</span><span class="logo__tag" data-status>Kent Ave &amp; N 4th St<span class="logo__where">, Brooklyn</span></span></a>
   <nav class="nav" aria-label="Main">
-    <a href="../index.html#board">The board</a><a href="../index.html#box">Butcher’s Box</a><a href="../delivery.html">Delivery</a><a href="../about.html">About</a>
+    <a href="../index.html#board">The board</a><a href="../index.html#box">Butcher’s Box</a><a href="../delivery.html">Delivery</a><a href="../about.html">About</a><a href="../account.html">Account</a>
   </nav>
   <div class="sample" role="note" aria-label="About this site"><p>Sample shop: nothing is charged or sent.</p><button type="button" class="link" data-sample-ok>Got it</button></div>
   <div class="header__tools">
     <button class="tool" data-open="search"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><span class="tool__label">Search</span></button>
-    <button class="tool tool--cart" data-open="cart"><span class="tool__t">Ticket</span> <span data-ticket-no></span><span class="tool__count" data-cart-count>0</span><span class="sr-only" data-cart-unit> items</span></button>
+    <button class="tool tool--cart" data-open="cart"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Zm4 0V6a3 3 0 0 1 6 0v2"/></svg><span class="tool__t">Ticket</span> <span data-ticket-no></span><span class="tool__count" data-cart-count>0</span><span class="sr-only" data-cart-unit> items</span></button>
   </div>
 </header>
 <main id="main">
@@ -57,17 +58,20 @@
         <p class="pdp__src">Steer #2186 · Kittle Hollow Farm, Delhi, NY</p>
         <h1 class="pdp__name">Bone-in ribeye</h1>
         <blockquote class="says"><p>“I cook an inch and a half at home and save the two-inch ones for the grill.”</p><footer>Marisol</footer></blockquote>
-        <p class="pdp__price"><b>$34/lb</b> <span>about <span data-pdp-weight>1.6 lb</span>, so about <span data-pdp-est>$54.40</span></span></p>
+        <p class="pdp__price"><b>$34/lb</b> <span>about <span data-pdp-weight>1.6 lb</span>, so about <span data-pdp-est>$54.40</span>, never more than <span data-pdp-max>$59.84</span></span></p>
         <fieldset class="opt"><legend>Thickness</legend><div class="opt__row"><label><input type="radio" name="opt0" value="0" checked><span>1½″<small>≈ $54.40</small></span></label><label><input type="radio" name="opt0" value="1" ><span>2″<small>≈ $71.40</small></span></label></div></fieldset>
         <details class="note"><summary>Add a note for the counter</summary><label><span class="sr-only">Note for the counter</span><textarea name="note" maxlength="200" rows="2" placeholder="e.g. Trim the fat to a quarter inch"></textarea></label></details>
-        <div class="pdp__buy"><label class="qty"><span class="sr-only">Quantity</span><select name="qty" data-pdp-qty><option>1</option><option>2</option><option>3</option><option>4</option></select></label><button class="btn btn--red" type="submit">Put it on my ticket</button></div>
+        <div class="pdp__buy"><label class="qty"><span class="sr-only">Quantity</span><select name="qty" data-pdp-qty><option>1</option><option>2</option><option>3</option><option>4</option></select></label><button class="btn btn--red" type="submit">Add to ticket</button></div>
         <p class="stock " data-pdp-stock>4 left</p>
-        <p class="fine">We weigh it after we cut it. You pay that weight, never more than 10% over the estimate. <a href="../faq.html#what-does-charged-by-actual-weight-mean">How weighing works</a></p>
+        <p class="fine">Final price by weight. Spoiled, warm or the wrong cut? We replace it or refund it. <a href="../refunds.html">Refunds</a></p>
         <dl class="pdp__specs"><div><dt>Bone</dt><dd>Bone-in</dd></div><div><dt>Feeds</dt><dd>2</dd></div></dl>
       </form>
-    </div>
-    <div class="pdp__more">
+      
+    </div><div class="pdp__more">
       <p class="pdp__desc">From ribs 6 to 12. The bone slows the heat down, so the meat next to it stays juicy.</p>
+      <section class="pdp__sec pdp__where"><h2>Where it comes from</h2><div class="pdp__where__row"><svg class="cuts" viewBox="0 0 640 340" role="img" aria-label="Beef diagram, Rib highlighted">
+      <defs><clipPath id="clip-beef-rib"><path d="M42 166 C38 158 38 148 44 140 L58 118 C64 108 72 100 84 96 L74 90 L66 82 L80 80 L96 88 C102 82 108 76 112 66 C116 72 116 80 114 86 L128 92 C150 100 168 98 186 94 C194 90 202 86 214 86 C232 90 260 94 300 96 L400 98 L498 100 C520 102 536 108 546 118 C548 136 546 158 540 182 C532 210 520 234 506 250 C500 262 496 276 494 292 L492 320 L466 318 L466 292 C462 274 458 256 452 242 L428 252 C390 264 346 268 300 266 C250 262 214 256 184 252 C180 262 178 278 176 296 L176 320 L150 318 L150 296 C152 280 152 262 150 244 L142 234 C136 228 130 220 124 210 C118 204 112 196 104 188 C94 192 82 192 70 188 C58 184 48 178 42 166 Z"/></clipPath></defs>
+      <g class="region  "><title>Head</title><path d="M0 0 L122 0 L114 188 L0 188 Z" clip-path="url(#clip-beef-rib)"/><text x="76" y="146">Head</text></g><g class="region  "><title>Chuck</title><path d="M122 0 L222 0 L222 196 L114 188 Z" clip-path="url(#clip-beef-rib)"/><text x="172" y="140">Chuck</text></g><g class="region  "><title>Brisket</title><path d="M114 188 L222 196 L222 272 L140 272 Z" clip-path="url(#clip-beef-rib)"/><text x="182" y="234">Brisket</text></g><g class="region  "><title>Shank</title><path d="M120 272 L222 272 L222 340 L120 340 Z M440 276 L520 276 L520 340 L440 340 Z" clip-path="url(#clip-beef-rib)"/></g><g class="region  is-active"><title>Rib</title><path d="M222 0 L304 0 L304 178 L222 188 Z" clip-path="url(#clip-beef-rib)"/><text x="263" y="136">Rib</text></g><g class="region  "><title>Plate</title><path d="M222 188 L304 178 L304 272 L222 272 Z" clip-path="url(#clip-beef-rib)"/><text x="263" y="228">Plate</text></g><g class="region  "><title>Loin</title><path d="M304 0 L420 0 L420 170 L304 178 Z" clip-path="url(#clip-beef-rib)"/><text x="362" y="132">Loin</text></g><g class="region  "><title>Flank</title><path d="M304 178 L420 170 L448 272 L304 272 Z" clip-path="url(#clip-beef-rib)"/><text x="372" y="222">Flank</text></g><g class="region  "><title>Round</title><path d="M420 0 L640 0 L640 276 L440 276 L448 272 L420 170 Z" clip-path="url(#clip-beef-rib)"/><text x="488" y="168">Round</text></g><g class="region  "><title>Tail</title><path d="M544 114 C552 150 556 194 558 236 L572 256 L552 258 L550 236 C548 194 544 152 536 120 Z" /><text x="596" y="214">Tail</text></g><path class="cuts__outline" d="M42 166 C38 158 38 148 44 140 L58 118 C64 108 72 100 84 96 L74 90 L66 82 L80 80 L96 88 C102 82 108 76 112 66 C116 72 116 80 114 86 L128 92 C150 100 168 98 186 94 C194 90 202 86 214 86 C232 90 260 94 300 96 L400 98 L498 100 C520 102 536 108 546 118 C548 136 546 158 540 182 C532 210 520 234 506 250 C500 262 496 276 494 292 L492 320 L466 318 L466 292 C462 274 458 256 452 242 L428 252 C390 264 346 268 300 266 C250 262 214 256 184 252 C180 262 178 278 176 296 L176 320 L150 318 L150 296 C152 280 152 262 150 244 L142 234 C136 228 130 220 124 210 C118 204 112 196 104 188 C94 192 82 192 70 188 C58 184 48 178 42 166 Z"/><text class="cuts__leg" x="84" y="300">Shank</text><path class="cuts__lead" d="M108 296 L150 290"/></svg><p>From the rib. <b>Good for:</b> grill, skillet.</p></div></section>
       <section class="pdp__sec"><h2>Take it off at</h2><ul class="temps"><li><b>120°F</b><span>Rare</span></li><li><b>128°F</b><span>Medium-rare</span></li><li><b>135°F</b><span>Medium</span></li></ul><p class="fine">Chef’s temperatures. The <a href="../food-safety.html">USDA’s</a> are higher.</p></section>
       <p class="pdp__store"><b>Keeping it.</b> Fridge, 3 to 5 days. Freezer, vacuum-sealed, up to 6 months. <a href="../food-safety.html">Storage and safety</a></p>
       <section class="pdp__sec"><h2>Similar cuts</h2><ul class="pairs"><li><a href="../cuts/strip.html">Strip steak</a><span>$32/lb</span></li><li><a href="../cuts/ribeye.html">Ribeye, boneless</a><span>$38/lb</span></li><li><a href="../cuts/hanger.html">Hanger steak</a><span>$22/lb</span></li></ul></section>

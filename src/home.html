@@ -1,8 +1,8 @@
 <div class="stage">
   <section class="board" id="board" data-board-wrap data-mode="chalk" aria-label="This week’s board">
     <div class="board__switch">
-      <div class="seg" role="group" aria-label="Show the board as"><button aria-pressed="true" data-view="chalk">Board</button><button aria-pressed="false" data-view="list">Full list</button><button aria-pressed="false" data-view="labels">Labels</button></div>
-      <p class="fine board__hint">Exact weights, stock and estimates are on the <button class="link" type="button" data-view="list">full list</button>.</p>
+      <div class="seg" role="group" aria-label="Show the board as"><button aria-pressed="true" data-view="chalk">The board</button><button aria-pressed="false" data-view="labels">All cuts</button></div>
+      <p class="fine board__hint">Every cut with a picture, weight and stock is under <button class="link" type="button" data-view="labels">All cuts</button>.</p>
     </div>
     <div class="board__frame">
       <div class="board__tools">
@@ -20,6 +20,9 @@
           <div class="seg" role="group" aria-label="Show">
             <button aria-pressed="true" data-species="">All</button><button aria-pressed="false" data-species="beef">Beef</button><button aria-pressed="false" data-species="pork">Pork</button><button aria-pressed="false" data-species="lamb">Lamb</button><button aria-pressed="false" data-species="chicken">Chicken</button><button aria-pressed="false" data-species="house">Made here</button>
           </div>
+          <div class="seg" role="group" aria-label="Good for">
+            <button aria-pressed="true" data-good="">Any cooking</button><button aria-pressed="false" data-good="grill">Grill</button><button aria-pressed="false" data-good="skillet">Skillet</button><button aria-pressed="false" data-good="oven">Oven</button><button aria-pressed="false" data-good="braise">Low and slow</button>
+          </div>
           <label class="select"><span>Sort</span><select data-sort><option value="">Board order</option><option value="price-asc">Price per lb, low to high</option><option value="price-desc">Price per lb, high to low</option></select></label>
         </div>
         <p class="board__note" data-filter-note aria-live="polite"></p>
@@ -34,6 +37,7 @@
     <div class="door__cap">
       <h1 id="hero-title">Kent Ave &amp; N 4th.<br>Whole animals since 2019.</h1>
       <p>A block from the river, five minutes from the Bedford Ave L.</p>
+      <a class="btn btn--red door__cta" href="#board">Shop this week’s board</a>
     </div>
   </section>
 
@@ -61,7 +65,6 @@
       <blockquote><p>{{counterText}}</p></blockquote>
       <figcaption>{{counterName}}, {{counterWhere}}</figcaption>
     </figure>
-    <p class="slip-note slip-note--plain">Not on the board? We can usually get {{special}} within a week, and a whole suckling pig with 10 days’ notice. <a href="contact.html">Ask us</a>.</p>
   </div>
 </div>
 
@@ -70,25 +73,25 @@
 <section class="block block--box" id="box" aria-labelledby="box-title">
   <div class="block__head">
     <h2 id="box-title">The Butcher’s Box</h2>
-    <p>Pick 6, 10 or 14 cuts from the board, or take {{butcherFirst}}’s pick. Subscribe and it’s 10% off.</p>
+    <p>6, 10 or 14 cuts, cut Wednesdays. Subscribe and it’s 10% off.</p>
   </div>
   <ol class="week" aria-label="The shop’s week">
-    <li data-wd="1"><b>Mon</b><span>Animals in and cut. Closed to walk-ins.</span></li>
+    <li data-wd="1"><b>Mon</b><span>Animals in and cut. Closed.</span></li>
     <li data-wd="2"><b>Tue</b><span>Open 9–7</span></li>
     <li data-wd="3"><b>Wed</b><span>Boxes cut. Open 9–7</span></li>
     <li data-wd="4"><b>Thu</b><span>Open 9–7</span></li>
     <li data-wd="5"><b>Fri</b><span>Open 9–7</span></li>
     <li data-wd="6"><b>Sat</b><span>Open 9–7</span></li>
-    <li data-wd="0"><b>Sun</b><span>Open 10–5. Box changes close at 11:59 PM.</span></li>
+    <li data-wd="0"><b>Sun</b><span>Open 10–5. Box cutoff 11:59 PM.</span></li>
   </ol>
   <div class="box">
     <div class="box__config">
       <fieldset class="opt">
         <legend>How many cuts</legend>
         <div class="opt__row opt__row--3" data-box-size>
-          <label><input type="radio" name="bsize" value="6" checked><span>6 cuts<small>Dinner for two, about a week</small></span></label>
-          <label><input type="radio" name="bsize" value="10"><span>10 cuts<small>A family of four, about a week</small></span></label>
-          <label><input type="radio" name="bsize" value="14"><span>14 cuts<small>A family of four, plus leftovers</small></span></label>
+          <label><input type="radio" name="bsize" value="6" checked><span>6 cuts<small>Two people, a week</small></span></label>
+          <label><input type="radio" name="bsize" value="10"><span>10 cuts<small>Four people, a week</small></span></label>
+          <label><input type="radio" name="bsize" value="14"><span>14 cuts<small>Four, plus leftovers</small></span></label>
         </div>
       </fieldset>
       <fieldset class="opt">
@@ -103,8 +106,8 @@
       <fieldset class="opt">
         <legend>What goes in</legend>
         <div class="opt__row opt__row--2" data-box-mode>
-          <label><input type="radio" name="bmode" value="pick" checked><span>{{butcherFirst}}’s pick<small>A fixed list, with her note</small></span></label>
-          <label><input type="radio" name="bmode" value="own"><span>I’ll choose<small>Any box cuts on the board</small></span></label>
+          <label><input type="radio" name="bmode" value="pick" checked><span>{{butcherFirst}}’s pick<small>Her list</small></span></label>
+          <label><input type="radio" name="bmode" value="own"><span>I’ll choose<small>Any box cut</small></span></label>
         </div>
       </fieldset>
       <div class="pick" data-box-pick></div>
@@ -116,7 +119,7 @@
 </section>
 
 <section class="block block--delivery" id="delivery" aria-labelledby="delivery-title">
-  <h2 id="delivery-title" class="block__h">Getting it home</h2>
+  <h2 id="delivery-title" class="block__h">Delivery</h2>
   <div class="delivery">
     <div class="delivery__main">
       <form class="zip dtag" data-zip novalidate>
@@ -126,11 +129,11 @@
         <p class="zip__out" id="zip-out" data-zip-out aria-live="polite"></p>
       </form>
       <ul class="ways3" aria-label="Delivery options">
-        <li><h3>Same-evening courier</h3><p>Brooklyn and Manhattan. $8, free on $100 of meat or more.</p><p class="ways3__next" data-next="courier">Order by 2 PM, delivered 5–⁠9 PM</p></li>
-        <li><h3>Overnight shipping</h3><p>The lower 48 states. $19, free on $200 of meat or more.</p><p class="ways3__next" data-next="ship">Order by noon Mon–Wed, arrives the next day</p></li>
+        <li><h3>Same-evening courier</h3><p>Brooklyn and Manhattan. $8, free over $100.</p><p class="ways3__next" data-next="courier">Order by 2 PM, delivered 5–⁠9 PM</p></li>
+        <li><h3>Overnight shipping</h3><p>The lower 48. $19, free over $200.</p><p class="ways3__next" data-next="ship">Order by noon Mon–Wed, arrives the next day</p></li>
         <li><h3>Pickup</h3><p>Kent Ave &amp; N 4th St. Free.</p><p class="ways3__next" data-next="pickup">Ready 2 hours after you order</p></li>
       </ul>
-      <p class="fine">All times Eastern. We don’t ship to Alaska, Hawaii, US territories or outside the US, because the box only stays below 40°F for 48 hours. <a href="delivery.html">How delivery works</a></p>
+      <p class="fine">All times Eastern. The lower 48 only. <a href="delivery.html">How delivery works</a></p>
     </div>
     <figure class="delivery__map">
       {{map}}
@@ -153,13 +156,9 @@
     <tbody>{{farms}}</tbody>
   </table>
   <ol class="story">
-    <li><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/cutting.webp" alt="Gloved hands slicing a beef roast on a wooden block" width="1200" height="900" loading="lazy"><figcaption><b>Three weeks in the cooler.</b> Then the steer comes down onto the block.</figcaption></figure></li>
-    <li><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/scale.webp" alt="A hanging scale weighing ground meat, with sausage links on the steel counter" width="1200" height="900" loading="lazy"><figcaption><b>Weighed after it’s cut.</b> That’s the weight you pay for.</figcaption></figure></li>
-    <li><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/sausage.webp" alt="Hands twisting fresh sausage into links" width="1200" height="900" loading="lazy"><figcaption><b>The trim goes into sausage.</b> Bones go into stock, and the fat is rendered into tallow.</figcaption></figure></li>
+    <li><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/cutting.webp" alt="Gloved hands slicing a beef roast on a wooden block" width="1200" height="900" loading="lazy"><figcaption><b>Three weeks in the cooler,</b> then the block.</figcaption></figure></li>
+    <li><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/scale.webp" alt="A hanging scale weighing ground meat, with sausage links on the steel counter" width="1200" height="900" loading="lazy"><figcaption><b>Weighed after cutting.</b> You pay for that weight.</figcaption></figure></li>
+    <li><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/sausage.webp" alt="Hands twisting fresh sausage into links" width="1200" height="900" loading="lazy"><figcaption><b>Trim into sausage,</b> bones into stock, fat into tallow.</figcaption></figure></li>
   </ol>
-  <blockquote class="quote">
-    <p>“We hang beef for 21 days. It keeps getting better after that, but so does the crust we trim off, and you’d be paying for both.”</p>
-    <footer>{{butcher}}, head butcher. 22 years at the block, the last seven here.</footer>
-  </blockquote>
   <p><a class="btn btn--line" href="about.html">More about us and the farms</a></p>
 </section>

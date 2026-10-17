@@ -43,7 +43,7 @@
   const nextNo = (n) => (n >= 99 ? 10 : n + 1); // the deli roll runs 10 to 99
   // shortcut: a placed ticket is "yours" for 8 hours, long enough for today's pickup or courier; a real shop would clear it at handover
   const loadPlaced = () => { const p = load('eym.placed', null); return p && Number.isInteger(p.no) && typeof p.text === 'string' && p.until > Date.now() ? p : null; };
-  const state = { cart: loadCart(), zip: loadZip(), method: load('eym.method', ''), ticket: loadTicket(), placed: loadPlaced(), f: { species: '', primal: '', sort: '', view: 'chalk' }, box: { size: 6, freq: 4, mode: 'pick', own: [] } };
+  const state = { cart: loadCart(), zip: loadZip(), method: load('eym.method', ''), ticket: loadTicket(), placed: loadPlaced(), f: { species: '', primal: '', sort: '', good: '', view: 'chalk' }, box: { size: 6, freq: 4, mode: 'pick', own: [] } };
   if (!state.placed && load('eym.placed', null)) { state.ticket = nextNo(state.ticket); localStorage.removeItem('eym.placed'); } // the old order's time is up: the next visit gets a fresh number
   save('eym.ticket', state.ticket); // the number you pulled stays the same on every page
   const persist = () => { save('eym.cart', state.cart); save('eym.zip', state.zip); save('eym.method', state.method); save('eym.ticket', state.ticket); };
@@ -120,7 +120,8 @@
     return o.open ? { open: true, text: `till ${clock(o.until)}` } : { open: false, text: `back ${dayLabel(t, o.day)} ${clock(o.at)}` };
   }
   function paintSign() {
-    const h = hoursText();
+    const h = hoursText(), t = now(), c = S.nextCourier(t), sh = S.nextShip(t);
+    $$('[data-cutbar]').forEach((el) => (el.textContent = `${c === 0 ? 'Order by 2 PM for the courier tonight in Brooklyn and Manhattan' : `Next courier ${dayLabel(t, c)} evening, order by 2 PM`} · Pickup in 2 hours · ${sh.ship === 0 ? 'Ships today, order by noon' : `Ships ${dayLabel(t, sh.ship)}`} · Free courier on $100`));
     $$('[data-status]').forEach((el) => (el.innerHTML = `<b class="${h.open ? 'is-open' : 'is-closed'}">${h.open ? 'Open' : 'Closed'}</b> ${esc(h.text)}<span class="logo__where"> · ${esc(D.shop.street)}</span>`));
     $$('[data-sign]').forEach((el) => { el.classList.toggle('is-closed', !h.open); el.innerHTML = `<b>${h.open ? 'Open' : 'Closed'}</b><small>${esc(h.text)}</small>`; });
   }
@@ -137,7 +138,7 @@
       if (sig !== boardSig && !$('[data-board]').contains(document.activeElement)) renderBoard();
     }
   }, 60000);
-  $$('[data-sample-ok]').forEach((b) => b.addEventListener('click', () => { save('eym.sample', 1); document.documentElement.classList.add('sample-ok'); }));
+  $$('[data-sample-ok]').forEach((b) => b.addEventListener('click', () => { save('eym.sample', 1); document.documentElement.classList.add('sample-ok'); slipHeight(); }));
   const slip = $('.sample'), slipHeight = () => slip && document.documentElement.style.setProperty('--slip-h', `${slip.offsetHeight}px`);
   slipHeight(); addEventListener('resize', slipHeight);
   fillTimes();
@@ -455,7 +456,7 @@
     boardSig = JSON.stringify(D.items.filter((i) => i.soldOut).map((i) => i.soldText));
     const v = state.f.view;
     $('[data-board-wrap]').dataset.mode = v;
-    el.innerHTML = v === 'chalk' ? R.chalkHTML(D, root, reserved) : v === 'labels' ? R.cardsHTML(D, root, state.f, reserved) : R.boardHTML(D, root, state.f, reserved);
+    el.innerHTML = v === 'chalk' ? R.chalkHTML(D, root, reserved) : R.cardsHTML(D, root, state.f, reserved);
     $$('[data-board-wrap] .seg [data-view]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
     const { species, primal } = state.f;
     const note = $('[data-filter-note]');
@@ -464,6 +465,7 @@
       note.innerHTML = `Showing ${esc(D.speciesLabel[species])}, ${esc(D.primals[species][primal])}: ${n} cut${n > 1 ? 's' : ''}. <button class="link" type="button" data-clear>Show the whole board</button>`;
     } else note.textContent = '';
     $$('[data-board-wrap] .seg [data-species]').forEach((b) => b.setAttribute('aria-pressed', String(!primal && b.dataset.species === species)));
+    $$('[data-board-wrap] .seg [data-good]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.good === state.f.good)));
     $$('.cutmap [data-primal]').forEach((b) => {
       const on = b.dataset.primal === primal && b.dataset.species === species;
       if (b.tagName === 'BUTTON') b.setAttribute('aria-pressed', String(on)); else b.classList.toggle('is-active', on);
@@ -504,16 +506,18 @@
   }
   function initHome() {
     const params = new URLSearchParams(location.search);
-    if (D.speciesOrder.includes(params.get('species'))) Object.assign(state.f, { species: params.get('species'), view: 'list' });
+    if (D.speciesOrder.includes(params.get('species'))) Object.assign(state.f, { species: params.get('species'), view: 'labels' });
     paintHomeTimes();
     renderTicketCard();
 
     $('[data-board-wrap]').addEventListener('click', (e) => {
       const sp = e.target.closest('.seg [data-species]');
-      if (sp) setFilter({ species: sp.dataset.species, primal: '', view: state.f.view === 'chalk' ? 'list' : state.f.view });
+      if (sp) setFilter({ species: sp.dataset.species, primal: '', view: 'labels' });
+      const gd = e.target.closest('.seg [data-good]');
+      if (gd) setFilter({ good: gd.dataset.good, view: 'labels' });
       const v = e.target.closest('[data-view]');
       if (v) { e.preventDefault(); setFilter({ view: v.dataset.view }); if (!v.closest('.board__switch .seg')) $('.board__switch .seg [aria-pressed="true"]').focus(); }
-      if (e.target.closest('[data-clear]')) setFilter({ species: '', primal: '' });
+      if (e.target.closest('[data-clear]')) setFilter({ species: '', primal: '', good: '' });
     });
     $('[data-sort]').addEventListener('change', (e) => setFilter({ sort: e.target.value }));
     $('#board').addEventListener('click', (e) => {
@@ -601,7 +605,7 @@
         <div><dt>${list.length} of ${size} cuts</dt><dd>${S.money(q.list)}</dd></div>
         ${list.length && q.discount ? `<div><dt>Subscriber discount, 10%</dt><dd>−${S.money(q.saved)}</dd></div>` : ''}
         <div class="is-total"><dt>Estimate per box</dt><dd>${S.money(q.price)}</dd></div></dl></div>
-      ${list.length ? `<p class="terms">${esc(terms)}</p>` : ''}
+      ${list.length ? `<details class="terms"><summary>${esc(first)}</summary><p>${esc(terms.slice(first.length + 1))}</p></details>` : ''}
       <button class="btn btn--red" type="button" data-box-add ${ready ? '' : 'disabled'}>${ready ? `Put the box on my ticket · ${S.money(q.price)}` : short.length ? 'Not enough left for this box' : `Choose ${size - list.length} more cut${size - list.length === 1 ? '' : 's'}`}</button>`;
     $('[data-box-bar]').innerHTML = `<span>${list.length} of ${size} cuts · ${S.money(q.price)}</span><button class="btn btn--red" type="button" data-box-jump>Review box</button>`;
   }
@@ -658,13 +662,23 @@
     }
   }
   function initPdp() {
+    const nf = $('[data-notify]');
+    nf?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = nf.elements.email.value.trim(), msg = $('[data-notify-msg]');
+      if (!isEmail(email)) { msg.textContent = 'Enter an email address, like you@example.com.'; nf.elements.email.focus(); return; }
+      const list = load('eym.notify', []);
+      save('eym.notify', [...(Array.isArray(list) ? list : []), { id: nf.dataset.notify, email }]);
+      nf.reset(); msg.textContent = 'Thanks. We’ll email you when the next one is on the board.';
+    });
     const form = $('[data-pdp]');
     if (!form) return;
     const it = byId[form.dataset.pdp];
     const opts = () => (it.options || []).map((o, i) => (o.choices.length < 2 ? 0 : Number(new FormData(form).get(`opt${i}`))));
     form.addEventListener('change', () => {
-      const est = $('[data-pdp-est]', form);
+      const est = $('[data-pdp-est]', form), mx = $('[data-pdp-max]', form);
       if (est) est.textContent = S.money(S.unitPrice(it, { opts: opts() }));
+      if (mx) mx.textContent = S.money(S.round(S.unitPrice(it, { opts: opts() }) * (1 + S.VARIANCE)));
       const w = $('[data-pdp-weight]', form);
       if (w) w.textContent = R.lb(S.weightOf(it, { opts: opts() }));
       hydratePdpStock();

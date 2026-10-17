@@ -23,20 +23,22 @@ const relLinks = (html, root) => html.replace(/href="\/(#?)([^"]*)"/g, (_, hash,
 const icon = {
   search: '<svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>',
   menu: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
+  bag: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Zm4 0V6a3 3 0 0 1 6 0v2"/></svg>',
   close: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg>',
 };
 
 function header(root) {
   return `<header class="header">
+  <p class="cutbar" data-cutbar>Courier Tue–Sun, order by 2 PM · Pickup in 2 hours · Ships Mon–Wed · Free courier on $100</p>
   <button class="iconbtn header__menu" data-open="menu" aria-label="Open menu">${icon.menu}</button>
   <a class="logo" href="${root}index.html"><span class="logo__name">Eat Your Meat</span><span class="logo__tag" data-status>Kent Ave &amp; N 4th St<span class="logo__where">, Brooklyn</span></span></a>
   <nav class="nav" aria-label="Main">
-    <a href="${root}index.html#board">The board</a><a href="${root}index.html#box">Butcher’s Box</a><a href="${root}delivery.html">Delivery</a><a href="${root}about.html">About</a>
+    <a href="${root}index.html#board">The board</a><a href="${root}index.html#box">Butcher’s Box</a><a href="${root}delivery.html">Delivery</a><a href="${root}about.html">About</a><a href="${root}account.html">Account</a>
   </nav>
   <div class="sample" role="note" aria-label="About this site"><p>Sample shop: nothing is charged or sent.</p><button type="button" class="link" data-sample-ok>Got it</button></div>
   <div class="header__tools">
     <button class="tool" data-open="search">${icon.search}<span class="tool__label">Search</span></button>
-    <button class="tool tool--cart" data-open="cart"><span class="tool__t">Ticket</span> <span data-ticket-no></span><span class="tool__count" data-cart-count>0</span><span class="sr-only" data-cart-unit> items</span></button>
+    <button class="tool tool--cart" data-open="cart">${icon.bag}<span class="tool__t">Ticket</span> <span data-ticket-no></span><span class="tool__count" data-cart-count>0</span><span class="sr-only" data-cart-unit> items</span></button>
   </div>
 </header>`;
 }
@@ -163,7 +165,7 @@ const home = tpl
   .replace('{{board}}', `${R.chalkHTML(D, '')}<div id="full-list">${R.boardHTML(D, '')}</div>`)
   .replace('{{map}}', fs.readFileSync(path.join(ROOT, 'content/nyc-map.svg'), 'utf8'))
   .replace('{{farms}}', farmsRows)
-  .replace('{{special}}', ((l) => l.slice(0, -1).join(', ') + ' and ' + l.at(-1))(D.specialOrders.slice(0, -1).map((o) => esc((o.short || o.name).toLowerCase()))));
+;
 out('index.html', layout({ root: '', file: 'index.html', page: 'home', jsonld: shopLd, title: 'Eat Your Meat · Whole-animal butchers in Brooklyn', description: 'Whole-animal butcher shop in Williamsburg, Brooklyn. Every cut from this week’s animals, priced by the pound. Same-evening delivery in Brooklyn and Manhattan, overnight to the lower 48.', body: home }));
 
 // ---------- drawings of each cut, until there's a photo from the block ----------

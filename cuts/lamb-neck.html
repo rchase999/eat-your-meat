@@ -31,15 +31,16 @@
   <filter id="ink"><feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="1" seed="9" result="t"/><feColorMatrix in="t" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.6 2.1" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter>
 </svg>
 <header class="header">
+  <p class="cutbar" data-cutbar>Courier Tue–Sun, order by 2 PM · Pickup in 2 hours · Ships Mon–Wed · Free courier on $100</p>
   <button class="iconbtn header__menu" data-open="menu" aria-label="Open menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <a class="logo" href="../index.html"><span class="logo__name">Eat Your Meat</span><span class="logo__tag" data-status>Kent Ave &amp; N 4th St<span class="logo__where">, Brooklyn</span></span></a>
   <nav class="nav" aria-label="Main">
-    <a href="../index.html#board">The board</a><a href="../index.html#box">Butcher’s Box</a><a href="../delivery.html">Delivery</a><a href="../about.html">About</a>
+    <a href="../index.html#board">The board</a><a href="../index.html#box">Butcher’s Box</a><a href="../delivery.html">Delivery</a><a href="../about.html">About</a><a href="../account.html">Account</a>
   </nav>
   <div class="sample" role="note" aria-label="About this site"><p>Sample shop: nothing is charged or sent.</p><button type="button" class="link" data-sample-ok>Got it</button></div>
   <div class="header__tools">
     <button class="tool" data-open="search"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><span class="tool__label">Search</span></button>
-    <button class="tool tool--cart" data-open="cart"><span class="tool__t">Ticket</span> <span data-ticket-no></span><span class="tool__count" data-cart-count>0</span><span class="sr-only" data-cart-unit> items</span></button>
+    <button class="tool tool--cart" data-open="cart"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Zm4 0V6a3 3 0 0 1 6 0v2"/></svg><span class="tool__t">Ticket</span> <span data-ticket-no></span><span class="tool__count" data-cart-count>0</span><span class="sr-only" data-cart-unit> items</span></button>
   </div>
 </header>
 <main id="main">
@@ -57,17 +58,20 @@
         <p class="pdp__src">2 lambs · Ridgeback Farm, Salem, NY</p>
         <h1 class="pdp__name">Lamb neck</h1>
         <blockquote class="says"><p>“The best braising cut on the animal.”</p><footer>Marisol</footer></blockquote>
-        <p class="pdp__price"><b>$10/lb</b> <span>about <span data-pdp-weight>1.5 lb</span>, so about <span data-pdp-est>$15.00</span></span></p>
+        <p class="pdp__price"><b>$10/lb</b> <span>about <span data-pdp-weight>1.5 lb</span>, so about <span data-pdp-est>$15.00</span>, never more than <span data-pdp-max>$16.50</span></span></p>
         
         <details class="note"><summary>Add a note for the counter</summary><label><span class="sr-only">Note for the counter</span><textarea name="note" maxlength="200" rows="2" placeholder="e.g. Trim the fat to a quarter inch"></textarea></label></details>
-        <div class="pdp__buy"><label class="qty"><span class="sr-only">Quantity</span><select name="qty" data-pdp-qty><option>1</option><option>2</option></select></label><button class="btn btn--red" type="submit">Put it on my ticket</button></div>
+        <div class="pdp__buy"><label class="qty"><span class="sr-only">Quantity</span><select name="qty" data-pdp-qty><option>1</option><option>2</option></select></label><button class="btn btn--red" type="submit">Add to ticket</button></div>
         <p class="stock is-low" data-pdp-stock>2 left</p>
-        <p class="fine">We weigh it after we cut it. You pay that weight, never more than 10% over the estimate. <a href="../faq.html#what-does-charged-by-actual-weight-mean">How weighing works</a></p>
+        <p class="fine">Final price by weight. Spoiled, warm or the wrong cut? We replace it or refund it. <a href="../refunds.html">Refunds</a></p>
         <dl class="pdp__specs"><div><dt>Bone</dt><dd>Bone-in</dd></div><div><dt>Feeds</dt><dd>2</dd></div></dl>
       </form>
-    </div>
-    <div class="pdp__more">
+      
+    </div><div class="pdp__more">
       <p class="pdp__desc">One per lamb. Two and a half hours in a covered pot and it falls apart.</p>
+      <section class="pdp__sec pdp__where"><h2>Where it comes from</h2><div class="pdp__where__row"><svg class="cuts" viewBox="0 0 640 340" role="img" aria-label="Lamb diagram, Neck highlighted">
+      <defs><clipPath id="clip-lamb-neck"><path d="M40 152 C40 160 44 168 54 172 C66 178 78 180 90 182 C104 190 114 200 124 210 C134 220 142 230 148 240 L152 300 L150 320 L172 320 L174 290 L176 262 C210 256 250 256 300 258 C350 260 400 254 432 244 C438 260 442 280 444 300 L440 320 L464 320 L468 292 C470 276 474 262 480 248 C490 230 500 206 504 180 C508 160 510 146 512 136 L520 130 L512 122 C500 114 470 106 420 104 L300 100 C250 100 210 102 184 106 C168 108 152 108 138 102 L118 94 L92 82 L98 100 C88 106 76 112 66 120 C54 130 44 140 40 152 Z"/></clipPath></defs>
+      <g class="region region--none "><title>Head</title><path d="M0 0 L100 0 L100 192 L0 192 Z" clip-path="url(#clip-lamb-neck)"/><text x="76" y="148">Head</text></g><g class="region  is-active"><title>Neck</title><path d="M100 0 L156 0 L156 216 L100 192 Z" clip-path="url(#clip-lamb-neck)"/><text x="128" y="152">Neck</text></g><g class="region  "><title>Shoulder</title><path d="M156 0 L230 0 L230 192 L156 216 Z" clip-path="url(#clip-lamb-neck)"/><text x="194" y="150">Shoulder</text></g><g class="region  "><title>Rack</title><path d="M230 0 L304 0 L304 176 L230 192 Z" clip-path="url(#clip-lamb-neck)"/><text x="267" y="140">Rack</text></g><g class="region region--out "><title>Loin</title><path d="M304 0 L392 0 L392 170 L304 176 Z" clip-path="url(#clip-lamb-neck)"/><text x="348" y="138">Loin</text></g><g class="region  "><title>Leg</title><path d="M392 0 L640 0 L640 340 L452 340 L452 264 L432 172 L392 170 Z" clip-path="url(#clip-lamb-neck)"/><text x="458" y="170">Leg</text></g><g class="region  "><title>Breast</title><path d="M156 216 L230 192 L304 176 L392 170 L432 172 L452 264 L156 264 Z" clip-path="url(#clip-lamb-neck)"/><text x="304" y="226">Breast</text></g><g class="region  "><title>Shank</title><path d="M140 264 L200 264 L200 340 L140 340 Z M432 264 L480 264 L480 340 L432 340 Z" clip-path="url(#clip-lamb-neck)"/></g><path class="cuts__outline" d="M40 152 C40 160 44 168 54 172 C66 178 78 180 90 182 C104 190 114 200 124 210 C134 220 142 230 148 240 L152 300 L150 320 L172 320 L174 290 L176 262 C210 256 250 256 300 258 C350 260 400 254 432 244 C438 260 442 280 444 300 L440 320 L464 320 L468 292 C470 276 474 262 480 248 C490 230 500 206 504 180 C508 160 510 146 512 136 L520 130 L512 122 C500 114 470 106 420 104 L300 100 C250 100 210 102 184 106 C168 108 152 108 138 102 L118 94 L92 82 L98 100 C88 106 76 112 66 120 C54 130 44 140 40 152 Z"/><text class="cuts__leg" x="86" y="300">Shank</text><path class="cuts__lead" d="M112 296 L150 290"/></svg><p>From the neck. <b>Good for:</b> braise, smoke.</p></div></section>
       
       <p class="pdp__store"><b>Keeping it.</b> Fridge, 3 to 5 days. Freezer, vacuum-sealed, up to 6 months. <a href="../food-safety.html">Storage and safety</a></p>
       <section class="pdp__sec"><h2>Similar cuts</h2><ul class="pairs"><li><a href="../cuts/lamb-shank.html">Lamb shank</a><span>$12/lb</span></li><li><a href="../cuts/lamb-breast.html">Lamb breast</a><span>$7.50/lb</span></li></ul></section>
