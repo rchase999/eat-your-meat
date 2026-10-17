@@ -242,7 +242,7 @@
     const box = dlg('cart'), hadFocus = box.contains(document.activeElement);
     renderCart();
     if (!hadFocus) return;
-    const el = focus.qty ? $$('[data-qty]', box).find((b) => b.dataset.qty === focus.qty && b.dataset.d === focus.d) : focus.method ? $('.method > summary', box) : focus.zip ? ($('.method', box)?.open ? $('[data-cart-zip] input', box) : $('.method > summary', box)) : null;
+    const el = focus.qty ? $$('[data-qty]', box).find((b) => b.dataset.qty === focus.qty && b.dataset.d === focus.d) : focus.remove >= 0 ? ($$('[data-remove]', box)[focus.remove] || $$('[data-remove]', box).at(-1)) : focus.method ? $('.method > summary', box) : focus.zip ? ($('.method', box)?.open ? $('[data-cart-zip] input', box) : $('.method > summary', box)) : null;
     (el || $('[data-remove]', box) || $('[data-checkout]', box) || $('.cart-empty a', box) || $('[data-close]', box)).focus();
   }
   const cartDlg = dlg('cart');
@@ -253,8 +253,9 @@
       const line = state.cart.find((l) => S.lineKey(l) === q.dataset.qty);
       if (line) state.cart = S.setQty(state.cart, q.dataset.qty, line.qty + Number(q.dataset.d), line.id === 'box' || line.id === 'gift' ? 1 : byId[line.id].stock - boxReserved(state.cart, line.id));
     }
+    const nextRemove = r && $$('[data-remove]', cartDlg).indexOf(r);
     if (r) state.cart = state.cart.filter((l) => S.lineKey(l) !== r.dataset.remove);
-    if (q || r) { afterCartChange(false); rerenderCart(q ? { qty: q.dataset.qty, d: q.dataset.d } : {}); }
+    if (q || r) { afterCartChange(false); rerenderCart(q ? { qty: q.dataset.qty, d: q.dataset.d } : { remove: nextRemove }); }
     if (e.target.closest('[data-checkout]')) openCheckout();
   });
   cartDlg.addEventListener('change', (e) => { if (e.target.name === 'method') { state.method = e.target.value; state.methodOpen = false; persist(); rerenderCart({ method: e.target.value }); } });
@@ -311,7 +312,7 @@
         <dl class="sum"><div><dt>Subtotal (estimate)</dt><dd>${S.money(t.subtotal)}</dd></div><div><dt>${METHOD_LABEL[method]}</dt><dd>${t.fee ? S.money(t.fee) : 'Free'}</dd></div><div data-credit-row hidden><dt>Gift card</dt><dd data-credit></dd></div><div class="is-total"><dt>Estimated total</dt><dd data-due>${S.money(t.total)}</dd></div></dl></aside>
     </div>`;
     const form = $('[data-co]');
-    for (const [k, v] of Object.entries(coDraft)) if (form.elements[k] && form.elements[k].type !== 'checkbox') form.elements[k].value = v;
+    for (const [k, v] of Object.entries(coDraft)) if (form.elements[k] && form.elements[k].type !== 'checkbox' && k !== 'zip' && k !== 'state') form.elements[k].value = v;
     form.addEventListener('input', () => { coDraft = Object.fromEntries(new FormData(form)); });
     const due = () => S.round(Math.max(0, t.total - credit.amount));
     $('[data-redeem]', form).addEventListener('click', () => {
@@ -380,7 +381,7 @@
     const hadSub = state.cart.some(S.isSubscription);
     const weighedOrder = state.cart.some((l) => l.weighed);
     state.cart = [];
-    state.placed = { no, text: (next || 'Thanks.').split('. ')[0].replace(/\.?$/, '.'), until: Date.now() + 8 * 3600e3 };
+    state.placed = { no, text: (next || 'Your gift card is on its way by email').split('. ')[0].replace(/\.?$/, '.'), until: Date.now() + 8 * 3600e3 };
     save('eym.placed', state.placed);
     coDraft = {};
     afterCartChange(false);
@@ -434,7 +435,7 @@
   });
   list.addEventListener('click', (e) => { const li = e.target.closest('[data-i]'); if (li) location.href = results[Number(li.dataset.i)].go; });
   document.addEventListener('keydown', (e) => {
-    const typing = /input|textarea|select/i.test(document.activeElement?.tagName || '');
+    const typing = document.activeElement?.matches('input:not([type=radio]):not([type=checkbox]), textarea, select');
     if (typing) return;
     if ((e.key.toLowerCase() === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !$('dialog[open]'))) { e.preventDefault(); openSearch(); }
   });
@@ -693,7 +694,7 @@
       subsEl.innerHTML = subs.length ? subs.map(([s, i]) => `<div class="sub ${s.status === 'cancelled' ? 'is-cancelled' : ''}">
           <p class="sub__head"><span>Butcher’s Box, ${Number(s.size) || ''} cuts · ${esc(own(D.box.freqs, s.freq))}</span><span>${s.status === 'cancelled' ? 'Canceled' : s.skip ? 'Next box skipped' : 'Active'}</span></p>
           <p class="fine">From ticket ${Number(s.order) || '?'}. Cut on Wednesdays. Changes must be in by Sunday 11:59 PM Eastern.</p>
-          ${s.status === 'cancelled' ? '<p class="fine" tabindex="-1" data-sub-done>Canceled. No more boxes will be cut or charged.</p>' : `<div class="sub__actions"><button class="btn btn--line" type="button" data-sub-skip="${i}">${s.skip ? 'Undo skip' : 'Skip the next box'}</button><button class="btn btn--line" type="button" data-sub-cancel="${i}">Cancel subscription</button></div>`}</div>`).join('')
+          ${s.status === 'cancelled' ? '<p class="fine" tabindex="-1" data-sub-done="${i}">Canceled. No more boxes will be cut or charged.</p>' : `<div class="sub__actions"><button class="btn btn--line" type="button" data-sub-skip="${i}">${s.skip ? 'Undo skip' : 'Skip the next box'}</button><button class="btn btn--line" type="button" data-sub-cancel="${i}">Cancel subscription</button></div>`}</div>`).join('')
         : '<p class="empty">No subscriptions in this browser.</p>';
       ordersEl.innerHTML = Array.isArray(orders) && orders.length ? `<div class="ticket-list">${[...orders].reverse().map(ticketHTML).join('')}</div>` : '<p class="empty">No orders in this browser yet.</p>';
     };
@@ -707,7 +708,7 @@
       if (sk) rec.skip = !rec.skip; else rec.status = 'cancelled';
       const i = (sk || ca).dataset[sk ? 'subSkip' : 'subCancel'];
       save('eym.subs', subs); render(); toast(ca ? 'Subscription canceled. No more boxes will be cut or charged.' : 'Saved.');
-      ($(`[data-sub-skip="${i}"]`) || $$('[data-sub-done]')[subsEl.querySelectorAll('.sub').length ? 0 : 0] || subsEl).focus();
+      ($(`[data-sub-skip="${i}"]`) || $(`[data-sub-done="${i}"]`) || subsEl).focus();
     });
     $('[data-lookup]').addEventListener('submit', (e) => {
       e.preventDefault();

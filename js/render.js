@@ -122,7 +122,7 @@
     </div>`;
   }
   // inside: the label and the stamp, laid on the paper
-  const drawnHTML = (it, root, big, inside) => `<div class="drawn${big ? ' drawn--big' : ''}"><div class="drawn__sheet"><img src="${it.img ? img(root, it.img) : `${root}assets/draw/${it.id}.svg`}" alt="${it.img ? '' : 'A drawing of '}${esc(it.name.toLowerCase())}" width="400" height="300"${big ? '' : ' loading="lazy"'}></div>${inside}</div>`;
+  const drawnHTML = (it, root, big, inside, onSheet = '') => `<div class="drawn${big ? ' drawn--big' : ''}"><div class="drawn__sheet"><img src="${it.img ? img(root, it.img) : `${root}assets/draw/${it.id}.svg`}" alt="${it.img ? '' : 'A drawing of '}${esc(it.name.toLowerCase())}" width="400" height="300"${big ? '' : ' loading="lazy"'}>${onSheet}</div>${inside}</div>`;
   const stampHTML = (it) => `<p class="stamp">Sold out<small data-when="stamp" data-id="${it.id}">${esc(it.soldStamp || '')}</small></p>`;
   function labelCard(D, it, root, reserved = () => 0) {
     const st = stockText(it, reserved(it.id));
@@ -192,7 +192,7 @@
       const state = !items.length ? 'none' : open.length ? '' : 'out';
       const title = !items.length ? `${label}: not sold` : open.length ? `${label}: ${open.length} cut${open.length > 1 ? 's' : ''} in stock` : `${label}: sold out this week`;
       const shape = `<path d="${path}" ${isExtra ? '' : `clip-path="url(#${id})"`}/>`;
-      const left = still || !items.length ? '' : `<text class="cuts__left" x="${shank ? sh.legLabel[0] : lx}" y="${(shank ? sh.legLabel[1] : ly) + 17}">${items.map((i, n) => `<tspan x="${shank ? sh.legLabel[0] : lx}" dy="${n ? 14 : 0}"${i.stock ? '' : ' class="cuts__gone"'}>${esc(i.chalk ? i.chalk.toLowerCase() : i.short.toLowerCase())}${i.stock === 1 ? ' (last)' : ''}</tspan>`).join('')}</text>`;
+      const left = still || !items.length ? '' : `<text class="cuts__left" x="${shank ? sh.legLabel[0] : lx}" y="${(shank ? sh.legLabel[1] : ly) + 17}">${items.map((i, n) => `<tspan x="${shank ? sh.legLabel[0] : lx}" dy="${n ? 12 : 0}"${i.stock ? '' : ' class="cuts__gone"'}>${esc(i.short.toLowerCase())}${i.stock === 1 ? ' (last)' : ''}</tspan>`).join('')}</text>`;
       const text = (shank ? '' : `<text x="${lx}" y="${ly}">${esc(label)}</text>`) + left;
       const cls = `region ${state ? 'region--' + state : ''} ${active === k ? 'is-active' : ''}`;
       return items.length && !still
@@ -225,7 +225,7 @@
     const src = farm ? `${esc(a.label)} · ${esc(farm.name)}, ${esc(farm.place)}` : esc(D.speciesLabel[it.species]);
     return `<nav class="crumbs" aria-label="Breadcrumb"><a href="${root}index.html#board">The board</a> <span aria-hidden="true">/</span> <a href="${root}index.html?species=${it.species}#board">${esc(D.speciesLabel[it.species])}</a> <span aria-hidden="true">/</span> <span aria-current="page">${esc(it.name)}</span></nav>
     <div class="pdp">
-      <div class="pdp__media counter" style="--tilt:${tilt(it.id)}deg">${drawnHTML(it, root, true, tagHTML(D, it, { heading: 'p', link: false, priced: false }) + (it.stock ? '' : stampHTML(it)) + notes.map(noteHTML).join(''))}</div>
+      <div class="pdp__media counter" style="--tilt:${tilt(it.id)}deg">${drawnHTML(it, root, true, tagHTML(D, it, { heading: 'p', link: false, priced: false }) + (it.stock ? '' : stampHTML(it)), notes.map(noteHTML).join(''))}</div>
       <form class="pdp__label" data-pdp="${it.id}">
         <p class="pdp__src">${src}</p>
         <h1 class="pdp__name">${esc(it.name)}</h1>
