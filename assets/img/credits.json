@@ -1,0 +1,18 @@
+{
+ "shop/breakdown": {
+  "alt": "man in blue shirt slicing meat",
+  "source": "https://unsplash.com/photos/man-in-blue-shirt-slicing-meat-effAM7L50fI"
+ },
+ "shop/cutting": {
+  "alt": "sliced meat on brown wooden chopping board",
+  "source": "https://unsplash.com/photos/sliced-meat-on-brown-wooden-chopping-board-xOVDJ3hUjvw"
+ },
+ "shop/sausage": {
+  "alt": "a person holding a bunch of sausages in their hands",
+  "source": "https://unsplash.com/photos/a-person-holding-a-bunch-of-sausages-in-their-hands-nFEQcezr7Lo"
+ },
+ "shop/scale": {
+  "alt": "Ground meat on a scale next to sausages",
+  "source": "https://unsplash.com/photos/ground-meat-on-a-scale-next-to-sausages-BgWPiTz8Bxs"
+ }
+}

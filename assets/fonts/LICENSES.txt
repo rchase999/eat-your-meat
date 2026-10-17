@@ -1,0 +1,4 @@
+Fonts served with this site. All are under the SIL Open Font License 1.1 (https://openfontlicense.org).
+Rokkitt (Vernon Adams), Public Sans (USWDS), Shadows Into Light Two (Kimberly Geswein),
+Patrick Hand (Patrick Wagesreiter), Nanum Pen Script (Sandoll Communication).
+Latin subsets, as served by Google Fonts.

@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eat Your Meat · Whole-animal butchers in Brooklyn</title>
+<meta name="description" content="Whole-animal butcher shop in Williamsburg, Brooklyn. Every cut from this week’s animals, priced by the pound. Same-evening delivery in Brooklyn and Manhattan, overnight to the lower 48.">
+<link rel="canonical" href="https://eatyourmeat.example/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Eat Your Meat">
+<meta property="og:title" content="Eat Your Meat · Whole-animal butchers in Brooklyn">
+<meta property="og:description" content="Whole-animal butcher shop in Williamsburg, Brooklyn. Every cut from this week’s animals, priced by the pound. Same-evening delivery in Brooklyn and Manhattan, overnight to the lower 48.">
+<meta property="og:url" content="https://eatyourmeat.example/">
+<meta property="og:image" content="https://eatyourmeat.example/assets/img/shop/breakdown.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1C1915">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/Rokkitt-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/Public-Sans-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/Shadows-Into-Light-Two-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js'); try { if (localStorage.getItem('eym.sample')) document.documentElement.classList.add('sample-ok'); } catch (e) {}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ButcherShop","name":"Eat Your Meat","url":"https://eatyourmeat.example/","telephone":"+1-718-555-0142","email":"hello@eatyourmeat.example","address":{"@type":"PostalAddress","streetAddress":"Kent Ave & N 4th St","addressLocality":"Brooklyn","addressRegion":"NY","postalCode":"11249","addressCountry":"US"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"19:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"10:00","closes":"17:00"}]}</script>
+</head>
+<body data-root="" data-page="home">
+<a class="skip" href="#main">Skip to content</a>
+<svg class="fx" width="0" height="0" aria-hidden="true" focusable="false">
+  <filter id="chalk" x="-2%" y="-5%" width="104%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="1" seed="4" result="t"/><feColorMatrix in="t" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.85" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in" result="c"/><feDisplacementMap in="c" in2="t" scale="1.8" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="wobble"><feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="3" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="4"/></filter>
+  <pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(38)"><rect width="9" height="9" fill="#F4DCD6"/><rect width="3.2" height="9" fill="#A3241B" opacity=".85"/></pattern>
+  <filter id="ink"><feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="1" seed="9" result="t"/><feColorMatrix in="t" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.6 2.1" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter>
+</svg>
+<header class="header">
+  <button class="iconbtn header__menu" data-open="menu" aria-label="Open menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="logo" href="index.html"><span class="logo__name">Eat Your Meat</span><span class="logo__tag" data-status>Kent Ave &amp; N 4th St<span class="logo__where">, Brooklyn</span></span></a>
+  <nav class="nav" aria-label="Main">
+    <a href="index.html#board">The board</a><a href="index.html#box">Butcher’s Box</a><a href="delivery.html">Delivery</a><a href="about.html">About</a>
+  </nav>
+  <div class="sample" role="note" aria-label="About this site"><p>Sample shop: nothing is charged or sent.</p><button type="button" class="link" data-sample-ok>Got it</button></div>
+  <div class="header__tools">
+    <button class="tool" data-open="search"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><span class="tool__label">Search</span></button>
+    <button class="tool tool--cart" data-open="cart"><span class="tool__t">Ticket</span> <span data-ticket-no></span><span class="tool__count" data-cart-count>0</span><span class="sr-only" data-cart-unit> items</span></button>
+  </div>
+</header>
+<main id="main">
+<div class="stage">
+  <section class="door" aria-labelledby="hero-title">
+    <img src="assets/img/shop/breakdown.webp" alt="A butcher in a flat cap breaking down a lamb on a wooden block" width="1600" height="1200" fetchpriority="high">
+    <span class="door__tag">Stand-in photo</span>
+    <p class="sign" data-sign><b>Open</b><small>Tuesday to Sunday</small></p>
+    <div class="door__cap">
+      <h1 id="hero-title">Kent Ave &amp; N 4th.<br>Whole animals since 2019.</h1>
+      <p>A block from the river, five minutes from the Bedford Ave L.</p>
+    </div>
+  </section>
+
+  <blockquote class="scrap">
+    <p>Good steer this week. The Kittles kept him on grass to the end, and the fat’s yellow and sweet. Two big pigs and a little one, so ask which shoulder you’re getting. Got a smoker? Ask me for the lamb breast.</p>
+    <footer>Marisol, <span data-when="signed">Mon 10/12, 11:20 AM</span></footer>
+  </blockquote>
+
+  <ul class="ways" aria-label="Getting it home">
+    <li data-way="courier">Courier in Brooklyn and Manhattan, 5–⁠9 PM</li>
+    <li data-way="ship">Overnight to the lower 48</li>
+    <li data-way="pickup">Pickup at the counter</li>
+    <li><a href="#delivery">Check your ZIP code</a></li>
+  </ul>
+
+  <aside class="tkt" aria-labelledby="tkt-k">
+    <p class="tkt__k" id="tkt-k">Your ticket</p>
+    <p class="tkt__no" data-ticket-no></p>
+    <div class="tkt__body" data-ticket-card><p>Nothing on it yet. Pick something off the board.</p></div>
+  </aside>
+
+  <section class="board" id="board" data-board-wrap data-mode="chalk" aria-label="This week’s board">
+    <div class="board__switch">
+      <div class="seg" role="group" aria-label="Show the board as"><button aria-pressed="true" data-view="chalk">Board</button><button aria-pressed="false" data-view="list">Full list</button><button aria-pressed="false" data-view="labels">Labels</button></div>
+      <p class="fine board__hint">Exact weights, stock and estimates are on the <button class="link" type="button" data-view="list">full list</button>.</p>
+    </div>
+    <div class="board__frame">
+      <div class="board__tools">
+        <div class="cutmap">
+          <div class="cutmap__head">
+            <h2 class="intro__h" id="cutmap-title">Shop by part of the animal</h2>
+            <div class="seg seg--sm" role="group" aria-labelledby="cutmap-title">
+              <button aria-pressed="true" data-cutmap-tab="beef">Beef</button><button aria-pressed="false" data-cutmap-tab="pork">Pork</button><button aria-pressed="false" data-cutmap-tab="lamb">Lamb</button>
+            </div>
+          </div>
+          <div class="cutmap__view" data-cutmap="beef" ><svg class="cuts" viewBox="0 0 640 340" role="group" aria-label="Beef cuts by part of the animal">
+      <defs><clipPath id="clip-beef"><path d="M42 166 C38 158 38 148 44 140 L58 118 C64 108 72 100 84 96 L74 90 L66 82 L80 80 L96 88 C102 82 108 76 112 66 C116 72 116 80 114 86 L128 92 C150 100 168 98 186 94 C194 90 202 86 214 86 C232 90 260 94 300 96 L400 98 L498 100 C520 102 536 108 546 118 C548 136 546 158 540 182 C532 210 520 234 506 250 C500 262 496 276 494 292 L492 320 L466 318 L466 292 C462 274 458 256 452 242 L428 252 C390 264 346 268 300 266 C250 262 214 256 184 252 C180 262 178 278 176 296 L176 320 L150 318 L150 296 C152 280 152 262 150 244 L142 234 C136 228 130 220 124 210 C118 204 112 196 104 188 C94 192 82 192 70 188 C58 184 48 178 42 166 Z"/></clipPath></defs>
+      <a href="#board" class="region  " data-primal="head" data-species="beef" aria-label="Head: 1 cut in stock"><title>Head: 1 cut in stock</title><path d="M0 0 L122 0 L114 188 L0 188 Z" clip-path="url(#clip-beef)"/><text x="76" y="146">Head</text></a><a href="#board" class="region  " data-primal="chuck" data-species="beef" aria-label="Chuck: 2 cuts in stock"><title>Chuck: 2 cuts in stock</title><path d="M122 0 L222 0 L222 196 L114 188 Z" clip-path="url(#clip-beef)"/><text x="172" y="140">Chuck</text></a><a href="#board" class="region  " data-primal="brisket" data-species="beef" aria-label="Brisket: 1 cut in stock"><title>Brisket: 1 cut in stock</title><path d="M114 188 L222 196 L222 272 L140 272 Z" clip-path="url(#clip-beef)"/><text x="182" y="234">Brisket</text></a><a href="#board" class="region  " data-primal="shank" data-species="beef" aria-label="Shank: 1 cut in stock"><title>Shank: 1 cut in stock</title><path d="M120 272 L222 272 L222 340 L120 340 Z M440 276 L520 276 L520 340 L440 340 Z" clip-path="url(#clip-beef)"/></a><a href="#board" class="region  " data-primal="rib" data-species="beef" aria-label="Rib: 2 cuts in stock"><title>Rib: 2 cuts in stock</title><path d="M222 0 L304 0 L304 178 L222 188 Z" clip-path="url(#clip-beef)"/><text x="263" y="136">Rib</text></a><a href="#board" class="region  " data-primal="plate" data-species="beef" aria-label="Plate: 3 cuts in stock"><title>Plate: 3 cuts in stock</title><path d="M222 188 L304 178 L304 272 L222 272 Z" clip-path="url(#clip-beef)"/><text x="263" y="228">Plate</text></a><a href="#board" class="region  " data-primal="loin" data-species="beef" aria-label="Loin: 2 cuts in stock"><title>Loin: 2 cuts in stock</title><path d="M304 0 L420 0 L420 170 L304 178 Z" clip-path="url(#clip-beef)"/><text x="362" y="132">Loin</text></a><a href="#board" class="region  " data-primal="flank" data-species="beef" aria-label="Flank: 1 cut in stock"><title>Flank: 1 cut in stock</title><path d="M304 178 L420 170 L448 272 L304 272 Z" clip-path="url(#clip-beef)"/><text x="372" y="222">Flank</text></a><a href="#board" class="region  " data-primal="round" data-species="beef" aria-label="Round: 2 cuts in stock"><title>Round: 2 cuts in stock</title><path d="M420 0 L640 0 L640 276 L440 276 L448 272 L420 170 Z" clip-path="url(#clip-beef)"/><text x="488" y="168">Round</text></a><a href="#board" class="region  " data-primal="tail" data-species="beef" aria-label="Tail: 1 cut in stock"><title>Tail: 1 cut in stock</title><path d="M544 114 C552 150 556 194 558 236 L572 256 L552 258 L550 236 C548 194 544 152 536 120 Z" /><text x="596" y="214">Tail</text></a><path class="cuts__outline" d="M42 166 C38 158 38 148 44 140 L58 118 C64 108 72 100 84 96 L74 90 L66 82 L80 80 L96 88 C102 82 108 76 112 66 C116 72 116 80 114 86 L128 92 C150 100 168 98 186 94 C194 90 202 86 214 86 C232 90 260 94 300 96 L400 98 L498 100 C520 102 536 108 546 118 C548 136 546 158 540 182 C532 210 520 234 506 250 C500 262 496 276 494 292 L492 320 L466 318 L466 292 C462 274 458 256 452 242 L428 252 C390 264 346 268 300 266 C250 262 214 256 184 252 C180 262 178 278 176 296 L176 320 L150 318 L150 296 C152 280 152 262 150 244 L142 234 C136 228 130 220 124 210 C118 204 112 196 104 188 C94 192 82 192 70 188 C58 184 48 178 42 166 Z"/><text class="cuts__leg" x="84" y="300">Shank</text><path class="cuts__lead" d="M108 296 L150 290"/></svg></div><div class="cutmap__view" data-cutmap="pork" hidden><svg class="cuts" viewBox="0 0 640 340" role="group" aria-label="Pork cuts by part of the animal">
+      <defs><clipPath id="clip-pork"><path d="M30 148 L30 176 C40 186 54 192 70 198 C88 206 104 212 118 218 C126 228 132 240 136 252 L138 300 L134 318 L160 318 L162 290 L164 264 C200 268 250 274 300 274 C350 274 404 270 448 258 C454 270 460 284 462 300 L458 318 L486 318 L490 296 C498 280 510 262 520 244 C530 220 536 192 536 164 C536 148 532 136 526 126 C510 110 470 100 420 98 L300 94 C250 94 220 96 196 100 C176 102 158 106 146 104 L134 74 L114 96 C100 104 86 112 72 120 C56 128 42 136 30 148 Z"/></clipPath></defs>
+      <a href="#board" class="region  " data-primal="head" data-species="pork" aria-label="Head: 1 cut in stock"><title>Head: 1 cut in stock</title><path d="M0 0 L116 0 L116 284 L0 284 Z" clip-path="url(#clip-pork)"/><text x="72" y="166">Head</text></a><a href="#board" class="region  " data-primal="shoulder" data-species="pork" aria-label="Shoulder: 1 cut in stock"><title>Shoulder: 1 cut in stock</title><path d="M116 0 L214 0 L214 270 L116 220 Z" clip-path="url(#clip-pork)"/><text x="164" y="168">Shoulder</text></a><a href="#board" class="region  " data-primal="loin" data-species="pork" aria-label="Loin: 1 cut in stock"><title>Loin: 1 cut in stock</title><path d="M214 0 L424 0 L424 180 L214 184 Z" clip-path="url(#clip-pork)"/><text x="318" y="140">Loin</text></a><a href="#board" class="region  " data-primal="belly" data-species="pork" aria-label="Belly: 2 cuts in stock"><title>Belly: 2 cuts in stock</title><path d="M214 184 L424 180 L440 284 L214 284 Z" clip-path="url(#clip-pork)"/><text x="320" y="232">Belly</text></a><a href="#board" class="region  " data-primal="leg" data-species="pork" aria-label="Leg: 1 cut in stock"><title>Leg: 1 cut in stock</title><path d="M424 0 L640 0 L640 280 L440 284 L424 180 Z" clip-path="url(#clip-pork)"/><text x="482" y="176">Leg</text></a><a href="#board" class="region  " data-primal="hock" data-species="pork" aria-label="Hock: 1 cut in stock"><title>Hock: 1 cut in stock</title><path d="M120 284 L196 284 L196 340 L120 340 Z M440 284 L500 284 L500 340 L440 340 Z" clip-path="url(#clip-pork)"/></a><path class="cuts__outline" d="M30 148 L30 176 C40 186 54 192 70 198 C88 206 104 212 118 218 C126 228 132 240 136 252 L138 300 L134 318 L160 318 L162 290 L164 264 C200 268 250 274 300 274 C350 274 404 270 448 258 C454 270 460 284 462 300 L458 318 L486 318 L490 296 C498 280 510 262 520 244 C530 220 536 192 536 164 C536 148 532 136 526 126 C510 110 470 100 420 98 L300 94 C250 94 220 96 196 100 C176 102 158 106 146 104 L134 74 L114 96 C100 104 86 112 72 120 C56 128 42 136 30 148 Z"/><path class="cuts__deco" d="M528 124 C540 112 552 120 546 130 C540 140 554 146 560 136"/><text class="cuts__leg" x="74" y="300">Hock</text><path class="cuts__lead" d="M100 296 L134 292"/></svg></div><div class="cutmap__view" data-cutmap="lamb" hidden><svg class="cuts" viewBox="0 0 640 340" role="group" aria-label="Lamb cuts by part of the animal">
+      <defs><clipPath id="clip-lamb"><path d="M40 152 C40 160 44 168 54 172 C66 178 78 180 90 182 C104 190 114 200 124 210 C134 220 142 230 148 240 L152 300 L150 320 L172 320 L174 290 L176 262 C210 256 250 256 300 258 C350 260 400 254 432 244 C438 260 442 280 444 300 L440 320 L464 320 L468 292 C470 276 474 262 480 248 C490 230 500 206 504 180 C508 160 510 146 512 136 L520 130 L512 122 C500 114 470 106 420 104 L300 100 C250 100 210 102 184 106 C168 108 152 108 138 102 L118 94 L92 82 L98 100 C88 106 76 112 66 120 C54 130 44 140 40 152 Z"/></clipPath></defs>
+      <g class="region region--none "><title>Head: not sold</title><path d="M0 0 L100 0 L100 192 L0 192 Z" clip-path="url(#clip-lamb)"/><text x="76" y="148">Head</text></g><a href="#board" class="region  " data-primal="neck" data-species="lamb" aria-label="Neck: 1 cut in stock"><title>Neck: 1 cut in stock</title><path d="M100 0 L156 0 L156 216 L100 192 Z" clip-path="url(#clip-lamb)"/><text x="128" y="152">Neck</text></a><a href="#board" class="region  " data-primal="shoulder" data-species="lamb" aria-label="Shoulder: 1 cut in stock"><title>Shoulder: 1 cut in stock</title><path d="M156 0 L230 0 L230 192 L156 216 Z" clip-path="url(#clip-lamb)"/><text x="194" y="150">Shoulder</text></a><a href="#board" class="region  " data-primal="rack" data-species="lamb" aria-label="Rack: 1 cut in stock"><title>Rack: 1 cut in stock</title><path d="M230 0 L304 0 L304 176 L230 192 Z" clip-path="url(#clip-lamb)"/><text x="267" y="140">Rack</text></a><a href="#board" class="region region--out " data-primal="loin" data-species="lamb" aria-label="Loin: sold out this week"><title>Loin: sold out this week</title><path d="M304 0 L392 0 L392 170 L304 176 Z" clip-path="url(#clip-lamb)"/><text x="348" y="138">Loin</text></a><a href="#board" class="region  " data-primal="leg" data-species="lamb" aria-label="Leg: 1 cut in stock"><title>Leg: 1 cut in stock</title><path d="M392 0 L640 0 L640 340 L452 340 L452 264 L432 172 L392 170 Z" clip-path="url(#clip-lamb)"/><text x="458" y="170">Leg</text></a><a href="#board" class="region  " data-primal="breast" data-species="lamb" aria-label="Breast: 1 cut in stock"><title>Breast: 1 cut in stock</title><path d="M156 216 L230 192 L304 176 L392 170 L432 172 L452 264 L156 264 Z" clip-path="url(#clip-lamb)"/><text x="304" y="226">Breast</text></a><a href="#board" class="region  " data-primal="shank" data-species="lamb" aria-label="Shank: 1 cut in stock"><title>Shank: 1 cut in stock</title><path d="M140 264 L200 264 L200 340 L140 340 Z M432 264 L480 264 L480 340 L432 340 Z" clip-path="url(#clip-lamb)"/></a><path class="cuts__outline" d="M40 152 C40 160 44 168 54 172 C66 178 78 180 90 182 C104 190 114 200 124 210 C134 220 142 230 148 240 L152 300 L150 320 L172 320 L174 290 L176 262 C210 256 250 256 300 258 C350 260 400 254 432 244 C438 260 442 280 444 300 L440 320 L464 320 L468 292 C470 276 474 262 480 248 C490 230 500 206 504 180 C508 160 510 146 512 136 L520 130 L512 122 C500 114 470 106 420 104 L300 100 C250 100 210 102 184 106 C168 108 152 108 138 102 L118 94 L92 82 L98 100 C88 106 76 112 66 120 C54 130 44 140 40 152 Z"/><text class="cuts__leg" x="86" y="300">Shank</text><path class="cuts__lead" d="M112 296 L150 290"/></svg></div>
+          <ul class="cutmap__list" data-cutlist="beef" ><li><button class="chip" data-primal="head" data-species="beef">Head <span>1 cut</span></button></li><li><button class="chip" data-primal="chuck" data-species="beef">Chuck <span>2 cuts</span></button></li><li><button class="chip" data-primal="rib" data-species="beef">Rib <span>2 cuts</span></button></li><li><button class="chip" data-primal="loin" data-species="beef">Loin <span>2 cuts</span></button></li><li><button class="chip" data-primal="round" data-species="beef">Round <span>2 cuts</span></button></li><li><button class="chip" data-primal="brisket" data-species="beef">Brisket <span>1 cut</span></button></li><li><button class="chip" data-primal="plate" data-species="beef">Plate <span>3 cuts</span></button></li><li><button class="chip" data-primal="flank" data-species="beef">Flank <span>1 cut</span></button></li><li><button class="chip" data-primal="shank" data-species="beef">Shank <span>1 cut</span></button></li><li><button class="chip" data-primal="tail" data-species="beef">Tail <span>1 cut</span></button></li></ul><ul class="cutmap__list" data-cutlist="pork" hidden><li><button class="chip" data-primal="head" data-species="pork">Head <span>1 cut</span></button></li><li><button class="chip" data-primal="shoulder" data-species="pork">Shoulder <span>1 cut</span></button></li><li><button class="chip" data-primal="loin" data-species="pork">Loin <span>1 cut</span></button></li><li><button class="chip" data-primal="belly" data-species="pork">Belly <span>2 cuts</span></button></li><li><button class="chip" data-primal="leg" data-species="pork">Leg <span>1 cut</span></button></li><li><button class="chip" data-primal="hock" data-species="pork">Hock <span>1 cut</span></button></li></ul><ul class="cutmap__list" data-cutlist="lamb" hidden><li><button class="chip" data-primal="neck" data-species="lamb">Neck <span>1 cut</span></button></li><li><button class="chip" data-primal="shoulder" data-species="lamb">Shoulder <span>1 cut</span></button></li><li><button class="chip" data-primal="rack" data-species="lamb">Rack <span>1 cut</span></button></li><li><button class="chip" data-primal="loin" data-species="lamb">Loin <span>sold out</span></button></li><li><button class="chip" data-primal="leg" data-species="lamb">Leg <span>1 cut</span></button></li><li><button class="chip" data-primal="breast" data-species="lamb">Breast <span>1 cut</span></button></li><li><button class="chip" data-primal="shank" data-species="lamb">Shank <span>1 cut</span></button></li></ul>
+          <p class="fine cutmap__key"><span class="keyitem"><span class="key key--open" aria-hidden="true"></span>Cuts in stock</span> <span class="keyitem"><span class="key key--out" aria-hidden="true"></span>Sold out</span> <span class="keyitem"><span class="key key--none" aria-hidden="true"></span>Not sold</span></p>
+        </div>
+        <div class="board__bar">
+          <div class="seg" role="group" aria-label="Show">
+            <button aria-pressed="true" data-species="">All</button><button aria-pressed="false" data-species="beef">Beef</button><button aria-pressed="false" data-species="pork">Pork</button><button aria-pressed="false" data-species="lamb">Lamb</button><button aria-pressed="false" data-species="chicken">Chicken</button><button aria-pressed="false" data-species="house">Made here</button>
+          </div>
+          <label class="select"><span>Sort</span><select data-sort><option value="">Board order</option><option value="price-asc">Price per lb, low to high</option><option value="price-desc">Price per lb, high to low</option></select></label>
+        </div>
+        <p class="board__note" data-filter-note aria-live="polite"></p>
+      </div>
+      <div class="board__body" data-board><div class="chalk">
+      <div class="chalk__head"><div><h2 class="chalk__title" id="board-title">On the block</h2><p class="chalk__sub">Steer #2186 from the Kittles, hung 21 days · 3 pigs · 2 lambs · 38 birds</p></div><p class="chalk__upd">updated Fri 10/16, 8:40 AM</p></div>
+      <div class="chalk__cols"><div><h3 class="chalk__h">Beef <small>per lb</small></h3>
+      <ul class="chalk__list"><li class="cl"><a href="cuts/ribeye-bone-in.html"><span class="cl__n"><span class="cl__t">Ribeye, bone in</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">34</span><span class="sr-only">, $34 a pound</span></a></li><li class="cl"><a href="cuts/ribeye.html"><span class="cl__n"><span class="cl__t">Ribeye</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">38</span><span class="sr-only">, $38 a pound</span></a></li><li class="cl"><a href="cuts/strip.html"><span class="cl__n"><span class="cl__t">Strip</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">32</span><span class="sr-only">, $32 a pound</span></a></li><li class="cl"><a href="cuts/tenderloin.html"><span class="cl__n"><span class="cl__t">Tenderloin</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">48</span><span class="sr-only">, $48 a pound</span></a></li><li class="cl"><a href="cuts/hanger.html"><span class="cl__n"><span class="cl__t"><svg class="cl__ring" viewBox="0 0 108 40" preserveAspectRatio="none" aria-hidden="true"><path d="M8 22c2-12 40-17 70-15s30 14 18 22-60 9-80 3S2 18 22 10"/></svg>Hanger</span><span class="cl__note">last one</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">22</span><span class="sr-only">, $22 a pound</span></a></li><li class="cl"><a href="cuts/skirt.html"><span class="cl__n"><span class="cl__t">Skirt</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">20</span><span class="sr-only">, $20 a pound</span></a></li><li class="cl"><a href="cuts/short-rib.html"><span class="cl__n"><span class="cl__t">Short ribs</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">14</span><span class="sr-only">, $14 a pound</span></a></li><li class="cl"><a href="cuts/brisket.html"><span class="cl__n"><span class="cl__t">Brisket, whole</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">11</span><span class="sr-only">, $11 a pound</span></a></li><li class="cl"><a href="cuts/chuck-eye.html"><span class="cl__n"><span class="cl__t">Chuck eye</span><span class="cl__tip"><svg class="cl__arrow" viewBox="0 0 44 22" aria-hidden="true"><path d="M42 12C30 4 16 6 4 12m0 0 8-7m-8 7 9 5"/></svg>better than the ribeye</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">19</span><span class="sr-only">, $19 a pound</span></a></li><li class="cl is-gone"><a href="cuts/flat-iron.html"><span class="cl__n"><span class="cl__t">Flat iron</span><span class="cl__note">gone Mon 12:15</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">24</span><span class="sr-only">, $24 a pound, sold out</span></a></li><li class="cl"><a href="cuts/ground-beef.html"><span class="cl__n"><span class="cl__t">Ground, 80/20</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">10</span><span class="sr-only">, $10 a pound</span></a></li><li class="cl"><a href="cuts/oxtail.html"><span class="cl__n"><span class="cl__t">Oxtail</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">11</span><span class="sr-only">, $11 a pound</span></a></li></ul><h3 class="chalk__h">Chicken <small>Old Mill</small></h3>
+      <ul class="chalk__list"><li class="cl"><a href="cuts/whole-chicken.html"><span class="cl__n"><span class="cl__t">Whole bird</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">6½</span><span class="sr-only">, $6.50 a pound</span></a></li><li class="cl"><a href="cuts/chicken-thighs.html"><span class="cl__n"><span class="cl__t">Thighs</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">7½</span><span class="sr-only">, $7.50 a pound</span></a></li></ul></div><div><h3 class="chalk__h">Pork <small>Two Creeks</small></h3>
+      <ul class="chalk__list"><li class="cl"><a href="cuts/pork-chops.html"><span class="cl__n"><span class="cl__t">Loin chops</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">15</span><span class="sr-only">, $15 a pound</span></a></li><li class="cl is-gone"><a href="cuts/pork-tenderloin.html"><span class="cl__n"><span class="cl__t">Tenderloin</span><span class="cl__note">gone Mon 2:10</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">16</span><span class="sr-only">, $16 a pound, sold out</span></a></li><li class="cl"><a href="cuts/pork-belly.html"><span class="cl__n"><span class="cl__t">Belly, skin on</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">11½</span><span class="sr-only">, $11.50 a pound</span></a></li><li class="cl"><a href="cuts/pork-shoulder.html"><span class="cl__n"><span class="cl__t">Shoulder</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">8</span><span class="sr-only">, $8 a pound</span></a></li><li class="cl"><a href="cuts/pork-sausage.html"><span class="cl__n"><span class="cl__t">Sausage, sweet</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">13</span><span class="sr-only">, $13 a pound</span></a></li></ul><h3 class="chalk__h">Lamb <small>Ridgeback</small></h3>
+      <ul class="chalk__list"><li class="cl"><a href="cuts/lamb-rack.html"><span class="cl__n"><span class="cl__t">Rack, frenched</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">34</span><span class="sr-only">, $34 a pound</span></a></li><li class="cl is-gone"><a href="cuts/lamb-loin-chops.html"><span class="cl__n"><span class="cl__t">Loin chops</span><span class="cl__note">gone Mon 5:30</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">26</span><span class="sr-only">, $26 a pound, sold out</span></a></li><li class="cl"><a href="cuts/lamb-shoulder-chops.html"><span class="cl__n"><span class="cl__t">Shoulder chops</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">16</span><span class="sr-only">, $16 a pound</span></a></li><li class="cl"><a href="cuts/lamb-neck.html"><span class="cl__n"><span class="cl__t">Neck</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">10</span><span class="sr-only">, $10 a pound</span></a></li></ul><h3 class="chalk__h">Made here</h3>
+      <ul class="chalk__list"><li class="cl"><a href="cuts/bacon.html"><span class="cl__n"><span class="cl__t">Bacon, hickory</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">16</span><span class="sr-only">, $16 a pound</span></a></li><li class="cl"><a href="cuts/beef-stock.html"><span class="cl__n"><span class="cl__t">Stock, quart</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">12 ea</span><span class="sr-only">, $12 each</span></a></li></ul></div></div>
+      <p class="chalk__foot"><a class="chalk__more" href="#full-list" data-view="list"><span>+ 18 more on the full list</span></a><span aria-hidden="true">— M.</span></p>
+    </div><div id="full-list"><table class="board__table">
+        <caption><span class="board__species">Beef</span><span class="board__animal">Steer #2186 · Kittle Hollow Farm, Delhi, NY · hung 21 days</span></caption><colgroup><col class="c-cut"><col class="c-w"><col class="c-p"><col class="c-e"><col class="c-s"><col class="c-a"></colgroup>
+        <thead><tr><th scope="col">Cut</th><th scope="col" class="num">Weight</th><th scope="col" class="num">Price</th><th scope="col" class="num">Estimate</th><th scope="col" class="num">Stock</th><th scope="col"><span class="sr-only">Add to your ticket</span></th></tr></thead>
+        <tbody><tr class="" data-row="ribeye-bone-in">
+        <th scope="row"><a href="cuts/ribeye-bone-in.html">Bone-in ribeye</a><span class="row__opt">1½″</span><span class="row__facts">Bone-in · Feeds 2</span></th>
+        <td class="num num--w">~1.6 lb</td>
+        <td class="num">$34/lb</td>
+        <td class="num num--est">≈ $54.40</td>
+        <td class="num stock ">4 left</td>
+        <td class="act"><button class="add" data-add="ribeye-bone-in" aria-label="Add Bone-in ribeye, 1½″ to your ticket">Add</button></td></tr><tr class="" data-row="ribeye">
+        <th scope="row"><a href="cuts/ribeye.html">Ribeye, boneless</a><span class="row__opt">1¼″</span><span class="row__facts">Boneless · Feeds 1–2</span></th>
+        <td class="num num--w">~1 lb</td>
+        <td class="num">$38/lb</td>
+        <td class="num num--est">≈ $38.00</td>
+        <td class="num stock ">6 left</td>
+        <td class="act"><button class="add" data-add="ribeye" aria-label="Add Ribeye, boneless, 1¼″ to your ticket">Add</button></td></tr><tr class="" data-row="strip">
+        <th scope="row"><a href="cuts/strip.html">Strip steak</a><span class="row__opt">1¼″</span><span class="row__facts">Boneless · Feeds 1–2</span></th>
+        <td class="num num--w">~0.9 lb</td>
+        <td class="num">$32/lb</td>
+        <td class="num num--est">≈ $28.80</td>
+        <td class="num stock ">8 left</td>
+        <td class="act"><button class="add" data-add="strip" aria-label="Add Strip steak, 1¼″ to your ticket">Add</button></td></tr><tr class="" data-row="tenderloin">
+        <th scope="row"><a href="cuts/tenderloin.html">Tenderloin steak</a><span class="row__opt">2″</span><span class="row__facts">Boneless · Feeds 1</span></th>
+        <td class="num num--w">~0.55 lb</td>
+        <td class="num">$48/lb</td>
+        <td class="num num--est">≈ $26.40</td>
+        <td class="num stock ">6 left</td>
+        <td class="act"><button class="add" data-add="tenderloin" aria-label="Add Tenderloin steak, 2″ to your ticket">Add</button></td></tr><tr class="" data-row="hanger">
+        <th scope="row"><a href="cuts/hanger.html">Hanger steak</a><span class="row__facts">Boneless · Feeds 2</span></th>
+        <td class="num num--w">~1 lb</td>
+        <td class="num">$22/lb</td>
+        <td class="num num--est">≈ $22.00</td>
+        <td class="num stock is-low">Last one</td>
+        <td class="act"><button class="add" data-add="hanger" aria-label="Add Hanger steak to your ticket">Add</button></td></tr><tr class="" data-row="skirt">
+        <th scope="row"><a href="cuts/skirt.html">Skirt steak</a><span class="row__facts">Boneless · Feeds 2–3</span></th>
+        <td class="num num--w">~1.2 lb</td>
+        <td class="num">$20/lb</td>
+        <td class="num num--est">≈ $24.00</td>
+        <td class="num stock is-low">2 left</td>
+        <td class="act"><button class="add" data-add="skirt" aria-label="Add Skirt steak to your ticket">Add</button></td></tr><tr class="" data-row="flank">
+        <th scope="row"><a href="cuts/flank.html">Flank steak</a><span class="row__facts">Boneless · Feeds 3</span></th>
+        <td class="num num--w">~1.5 lb</td>
+        <td class="num">$18/lb</td>
+        <td class="num num--est">≈ $27.00</td>
+        <td class="num stock is-low">2 left</td>
+        <td class="act"><button class="add" data-add="flank" aria-label="Add Flank steak to your ticket">Add</button></td></tr><tr class="" data-row="short-rib">
+        <th scope="row"><a href="cuts/short-rib.html">Short ribs, 3-bone plate</a><span class="row__facts">Bone-in · Feeds 4</span></th>
+        <td class="num num--w">~4 lb</td>
+        <td class="num">$14/lb</td>
+        <td class="num num--est">≈ $56.00</td>
+        <td class="num stock is-low">2 left</td>
+        <td class="act"><button class="add" data-add="short-rib" aria-label="Add Short ribs, 3-bone plate to your ticket">Add</button></td></tr><tr class="" data-row="brisket">
+        <th scope="row"><a href="cuts/brisket.html">Brisket</a><span class="row__opt">Whole, point and flat (~12 lb)</span><span class="row__facts">Boneless · Feeds 10–14</span></th>
+        <td class="num num--w">~12 lb</td>
+        <td class="num">$11/lb</td>
+        <td class="num num--est">≈ $132.00</td>
+        <td class="num stock is-low">Last one</td>
+        <td class="act"><button class="add" data-add="brisket" aria-label="Add Brisket, Whole, point and flat (~12 lb) to your ticket">Add</button></td></tr><tr class="" data-row="chuck-eye">
+        <th scope="row"><a href="cuts/chuck-eye.html">Chuck eye steak</a><span class="row__facts">Boneless · Feeds 1–2</span></th>
+        <td class="num num--w">~0.8 lb</td>
+        <td class="num">$19/lb</td>
+        <td class="num num--est">≈ $15.20</td>
+        <td class="num stock is-low">2 left</td>
+        <td class="act"><button class="add" data-add="chuck-eye" aria-label="Add Chuck eye steak to your ticket">Add</button></td></tr><tr class="is-soldout" data-row="flat-iron">
+        <th scope="row"><a href="cuts/flat-iron.html">Flat iron steak</a><span class="row__facts">Boneless · Feeds 2</span></th>
+        <td class="num num--w">~0.9 lb</td>
+        <td class="num">$24/lb</td>
+        <td class="num num--est">≈ $21.60</td>
+        <td class="num stock is-out">Sold out Mon 10/12, 12:15 PM</td>
+        <td class="act"></td></tr><tr class="" data-row="chuck-roast">
+        <th scope="row"><a href="cuts/chuck-roast.html">Chuck roast</a><span class="row__opt">~2½ lb</span><span class="row__facts">Boneless · Feeds 4–6</span></th>
+        <td class="num num--w">~2.5 lb</td>
+        <td class="num">$12/lb</td>
+        <td class="num num--est">≈ $30.00</td>
+        <td class="num stock ">4 left</td>
+        <td class="act"><button class="add" data-add="chuck-roast" aria-label="Add Chuck roast, ~2½ lb to your ticket">Add</button></td></tr><tr class="" data-row="eye-of-round">
+        <th scope="row"><a href="cuts/eye-of-round.html">Eye of round roast</a><span class="row__facts">Boneless · Feeds 6</span></th>
+        <td class="num num--w">~3 lb</td>
+        <td class="num">$13.50/lb</td>
+        <td class="num num--est">≈ $40.50</td>
+        <td class="num stock is-low">2 left</td>
+        <td class="act"><button class="add" data-add="eye-of-round" aria-label="Add Eye of round roast to your ticket">Add</button></td></tr><tr class="" data-row="top-round">
+        <th scope="row"><a href="cuts/top-round.html">Top round steak</a><span class="row__facts">Boneless · Feeds 3</span></th>
+        <td class="num num--w">~1.5 lb</td>
+        <td class="num">$12/lb</td>
+        <td class="num num--est">≈ $18.00</td>
+        <td class="num stock ">3 left</td>
+        <td class="act"><button class="add" data-add="top-round" aria-label="Add Top round steak to your ticket">Add</button></td></tr><tr class="" data-row="ground-beef">
+        <th scope="row"><a href="cuts/ground-beef.html">Ground beef, 80/20</a><span class="row__opt">1 lb pack</span><span class="row__facts">Boneless · Feeds 3–4</span></th>
+        <td class="num num--w">~1 lb</td>
+        <td class="num">$10/lb</td>
+        <td class="num num--est">≈ $10.00</td>
+        <td class="num stock ">30 left</td>
+        <td class="act"><button class="add" data-add="ground-beef" aria-label="Add Ground beef, 80/20, 1 lb pack to your ticket">Add</button></td></tr><tr class="" data-row="marrow-bones">
+        <th scope="row"><a href="cuts/marrow-bones.html">Marrow bones, cross-cut</a><span class="row__facts">Bone-in</span></th>
+        <td class="num num--w">~2 lb</td>
+        <td class="num">$5.50/lb</td>
+        <td class="num num--est">≈ $11.00</td>
+        <td class="num stock ">3 left</td>
+        <td class="act"><button class="add" data-add="marrow-bones" aria-label="Add Marrow bones, cross-cut to your ticket">Add</button></td></tr><tr class="" data-row="oxtail">
+        <th scope="row"><a href="cuts/oxtail.html">Oxtail</a><span class="row__facts">Bone-in · Feeds 3–4</span></th>
+        <td class="num num--w">~2.5 lb</td>
+        <td class="num">$11/lb</td>
+        <td class="num num--est">≈ $27.50</td>
+        <td class="num stock is-low">Last one</td>
+        <td class="act"><button class="add" data-add="oxtail" aria-label="Add Oxtail to your ticket">Add</button></td></tr><tr class="" data-row="tongue">
+        <th scope="row"><a href="cuts/tongue.html">Beef tongue</a><span class="row__facts">Boneless · Feeds 4–6</span></th>
+        <td class="num num--w">~3 lb</td>
+        <td class="num">$8.50/lb</td>
+        <td class="num num--est">≈ $25.50</td>
+        <td class="num stock is-low">Last one</td>
+        <td class="act"><button class="add" data-add="tongue" aria-label="Add Beef tongue to your ticket">Add</button></td></tr></tbody></table><table class="board__table">
+        <caption><span class="board__species">Pork</span><span class="board__animal">3 pigs · Two Creeks Farm, Kutztown, PA · one on the small side</span></caption><colgroup><col class="c-cut"><col class="c-w"><col class="c-p"><col class="c-e"><col class="c-s"><col class="c-a"></colgroup>
+        <thead><tr><th scope="col">Cut</th><th scope="col" class="num">Weight</th><th scope="col" class="num">Price</th><th scope="col" class="num">Estimate</th><th scope="col" class="num">Stock</th><th scope="col"><span class="sr-only">Add to your ticket</span></th></tr></thead>
+        <tbody><tr class="" data-row="pork-chops">
+        <th scope="row"><a href="cuts/pork-chops.html">Pork loin chops, boneless</a><span class="row__opt">2 chops, 1″ (~1 lb)</span><span class="row__facts">Boneless · Feeds 2</span></th>
+        <td class="num num--w">~1 lb</td>
+        <td class="num">$15/lb</td>
+        <td class="num num--est">≈ $15.00</td>
+        <td class="num stock ">8 left</td>
+        <td class="act"><button class="add" data-add="pork-chops" aria-label="Add Pork loin chops, boneless, 2 chops, 1″ (~1 lb) to your ticket">Add</button></td></tr><tr class="is-soldout" data-row="pork-tenderloin">
+        <th scope="row"><a href="cuts/pork-tenderloin.html">Pork tenderloin</a><span class="row__facts">Boneless · Feeds 2–3</span></th>
+        <td class="num num--w">~1.1 lb</td>
+        <td class="num">$16/lb</td>
+        <td class="num num--est">≈ $17.60</td>
+        <td class="num stock is-out">Sold out Mon 10/12, 2:10 PM</td>
+        <td class="act"></td></tr><tr class="" data-row="pork-belly">
+        <th scope="row"><a href="cuts/pork-belly.html">Pork belly</a><span class="row__opt">Skin on</span><span class="row__facts">Boneless · Feeds 4</span></th>
+        <td class="num num--w">~2 lb</td>
+        <td class="num">$11.50/lb</td>
+        <td class="num num--est">≈ $23.00</td>
+        <td class="num stock ">3 left</td>
+        <td class="act"><button class="add" data-add="pork-belly" aria-label="Add Pork belly, Skin on to your ticket">Add</button></td></tr><tr class="" data-row="spare-ribs">
+        <th scope="row"><a href="cuts/spare-ribs.html">Spare ribs</a><span class="row__facts">Bone-in · Feeds 3</span></th>
+        <td class="num num--w">~3 lb</td>
+        <td class="num">$9.50/lb</td>
+        <td class="num num--est">≈ $28.50</td>
+        <td class="num stock is-low">2 left</td>
+        <td class="act"><button class="add" data-add="spare-ribs" aria-label="Add Spare ribs to your ticket">Add</button></td></tr><tr class="" data-row="pork-shoulder">
+        <th scope="row"><a href="cuts/pork-shoulder.html">Pork shoulder, bone-in</a><span class="row__opt">Half (~4 lb)</span><span class="row__facts">Bone-in · Feeds 6–12</span></th>
+        <td class="num num--w">~4 lb</td>
+        <td class="num">$8/lb</td>
+        <td class="num num--est">≈ $32.00</td>
+        <td class="num stock ">3 left</td>
+        <td class="act"><button class="add" data-add="pork-shoulder" aria-label="Add Pork shoulder, bone-in, Half (~4 lb) to your ticket">Add</button></td></tr><tr class="" data-row="fresh-ham">
+        <th scope="row"><a href="cuts/fresh-ham.html">Fresh ham, half</a><span class="row__facts">Bone-in · Feeds 10–12</span></th>
+        <td class="num num--w">~8 lb</td>
+        <td class="num">$7/lb</td>
+        <td class="num num--est">≈ $56.00</td>
+        <td class="num stock is-low">2 left</td>
+        <td class="act"><button class="add" data-add="fresh-ham" aria-label="Add Fresh ham, half to your ticket">Add</button></td></tr><tr class="" data-row="pork-jowl">
+        <th scope="row"><a href="cuts/pork-jowl.html">Pork jowl</a><span class="row__facts">Boneless</span></th>
+        <td class="num num--w">~1 lb</td>
+        <td class="num">$9/lb</td>
+        <td class="num num--est">≈ $9.00</td>
+        <td class="num stock ">4 left</td>
+        <td class="act"><button class="add" data-add="pork-jowl" aria-label="Add Pork jowl to your ticket">Add</button></td></tr><tr class="" data-row="pork-hock">
+        <th scope="row"><a href="cuts/pork-hock.html">Pork hocks</a><span class="row__facts">Bone-in</span></th>
+        <td class="num num--w">~2 lb</td>
+        <td class="num">$5/lb</td>
+        <td class="num num--est">≈ $10.00</td>
+        <td class="num stock ">4 left</td>
+        <td class="act"><button class="add" data-add="pork-hock" aria-label="Add Pork hocks to your ticket">Add</button></td></tr><tr class="" data-row="pork-sausage">
+        <th scope="row"><a href="cuts/pork-sausage.html">Sweet Italian sausage</a><span class="row__facts">Feeds 3</span></th>
+        <td class="num num--w">~1 lb</td>
+        <td class="num">$13/lb</td>
+        <td class="num num--est">≈ $13.00</td>
+        <td class="num stock ">14 left</td>
+        <td class="act"><button class="add" data-add="pork-sausage" aria-label="Add Sweet Italian sausage to your ticket">Add</button></td></tr></tbody></table><table class="board__table">
+        <caption><span class="board__species">Lamb</span><span class="board__animal">2 lambs · Ridgeback Farm, Salem, NY · cut Monday</span></caption><colgroup><col class="c-cut"><col class="c-w"><col class="c-p"><col class="c-e"><col class="c-s"><col class="c-a"></colgroup>
+        <thead><tr><th scope="col">Cut</th><th scope="col" class="num">Weight</th><th scope="col" class="num">Price</th><th scope="col" class="num">Estimate</th><th scope="col" class="num">Stock</th><th scope="col"><span class="sr-only">Add to your ticket</span></th></tr></thead>
+        <tbody><tr class="" data-row="lamb-rack">
+        <th scope="row"><a href="cuts/lamb-rack.html">Rack of lamb, frenched</a><span class="row__facts">Bone-in · Feeds 2–3</span></th>
+        <td class="num num--w">~1.5 lb</td>
+        <td class="num">$34/lb</td>
+        <td class="num num--est">≈ $51.00</td>
+        <td class="num stock ">4 left</td>
+        <td class="act"><button class="add" data-add="lamb-rack" aria-label="Add Rack of lamb, frenched to your ticket">Add</button></td></tr><tr class="is-soldout" data-row="lamb-loin-chops">
+        <th scope="row"><a href="cuts/lamb-loin-chops.html">Lamb loin chops</a><span class="row__facts">Bone-in · Feeds 1–2</span></th>
+        <td class="num num--w">~0.75 lb</td>
+        <td class="num">$26/lb</td>
+        <td class="num num--est">≈ $19.50</td>
+        <td class="num stock is-out">Sold out Mon 10/12, 5:30 PM</td>
+        <td class="act"></td></tr><tr class="" data-row="lamb-shoulder-chops">
+        <th scope="row"><a href="cuts/lamb-shoulder-chops.html">Lamb shoulder chops</a><span class="row__opt">2 chops (~1.2 lb)</span><span class="row__facts">Bone-in · Feeds 2</span></th>
+        <td class="num num--w">~1.2 lb</td>
+        <td class="num">$16/lb</td>
+        <td class="num num--est">≈ $19.20</td>
+        <td class="num stock ">5 left</td>
+        <td class="act"><button class="add" data-add="lamb-shoulder-chops" aria-label="Add Lamb shoulder chops, 2 chops (~1.2 lb) to your ticket">Add</button></td></tr><tr class="" data-row="lamb-leg">
+        <th scope="row"><a href="cuts/lamb-leg.html">Leg of lamb, bone-in</a><span class="row__opt">Half, shank end (~3 lb)</span><span class="row__facts">Bone-in · Feeds 4–10</span></th>
+        <td class="num num--w">~3 lb</td>
+        <td class="num">$14/lb</td>
+        <td class="num num--est">≈ $42.00</td>
+        <td class="num stock ">3 left</td>
+        <td class="act"><button class="add" data-add="lamb-leg" aria-label="Add Leg of lamb, bone-in, Half, shank end (~3 lb) to your ticket">Add</button></td></tr><tr class="" data-row="lamb-breast">
+        <th scope="row"><a href="cuts/lamb-breast.html">Lamb breast</a><span class="row__facts">Bone-in · Feeds 2</span></th>
+        <td class="num num--w">~1.5 lb</td>
+        <td class="num">$7.50/lb</td>
+        <td class="num num--est">≈ $11.25</td>
+        <td class="num stock ">3 left</td>
+        <td class="act"><button class="add" data-add="lamb-breast" aria-label="Add Lamb breast to your ticket">Add</button></td></tr><tr class="" data-row="lamb-shank">
+        <th scope="row"><a href="cuts/lamb-shank.html">Lamb shank</a><span class="row__facts">Bone-in · Feeds 1</span></th>
+        <td class="num num--w">~1 lb</td>
+        <td class="num">$12/lb</td>
+        <td class="num num--est">≈ $12.00</td>
+        <td class="num stock ">4 left</td>
+        <td class="act"><button class="add" data-add="lamb-shank" aria-label="Add Lamb shank to your ticket">Add</button></td></tr><tr class="" data-row="lamb-neck">
+        <th scope="row"><a href="cuts/lamb-neck.html">Lamb neck</a><span class="row__facts">Bone-in · Feeds 2</span></th>
+        <td class="num num--w">~1.5 lb</td>
+        <td class="num">$10/lb</td>
+        <td class="num num--est">≈ $15.00</td>
+        <td class="num stock is-low">2 left</td>
+        <td class="act"><button class="add" data-add="lamb-neck" aria-label="Add Lamb neck to your ticket">Add</button></td></tr><tr class="" data-row="ground-lamb">
+        <th scope="row"><a href="cuts/ground-lamb.html">Ground lamb</a><span class="row__facts">Boneless · Feeds 3–4</span></th>
+        <td class="num num--w">~1 lb</td>
+        <td class="num">$13/lb</td>
+        <td class="num num--est">≈ $13.00</td>
+        <td class="num stock ">9 left</td>
+        <td class="act"><button class="add" data-add="ground-lamb" aria-label="Add Ground lamb to your ticket">Add</button></td></tr></tbody></table><table class="board__table">
+        <caption><span class="board__species">Chicken</span><span class="board__animal">38 chickens · Old Mill Poultry, Lancaster County, PA · in Monday</span></caption><colgroup><col class="c-cut"><col class="c-w"><col class="c-p"><col class="c-e"><col class="c-s"><col class="c-a"></colgroup>
+        <thead><tr><th scope="col">Cut</th><th scope="col" class="num">Weight</th><th scope="col" class="num">Price</th><th scope="col" class="num">Estimate</th><th scope="col" class="num">Stock</th><th scope="col"><span class="sr-only">Add to your ticket</span></th></tr></thead>
+        <tbody><tr class="" data-row="whole-chicken">
+        <th scope="row"><a href="cuts/whole-chicken.html">Whole chicken</a><span class="row__facts">Bone-in · Feeds 4</span></th>
+        <td class="num num--w">~4 lb</td>
+        <td class="num">$6.50/lb</td>
+        <td class="num num--est">≈ $26.00</td>
+        <td class="num stock ">22 left</td>
+        <td class="act"><button class="add" data-add="whole-chicken" aria-label="Add Whole chicken to your ticket">Add</button></td></tr><tr class="" data-row="chicken-thighs">
+        <th scope="row"><a href="cuts/chicken-thighs.html">Chicken thighs, bone-in, skin-on</a><span class="row__facts">Bone-in · Feeds 3</span></th>
+        <td class="num num--w">~1.5 lb</td>
+        <td class="num">$7.50/lb</td>
+        <td class="num num--est">≈ $11.25</td>
+        <td class="num stock ">5 left</td>
+        <td class="act"><button class="add" data-add="chicken-thighs" aria-label="Add Chicken thighs, bone-in, skin-on to your ticket">Add</button></td></tr><tr class="" data-row="chicken-breasts">
+        <th scope="row"><a href="cuts/chicken-breasts.html">Chicken breasts, boneless</a><span class="row__facts">Boneless · Feeds 2</span></th>
+        <td class="num num--w">~1.2 lb</td>
+        <td class="num">$13/lb</td>
+        <td class="num num--est">≈ $15.60</td>
+        <td class="num stock ">10 left</td>
+        <td class="act"><button class="add" data-add="chicken-breasts" aria-label="Add Chicken breasts, boneless to your ticket">Add</button></td></tr><tr class="" data-row="chicken-wings">
+        <th scope="row"><a href="cuts/chicken-wings.html">Chicken wings</a><span class="row__facts">Bone-in · Feeds 2–3</span></th>
+        <td class="num num--w">~2 lb</td>
+        <td class="num">$6/lb</td>
+        <td class="num num--est">≈ $12.00</td>
+        <td class="num stock ">3 left</td>
+        <td class="act"><button class="add" data-add="chicken-wings" aria-label="Add Chicken wings to your ticket">Add</button></td></tr></tbody></table><table class="board__table">
+        <caption><span class="board__species">Made in the shop</span><span class="board__animal">Cured, smoked and rendered in the back</span></caption><colgroup><col class="c-cut"><col class="c-w"><col class="c-p"><col class="c-e"><col class="c-s"><col class="c-a"></colgroup>
+        <thead><tr><th scope="col">Cut</th><th scope="col" class="num">Weight</th><th scope="col" class="num">Price</th><th scope="col" class="num">Estimate</th><th scope="col" class="num">Stock</th><th scope="col"><span class="sr-only">Add to your ticket</span></th></tr></thead>
+        <tbody><tr class="" data-row="bacon">
+        <th scope="row"><a href="cuts/bacon.html">Bacon, house-smoked</a><span class="row__facts"></span></th>
+        <td class="num num--w">~1 lb</td>
+        <td class="num">$16/lb</td>
+        <td class="num num--est">≈ $16.00</td>
+        <td class="num stock ">10 left</td>
+        <td class="act"><button class="add" data-add="bacon" aria-label="Add Bacon, house-smoked to your ticket">Add</button></td></tr><tr class="" data-row="salami">
+        <th scope="row"><a href="cuts/salami.html">Salami, house-cured</a><span class="row__facts">Dry-cured</span></th>
+        <td class="num num--w">~0.5 lb</td>
+        <td class="num">$32/lb</td>
+        <td class="num num--est">≈ $16.00</td>
+        <td class="num stock ">6 left</td>
+        <td class="act"><button class="add" data-add="salami" aria-label="Add Salami, house-cured to your ticket">Add</button></td></tr><tr class="" data-row="beef-stock">
+        <th scope="row"><a href="cuts/beef-stock.html">Beef stock</a><span class="row__facts">Frozen</span></th>
+        <td class="num num--w">1 quart</td>
+        <td class="num">$12 each</td>
+        <td class="num num--est">$12.00</td>
+        <td class="num stock ">12 left</td>
+        <td class="act"><button class="add" data-add="beef-stock" aria-label="Add Beef stock to your ticket">Add</button></td></tr><tr class="" data-row="beef-tallow">
+        <th scope="row"><a href="cuts/beef-tallow.html">Beef tallow</a><span class="row__facts">Shelf-stable</span></th>
+        <td class="num num--w">8 oz jar</td>
+        <td class="num">$8 each</td>
+        <td class="num num--est">$8.00</td>
+        <td class="num stock ">10 left</td>
+        <td class="act"><button class="add" data-add="beef-tallow" aria-label="Add Beef tallow to your ticket">Add</button></td></tr></tbody></table></div></div>
+    </div>
+  </section>
+
+  <div class="slips">
+    <figure class="slip-note">
+      <blockquote><p>Saturday mornings it’s short ribs and whole chickens. If you want the short ribs, order Friday.</p></blockquote>
+      <figcaption>Theo, at the counter</figcaption>
+    </figure>
+    <p class="slip-note slip-note--plain">Not on the board? We can usually get duck, rabbit, goat, quail, guinea hen and venison within a week, and a whole suckling pig with 10 days’ notice. <a href="contact.html">Ask us</a>.</p>
+  </div>
+</div>
+
+
+
+<section class="block block--box" id="box" aria-labelledby="box-title">
+  <div class="block__head">
+    <h2 id="box-title">The Butcher’s Box</h2>
+    <p>Pick 6, 10 or 14 cuts from the board, or take Marisol’s pick. Subscribe and it’s 10% off.</p>
+  </div>
+  <ol class="week" aria-label="The shop’s week">
+    <li data-wd="1"><b>Mon</b><span>Animals in and cut. Closed to walk-ins.</span></li>
+    <li data-wd="2"><b>Tue</b><span>Open 9–7</span></li>
+    <li data-wd="3"><b>Wed</b><span>Boxes cut. Open 9–7</span></li>
+    <li data-wd="4"><b>Thu</b><span>Open 9–7</span></li>
+    <li data-wd="5"><b>Fri</b><span>Open 9–7</span></li>
+    <li data-wd="6"><b>Sat</b><span>Open 9–7</span></li>
+    <li data-wd="0"><b>Sun</b><span>Open 10–5. Box changes close at 11:59 PM.</span></li>
+  </ol>
+  <div class="box">
+    <div class="box__config">
+      <fieldset class="opt">
+        <legend>How many cuts</legend>
+        <div class="opt__row opt__row--3" data-box-size>
+          <label><input type="radio" name="bsize" value="6" checked><span>6 cuts<small>Dinner for two, about a week</small></span></label>
+          <label><input type="radio" name="bsize" value="10"><span>10 cuts<small>A family of four, about a week</small></span></label>
+          <label><input type="radio" name="bsize" value="14"><span>14 cuts<small>A family of four, plus leftovers</small></span></label>
+        </div>
+      </fieldset>
+      <fieldset class="opt">
+        <legend>How often</legend>
+        <div class="opt__row opt__row--4" data-box-freq>
+          <label><input type="radio" name="bfreq" value="2"><span>Every 2 weeks</span></label>
+          <label><input type="radio" name="bfreq" value="4" checked><span>Every 4 weeks</span></label>
+          <label><input type="radio" name="bfreq" value="8"><span>Every 8 weeks</span></label>
+          <label><input type="radio" name="bfreq" value="0"><span>One time</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="opt">
+        <legend>What goes in</legend>
+        <div class="opt__row opt__row--2" data-box-mode>
+          <label><input type="radio" name="bmode" value="pick" checked><span>Marisol’s pick<small>A fixed list, with her note</small></span></label>
+          <label><input type="radio" name="bmode" value="own"><span>I’ll choose<small>Any box cuts on the board</small></span></label>
+        </div>
+      </fieldset>
+      <div class="pick" data-box-pick></div>
+      <ul class="picker" data-box-picker hidden></ul>
+    </div>
+    <div class="box__summary" data-box-summary></div>
+  </div>
+  <div class="boxbar" data-box-bar hidden></div>
+</section>
+
+<section class="block block--delivery" id="delivery" aria-labelledby="delivery-title">
+  <h2 id="delivery-title" class="block__h">Getting it home</h2>
+  <div class="delivery">
+    <div class="delivery__main">
+      <form class="zip dtag" data-zip novalidate>
+        <span class="dtag__hole" aria-hidden="true"></span>
+        <label for="zip-input">Deliver to ZIP</label>
+        <div class="zip__row"><input id="zip-input" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="11211" aria-describedby="zip-out"><button class="btn btn--red" type="submit">Check</button></div>
+        <p class="zip__out" id="zip-out" data-zip-out aria-live="polite"></p>
+      </form>
+      <ul class="ways3" aria-label="Delivery options">
+        <li><h3>Same-evening courier</h3><p>Brooklyn and Manhattan. $8, free on $100 of meat or more.</p><p class="ways3__next" data-next="courier">Order by 2 PM, delivered 5–⁠9 PM</p></li>
+        <li><h3>Overnight shipping</h3><p>The lower 48 states. $19, free on $200 of meat or more.</p><p class="ways3__next" data-next="ship">Order by noon Mon–Wed, arrives the next day</p></li>
+        <li><h3>Pickup</h3><p>Kent Ave &amp; N 4th St. Free.</p><p class="ways3__next" data-next="pickup">Ready 2 hours after you order</p></li>
+      </ul>
+      <p class="fine">All times Eastern. We don’t ship to Alaska, Hawaii, US territories or outside the US, because the box only stays below 40°F for 48 hours. <a href="delivery.html">How delivery works</a></p>
+    </div>
+    <figure class="delivery__map">
+      <svg class="zone-map" viewBox="0 0 600 600" role="img" aria-labelledby="zone-map-title"><title id="zone-map-title">Map of New York City. Brooklyn and Manhattan are the same-evening courier zone; the Bronx, Queens and Staten Island get overnight shipping.</title><path class="boro" d="M191.0 378.0L194.4 378.2L199.1 382.4L200.3 381.4L200.9 383.3L202.0 382.5L201.4 383.5L202.8 384.8L201.5 386.0L203.4 385.9L200.5 386.9L203.5 386.6L200.5 387.2L200.7 388.1L203.8 387.9L200.5 388.7L201.3 391.9L200.1 393.2L203.2 393.3L200.2 393.7L201.6 394.0L200.2 394.2L200.6 402.8L205.8 404.8L200.7 403.2L201.4 410.6L204.0 415.3L207.7 418.7L208.5 418.0L207.2 419.6L209.7 419.5L208.9 420.4L210.1 420.6L213.8 428.1L214.2 426.9L217.8 434.5L220.6 436.3L221.1 443.8L222.3 444.8L211.9 455.5L208.9 459.6L209.6 460.6L202.7 467.6L203.1 469.8L201.9 469.4L198.5 473.1L200.2 474.4L198.4 473.2L198.2 474.9L194.1 478.0L194.7 478.8L192.8 478.9L187.1 485.4L186.8 487.8L185.7 487.1L181.8 490.3L178.6 495.8L177.2 495.2L176.0 496.7L174.7 500.9L171.6 501.9L171.0 505.6L169.2 505.2L167.4 509.2L164.8 507.6L159.1 516.3L155.2 516.3L149.0 520.5L134.7 541.4L131.9 541.0L130.3 533.7L137.1 533.1L141.1 527.2L139.9 530.0L143.1 526.3L143.8 523.6L140.0 518.3L135.0 518.2L133.6 519.1L134.4 520.4L133.3 519.4L133.9 520.7L132.8 518.8L131.9 520.0L133.2 521.3L132.0 520.3L132.7 521.7L131.2 521.2L132.4 522.2L130.3 521.6L131.5 522.7L130.4 522.1L130.8 523.9L129.3 522.8L130.3 524.0L129.2 522.9L129.7 525.1L128.3 524.0L129.3 531.0L128.4 530.0L129.0 531.1L126.8 530.9L125.7 532.9L121.0 535.0L113.8 542.8L107.4 544.7L99.4 550.5L97.2 550.1L91.4 555.7L87.8 553.7L83.9 555.6L73.0 568.4L68.4 566.5L68.7 564.3L60.1 565.9L49.7 577.6L41.9 579.8L35.5 579.6L29.6 582.2L26.4 585.5L21.8 585.6L18.5 587.5L12.5 581.9L10.0 571.6L12.0 569.2L11.1 568.5L12.4 568.6L13.6 563.3L15.8 561.4L15.3 560.0L16.7 561.4L15.9 560.0L17.4 559.9L16.5 558.8L17.4 558.1L18.4 560.5L19.6 560.2L19.0 558.5L20.8 558.4L20.4 557.3L23.8 557.0L26.4 554.6L23.2 553.0L23.4 549.1L22.1 547.9L24.7 539.3L24.0 534.6L20.7 531.4L21.6 530.1L20.4 525.8L17.9 522.8L22.8 516.3L24.4 517.5L29.9 512.7L30.1 510.1L33.2 509.9L35.9 505.7L38.5 504.5L46.6 505.2L47.4 507.0L48.0 505.4L48.6 506.9L48.5 505.0L49.5 506.4L51.3 505.7L55.5 501.8L56.2 494.8L59.7 485.1L63.4 466.9L63.2 459.2L68.4 453.2L70.9 447.2L65.1 433.1L65.5 426.2L67.6 421.9L66.3 412.6L67.2 402.7L72.9 396.0L73.6 393.0L82.1 384.7L83.9 383.7L85.1 386.3L85.1 383.1L88.9 383.5L89.0 382.2L89.3 386.8L89.8 385.3L92.7 386.2L92.4 384.7L94.8 382.3L96.5 385.3L98.0 385.5L97.7 388.0L96.2 388.7L98.3 385.8L98.1 387.0L103.0 387.4L103.4 386.1L105.4 389.4L105.6 387.9L105.8 389.6L106.4 388.1L108.0 388.6L107.4 391.1L108.8 390.3L109.4 391.6L109.9 389.5L110.5 392.4L110.8 391.0L112.7 392.2L112.9 390.4L112.9 392.2L114.3 392.8L115.3 390.5L115.4 393.1L117.3 393.4L117.8 391.8L119.0 392.5L118.8 390.2L120.8 393.0L121.4 391.2L121.7 392.9L121.5 391.0L126.6 390.9L128.3 389.0L136.6 386.8L140.9 388.4L141.6 387.5L141.8 388.9L142.3 387.8L144.2 390.3L144.9 387.6L145.3 389.1L147.2 389.2L148.7 387.4L151.6 387.8L151.6 386.4L152.5 387.4L152.2 386.1L153.0 387.3L152.8 385.9L154.4 387.2L154.4 385.2L155.0 386.5L155.0 385.0L156.4 386.0L157.9 383.7L162.3 381.9L173.7 382.5L179.7 381.2L187.4 377.2L191.0 378.0Z"><title>Staten Island: overnight shipping</title></path><path class="boro" d="M447.3 451.4L451.6 455.3L449.9 456.4L451.6 456.4L451.6 458.0L448.8 459.0L446.8 458.7L444.0 454.4L442.4 455.3L439.8 453.5L444.9 449.6L447.3 451.4ZM491.7 433.8L492.4 435.8L490.7 434.5L491.6 436.4L488.8 438.8L481.1 438.3L480.2 435.2L484.0 430.4L486.9 430.3L491.7 433.8ZM520.4 424.9L522.0 425.5L522.1 427.9L527.1 429.6L525.8 432.1L527.4 429.5L527.7 430.5L532.0 430.6L539.9 427.5L542.2 428.0L545.0 434.5L550.2 440.8L550.2 447.7L548.2 449.7L546.3 449.0L548.3 449.9L550.2 448.1L550.7 452.2L541.3 452.3L534.1 457.0L526.0 455.9L510.8 457.8L471.5 467.2L450.3 475.3L420.2 490.6L419.3 489.9L413.3 492.2L412.2 493.8L411.6 493.0L410.1 494.6L409.2 494.0L386.5 503.6L374.0 505.6L339.0 523.2L338.7 524.6L339.6 507.1L343.9 503.4L347.9 502.6L353.9 497.4L362.8 495.7L368.8 492.7L368.7 491.5L374.1 495.6L379.6 495.5L385.1 492.4L385.8 489.8L388.9 487.7L392.6 488.7L397.6 487.6L397.4 488.7L398.0 487.3L404.4 487.4L430.2 470.3L433.0 469.1L444.6 469.5L445.4 468.2L455.8 465.3L456.3 463.7L459.7 462.2L463.2 462.7L473.5 455.3L474.1 454.1L475.3 455.2L475.7 453.3L479.3 455.5L479.6 457.2L479.5 455.7L481.1 456.4L477.2 453.2L479.3 450.6L483.1 454.6L482.2 452.4L483.2 452.1L480.2 449.0L480.7 447.7L484.7 445.3L493.6 444.6L498.9 440.0L500.1 440.3L494.9 448.3L495.1 451.3L495.9 449.9L496.3 451.7L497.0 447.2L502.8 441.0L502.7 437.2L508.9 431.0L512.6 432.4L512.1 434.3L510.7 431.8L512.1 434.4L512.0 438.6L508.4 443.9L506.3 443.5L504.6 446.7L506.4 448.8L511.7 442.1L513.2 447.1L518.9 447.5L515.7 445.3L518.0 431.6L514.6 428.7L513.4 429.2L513.8 430.5L512.6 428.2L513.4 425.7L520.4 424.9ZM520.4 424.0L512.8 422.5L518.3 415.7L519.6 416.2L520.4 424.0ZM487.9 406.7L490.1 408.5L486.4 411.3L492.3 409.8L487.6 412.7L485.7 418.9L483.8 417.0L484.3 422.6L482.8 425.8L480.3 426.0L480.6 422.7L477.6 415.3L478.3 411.6L485.5 407.4L484.6 406.6L487.9 406.7ZM472.0 404.2L471.5 406.9L472.5 405.4L473.8 410.5L473.0 415.4L474.9 421.8L472.2 418.4L470.8 411.9L468.1 408.2L471.2 408.5L468.6 407.1L467.5 402.3L469.9 401.6L472.0 404.2ZM461.2 390.8L463.6 403.5L468.8 410.6L465.9 413.3L469.2 414.9L469.5 416.8L467.1 420.4L468.5 424.8L470.9 424.4L468.7 426.7L469.5 430.2L470.5 429.3L470.0 434.0L467.5 437.4L466.3 445.3L463.5 451.7L451.8 451.9L449.2 450.6L451.8 447.5L456.3 447.7L458.5 445.2L459.9 446.3L460.8 444.4L463.2 444.5L460.1 443.4L461.7 440.9L461.7 436.4L465.1 430.1L463.8 427.6L463.0 432.8L458.9 425.0L457.2 426.1L453.3 423.8L450.1 424.7L450.7 407.6L453.1 399.4L450.7 391.5L452.0 390.9L456.3 395.1L458.6 395.3L460.1 394.6L460.4 389.5L461.2 390.8ZM464.2 167.7L471.3 173.1L472.8 171.7L480.0 174.4L485.5 173.7L489.4 175.0L491.4 176.2L490.9 180.4L493.1 184.5L495.8 182.4L503.2 181.7L503.9 181.0L502.0 180.4L504.7 181.3L505.7 177.3L503.1 176.0L507.2 173.7L510.4 174.4L516.3 185.0L512.5 187.3L510.3 184.9L518.8 197.4L520.3 196.9L518.9 197.5L522.0 205.2L528.8 214.0L532.7 215.8L536.7 221.7L541.4 225.1L541.8 227.3L543.5 228.4L539.5 222.0L537.2 221.5L532.5 213.8L532.0 208.3L534.3 206.0L532.1 199.8L537.0 192.6L588.3 234.5L590.0 252.6L582.0 268.5L570.9 270.9L558.4 276.3L561.9 293.0L563.3 334.9L561.2 342.4L560.4 357.7L563.8 372.4L553.3 376.0L546.8 379.9L545.9 389.2L548.3 396.1L545.7 396.1L547.2 393.1L544.1 392.3L544.4 390.8L543.2 393.4L541.2 393.8L542.7 391.6L540.9 393.7L541.8 388.9L540.6 385.0L539.0 382.3L532.8 378.7L540.5 387.5L539.3 395.7L522.1 404.0L516.1 416.9L515.1 412.0L511.5 418.0L515.1 412.0L510.5 406.7L507.3 406.9L501.0 416.9L501.8 421.0L505.7 424.4L505.5 425.8L497.5 430.6L494.6 434.0L494.8 432.8L491.0 430.2L484.8 428.1L491.3 413.3L496.4 413.3L502.9 405.8L503.7 402.8L496.6 397.3L487.6 401.7L495.2 397.2L493.7 395.1L466.6 380.7L463.4 376.8L461.1 368.2L462.3 362.7L466.1 360.3L473.7 360.9L466.1 358.9L461.1 361.8L459.5 368.2L461.5 378.4L458.3 375.5L458.1 377.9L455.8 376.8L453.3 373.4L452.6 370.5L455.3 367.2L452.5 370.2L452.0 369.5L455.4 365.7L454.3 363.0L455.2 365.5L452.4 368.9L451.3 365.3L452.3 367.1L451.6 364.9L453.3 364.3L450.8 364.6L453.2 377.7L449.1 378.1L445.1 360.4L445.9 359.1L443.9 359.2L448.1 381.8L433.9 383.7L430.9 379.2L434.0 373.7L430.8 374.9L427.2 373.8L421.6 366.8L423.2 366.0L423.4 364.0L422.0 364.1L422.3 362.8L421.7 363.6L423.2 364.2L422.1 366.1L419.7 364.2L425.5 361.7L424.6 357.1L427.5 356.5L425.4 345.8L422.6 346.4L420.5 335.5L419.5 335.6L418.7 331.1L416.7 331.7L413.7 313.5L408.3 314.8L392.0 328.5L391.5 327.4L389.0 329.6L387.3 327.1L384.9 331.1L380.0 323.5L379.9 318.6L375.2 314.9L376.8 312.7L368.9 306.9L370.1 305.3L367.7 303.5L368.9 302.1L358.4 293.8L359.6 292.3L356.0 285.9L359.7 284.8L358.0 284.2L355.0 276.1L355.7 274.3L360.0 274.2L355.2 273.0L350.7 267.9L341.5 264.8L337.8 257.4L333.3 255.1L337.9 252.7L340.9 247.7L339.4 247.3L336.6 252.9L332.0 254.6L325.1 252.0L317.8 254.4L315.8 253.0L318.8 246.9L317.9 246.0L319.9 245.4L318.9 244.5L320.2 244.8L319.3 244.1L321.9 239.5L325.7 241.1L322.5 238.4L323.7 238.4L335.8 218.0L339.6 213.2L344.8 210.3L345.3 208.4L341.7 205.5L343.2 200.9L345.8 199.2L350.0 201.8L351.4 201.3L363.3 190.9L370.9 181.6L380.9 184.2L385.5 188.8L382.5 192.8L380.0 192.9L378.5 196.2L379.9 194.1L382.6 193.9L387.1 190.8L385.3 192.3L386.1 194.3L386.9 193.5L386.1 194.4L387.3 193.2L388.5 194.1L388.8 192.5L389.9 193.6L388.5 194.2L390.4 198.6L389.0 200.2L389.7 203.7L391.6 199.7L392.2 205.5L398.0 204.7L397.0 196.6L403.4 195.8L402.4 192.7L407.2 194.5L411.2 188.3L412.8 189.3L414.7 186.5L412.7 189.6L414.1 191.6L409.9 195.5L428.1 207.4L426.7 210.0L424.9 210.0L426.9 211.9L423.6 214.4L420.1 214.9L424.2 221.3L426.1 218.6L425.5 219.9L426.5 220.4L424.9 220.9L426.5 221.9L424.5 221.5L432.7 224.9L434.1 223.8L433.5 222.6L431.3 223.6L433.6 222.4L434.9 223.9L441.0 217.8L444.8 215.9L444.3 214.4L439.2 216.7L435.7 214.8L434.9 210.6L433.7 210.5L434.8 209.3L432.1 207.9L434.5 205.5L434.5 199.4L433.8 197.3L431.9 198.1L433.6 197.1L431.0 197.8L433.9 196.8L431.7 196.6L433.9 196.5L432.4 195.1L434.2 193.5L427.9 193.9L427.7 192.3L425.0 191.5L423.5 189.0L424.9 186.9L430.4 185.3L428.4 184.8L428.7 182.5L430.6 181.3L429.6 177.3L430.7 176.0L434.4 178.2L434.8 175.4L437.3 174.4L440.2 176.1L440.4 174.4L441.5 175.2L440.9 173.3L442.2 175.4L443.4 172.3L446.0 171.1L443.6 172.4L445.5 173.6L446.9 177.6L446.7 184.2L448.4 183.4L451.2 184.9L452.8 184.0L452.9 181.0L456.5 178.9L454.9 173.5L459.4 172.7L464.2 167.7Z"><title>Queens: overnight shipping</title></path><path class="boro boro--zone" d="M415.6 469.2L413.6 469.7L412.0 467.4L411.3 462.6L412.7 459.0L416.3 455.7L420.1 457.8L421.7 461.0L421.0 464.2L415.6 469.2ZM360.4 445.0L364.2 447.0L367.6 452.6L367.7 455.4L364.6 455.3L358.4 448.2L358.1 446.3L360.4 445.0ZM430.9 448.2L426.4 449.9L422.5 449.3L419.5 444.7L419.9 443.1L422.2 440.9L428.4 441.9L432.6 446.1L430.9 448.2ZM428.0 422.3L427.9 426.4L430.9 426.4L429.5 425.1L430.7 423.7L433.7 423.6L433.3 430.4L428.0 436.1L426.0 435.6L423.8 429.0L426.6 426.3L424.5 421.2L428.0 422.3ZM440.7 420.1L439.1 424.0L442.8 426.5L445.7 425.4L443.0 436.7L436.4 439.5L431.5 435.0L435.7 431.8L435.3 427.2L437.4 420.1L440.7 420.1ZM411.7 421.1L403.9 423.2L407.5 412.0L415.8 406.2L417.8 409.2L416.4 419.1L411.7 421.1ZM436.2 404.4L433.6 408.4L436.3 407.8L438.6 409.5L440.1 412.6L437.4 413.9L435.0 413.6L426.5 417.0L421.9 420.1L419.2 419.9L418.8 418.0L421.4 418.3L421.9 411.2L419.3 412.3L419.5 408.8L422.5 409.8L426.6 404.4L429.3 406.5L428.9 404.8L432.7 405.9L435.0 403.7L436.2 404.4ZM447.8 401.6L442.7 410.7L439.2 403.4L441.3 401.1L446.3 399.3L447.8 401.6ZM436.3 400.5L434.9 403.0L424.5 402.5L427.0 396.2L436.9 391.2L440.2 394.2L438.6 398.8L436.3 400.5ZM324.4 252.9L332.7 255.9L332.1 259.4L333.6 256.4L334.0 257.9L334.7 256.8L337.0 258.0L341.4 265.9L350.7 269.1L355.6 280.4L351.1 282.4L350.5 285.1L347.6 286.2L348.6 287.9L346.5 291.7L347.9 291.2L349.5 294.8L349.1 290.0L348.0 289.5L349.5 288.6L349.0 286.3L351.5 285.4L351.7 283.2L355.5 282.1L356.5 282.9L357.2 284.3L355.2 285.8L359.6 292.3L358.4 293.8L368.9 302.1L367.7 303.5L370.1 305.3L368.9 306.9L376.8 312.7L375.2 314.9L379.9 318.6L380.0 323.5L384.9 331.1L387.3 327.1L389.0 329.6L391.5 327.4L392.0 328.5L408.3 314.8L413.7 313.5L416.7 331.7L418.7 331.1L419.5 335.6L420.5 335.5L422.6 346.4L425.4 345.8L427.5 356.5L424.6 357.1L425.5 361.7L419.7 364.2L419.6 366.1L426.2 374.8L424.6 379.8L425.9 384.3L420.0 385.9L416.0 389.4L417.1 391.1L413.9 388.1L411.9 382.7L409.9 381.7L402.8 369.3L412.6 390.9L414.6 392.0L407.9 394.0L403.6 390.8L399.9 384.3L398.5 383.2L396.3 383.8L394.0 378.6L390.6 376.5L392.9 381.1L392.3 379.9L393.5 379.6L393.7 382.4L403.5 391.8L405.1 394.9L398.3 401.9L397.9 403.8L399.4 405.6L398.2 406.5L396.7 404.8L394.2 405.5L389.2 411.8L385.6 413.5L364.2 400.4L362.9 401.2L378.8 410.9L378.2 412.0L380.5 414.7L384.9 415.0L385.5 424.5L390.7 426.8L387.5 429.0L390.5 427.6L392.0 428.7L388.2 435.2L381.4 436.9L379.8 428.4L378.6 428.2L379.8 430.1L372.0 420.5L372.9 422.8L371.9 421.1L371.2 421.9L378.9 430.1L379.5 436.6L375.7 437.7L375.0 435.7L372.2 435.3L372.8 437.1L371.9 435.5L370.9 436.2L372.5 438.9L367.0 439.0L363.7 435.1L363.4 432.3L366.1 428.4L366.4 423.9L364.1 425.8L364.7 426.7L363.9 426.0L364.8 428.2L362.3 430.4L362.4 433.3L361.4 433.1L362.3 434.0L361.0 433.4L362.2 434.5L360.8 433.8L366.2 440.5L370.0 441.7L371.8 440.8L370.0 441.7L371.9 442.3L382.5 439.5L389.4 439.8L397.9 436.8L399.3 438.7L398.7 440.5L403.4 461.0L405.5 465.3L402.4 471.8L385.9 476.5L384.3 472.2L384.8 467.9L383.0 462.6L381.5 462.2L382.2 461.4L376.8 462.5L374.4 461.0L374.5 462.4L368.8 463.2L368.6 452.0L363.5 444.7L358.8 441.8L355.6 444.9L350.4 440.8L350.7 439.0L348.6 439.2L347.7 440.8L348.8 442.1L352.8 444.6L366.4 459.4L361.2 463.8L355.4 464.3L351.9 461.4L356.2 456.7L351.3 460.2L349.3 458.4L349.9 452.6L347.2 451.5L348.6 458.9L350.2 460.2L350.2 461.6L348.5 462.2L351.5 462.3L354.8 465.6L367.1 463.6L368.2 467.4L363.2 467.6L365.1 468.8L368.8 467.9L369.1 469.6L365.5 469.9L355.7 467.1L348.9 468.3L337.8 467.1L325.4 467.9L325.6 469.3L329.3 468.8L336.6 470.7L347.2 470.3L348.3 478.0L335.0 477.8L319.6 481.1L311.1 481.2L308.9 482.6L306.8 482.2L306.9 483.1L305.5 482.3L304.8 483.6L304.2 482.6L300.1 484.2L299.3 483.2L294.8 483.7L294.2 486.4L293.8 483.9L286.4 485.5L275.7 485.2L274.6 486.4L273.7 482.8L264.3 479.1L263.2 474.9L264.8 471.9L270.5 469.3L278.7 470.0L279.1 471.2L288.9 473.7L291.4 469.7L289.3 472.5L285.6 470.5L287.0 465.7L281.6 469.0L276.6 467.8L276.4 466.3L278.8 464.6L277.3 463.4L283.0 460.1L279.0 462.0L281.7 459.2L276.4 463.1L279.0 460.5L277.4 459.3L279.8 456.0L276.6 456.2L278.5 453.4L275.7 454.8L273.0 449.9L263.9 442.6L244.4 437.3L239.2 431.7L234.6 423.0L233.1 410.9L234.0 402.9L238.4 390.8L236.4 389.8L238.5 390.6L239.5 388.5L238.5 387.2L241.3 383.5L243.1 384.5L245.0 382.1L247.4 383.9L249.6 380.8L246.1 377.3L250.0 380.3L251.1 379.6L249.4 378.2L251.6 378.9L250.2 375.9L250.9 374.8L249.6 374.3L251.5 374.1L250.3 373.0L253.0 374.0L250.3 371.9L254.6 374.5L252.0 371.4L253.9 372.6L254.7 371.7L252.6 370.0L254.2 370.6L254.2 368.9L257.4 370.8L255.9 368.3L258.2 370.0L258.9 369.1L256.2 366.7L259.4 368.3L256.9 365.5L260.3 367.1L258.4 364.0L261.1 366.1L261.8 365.2L258.6 362.6L260.6 360.8L264.5 363.4L265.2 362.3L262.2 359.8L263.6 359.1L267.8 362.5L269.0 361.1L266.0 358.6L266.9 357.4L272.4 359.9L270.6 357.6L273.2 358.8L268.8 355.3L273.0 358.1L271.7 354.9L275.6 357.9L277.3 355.8L273.8 353.0L277.8 350.2L278.1 345.9L276.5 349.9L274.5 350.1L273.8 351.7L270.7 350.9L269.6 353.5L271.1 346.8L268.9 352.2L269.4 350.0L266.5 350.1L264.8 354.9L259.2 355.2L256.6 345.9L258.5 346.7L259.6 355.1L264.0 354.0L266.0 349.4L264.7 347.3L261.9 348.5L264.6 347.2L261.0 347.1L262.0 345.2L260.4 346.7L263.3 343.5L261.0 345.1L259.8 344.1L261.2 341.7L257.2 345.0L258.8 343.1L258.2 340.9L257.1 341.1L258.1 339.1L256.0 338.3L257.6 337.2L256.3 336.5L257.8 336.3L256.7 334.8L263.4 329.3L264.2 330.3L262.1 332.0L263.2 333.8L266.7 329.8L265.6 328.3L264.4 329.0L268.5 325.7L270.7 325.8L273.7 320.0L275.8 320.4L275.0 317.2L282.5 300.8L286.3 301.2L287.0 300.0L299.4 298.5L300.3 302.4L301.9 300.3L300.9 302.9L301.7 303.8L302.6 302.7L301.9 304.1L303.4 304.6L302.2 307.4L303.8 305.0L305.6 306.6L304.8 304.5L307.3 306.8L305.2 303.0L308.7 306.1L305.2 302.2L309.2 304.4L303.3 298.4L305.5 298.2L303.3 296.2L307.0 298.7L305.7 294.3L307.9 297.3L308.0 300.0L310.7 302.1L308.9 299.8L308.1 292.4L311.0 283.4L315.5 276.4L316.4 272.2L320.7 272.8L316.9 271.2L316.2 259.9L320.3 254.3L324.4 252.9Z"><title>Brooklyn: same-evening courier</title></path><path class="boro boro--zone" d="M259.3 316.0L264.5 317.1L262.9 317.8L264.5 319.1L263.6 322.2L259.0 324.9L261.0 325.5L258.5 326.9L259.0 324.9L253.2 328.3L252.8 330.3L253.1 328.4L249.3 327.7L249.2 325.8L256.2 316.3L259.3 316.0ZM337.6 211.7L320.8 235.0L317.0 238.2L323.2 227.9L336.8 208.1L339.4 206.5L337.6 211.7ZM358.9 167.9L365.1 173.1L366.8 177.6L361.8 183.3L357.1 192.0L351.9 195.4L344.7 192.5L343.6 190.4L349.0 181.5L353.8 181.9L353.5 180.3L354.5 180.3L352.1 181.5L352.9 180.2L351.7 179.7L353.1 175.3L352.8 168.5L354.8 166.3L358.9 167.9ZM353.7 62.2L357.8 63.4L357.6 66.6L359.0 68.5L360.6 67.7L359.4 65.2L361.5 66.3L361.9 68.3L362.9 66.4L362.6 67.3L364.8 66.5L368.2 67.6L370.3 70.7L368.1 77.5L366.2 80.7L364.6 80.5L365.2 82.2L360.9 88.0L358.7 86.4L360.0 89.0L350.2 106.8L344.8 120.6L345.4 155.9L350.9 167.6L350.7 174.8L343.8 181.4L342.5 183.7L343.4 184.5L342.4 184.0L339.6 189.4L336.0 192.1L335.4 194.9L337.3 202.2L307.2 245.6L305.5 257.5L303.8 257.3L305.3 257.9L303.5 258.2L306.6 269.1L304.2 282.1L300.8 291.4L296.4 293.3L288.9 294.2L288.5 293.1L278.8 295.1L275.6 297.3L275.3 300.1L273.4 299.0L273.7 300.2L272.0 300.2L273.2 301.6L271.2 300.9L272.4 302.6L270.9 301.1L269.9 301.7L271.1 303.4L269.7 301.9L267.1 304.1L268.7 304.7L268.1 305.9L266.8 304.2L265.2 304.8L265.5 306.5L265.2 305.6L263.1 307.1L262.3 305.4L261.1 306.4L256.6 298.4L258.3 289.1L259.5 290.0L259.8 288.3L258.3 288.8L259.4 281.1L263.0 281.6L263.3 279.6L261.7 278.5L263.3 278.8L264.7 271.2L261.0 270.5L264.8 270.4L264.9 267.9L261.8 267.6L262.2 264.5L265.2 264.9L265.4 261.3L262.2 260.9L265.6 260.7L264.3 259.9L265.5 259.6L266.0 252.8L263.6 250.7L266.9 250.7L264.1 249.7L266.9 249.7L267.3 248.4L264.1 246.8L267.5 246.3L266.8 244.4L264.5 244.6L264.6 243.5L266.9 243.8L264.7 242.6L267.2 242.4L264.9 241.2L267.4 241.0L265.1 239.8L266.8 238.0L265.6 237.4L267.2 238.0L267.1 234.7L268.0 235.0L266.4 233.9L268.1 234.7L271.8 227.2L269.5 225.3L270.0 224.3L272.1 225.4L274.4 222.0L272.2 220.5L274.5 221.8L275.2 220.5L273.1 219.0L275.8 219.5L273.5 217.7L277.2 219.3L277.7 218.4L274.4 216.5L278.0 217.9L278.6 216.5L275.2 214.5L278.8 216.1L279.6 214.8L276.1 212.8L279.8 214.4L280.5 213.0L277.1 211.1L279.9 212.1L280.4 211.2L278.1 209.3L280.7 210.7L282.1 208.4L279.8 206.9L282.6 207.1L280.3 205.6L282.9 207.0L280.8 204.9L283.2 206.0L284.9 203.4L288.4 197.1L285.6 197.2L288.4 196.8L292.0 189.2L291.3 188.3L290.3 189.5L291.3 188.0L292.0 189.2L292.8 187.6L291.5 187.7L292.9 187.6L314.3 147.4L319.8 139.5L319.0 137.4L320.5 138.4L319.0 136.5L321.4 131.7L322.4 130.6L323.8 131.3L327.6 124.4L333.1 108.6L332.2 99.6L337.5 94.9L347.4 76.0L349.9 66.7L353.7 62.2ZM374.3 64.8L371.9 69.7L368.4 66.3L364.7 64.8L369.2 60.3L371.8 61.0L374.3 64.8Z"><title>Manhattan: same-evening courier</title></path><path class="boro" d="M392.9 170.9L398.2 175.0L406.3 178.4L411.3 182.8L411.7 185.8L409.4 188.5L403.9 189.3L393.4 187.0L391.3 183.0L389.4 182.3L388.7 179.0L389.8 173.5L390.8 171.8L393.4 171.7L392.9 170.9ZM495.9 88.4L498.1 89.8L497.6 94.2L499.3 94.6L498.2 95.5L500.4 97.8L503.0 98.1L501.7 98.7L502.8 101.2L504.9 101.1L503.7 102.8L505.5 102.4L503.7 102.9L504.9 103.2L504.2 104.9L506.1 104.5L503.9 105.2L503.2 106.7L504.6 106.1L503.3 107.0L504.6 106.5L503.2 106.7L502.8 108.9L505.9 107.8L506.6 108.7L502.9 109.0L503.5 110.6L506.3 108.8L506.3 110.0L503.5 110.6L505.9 110.2L504.0 110.7L504.5 111.7L506.2 110.6L504.8 112.7L503.5 119.1L500.6 118.1L500.5 115.1L498.0 113.3L498.5 112.4L494.2 104.7L496.3 100.9L495.0 100.5L496.1 99.4L495.0 99.6L496.6 98.4L495.0 98.5L496.4 98.2L495.1 98.1L495.9 97.1L493.5 98.1L495.9 97.1L492.8 98.1L494.6 96.7L492.4 97.1L495.6 96.1L493.1 96.8L495.2 95.8L493.1 96.2L495.0 94.8L493.5 95.3L494.9 94.8L493.4 94.9L494.7 93.9L492.8 91.3L494.0 91.7L493.0 89.9L494.1 90.6L493.6 89.4L494.1 90.6L495.9 88.4ZM519.2 94.1L517.6 96.7L517.4 103.6L519.1 106.7L518.0 107.0L515.3 103.7L516.0 100.6L513.8 97.3L515.1 96.8L514.6 95.5L514.6 86.5L517.5 87.4L521.8 93.3L519.2 94.1ZM409.5 25.3L423.5 30.7L423.4 28.0L424.9 28.2L425.9 24.1L427.1 24.1L426.3 22.9L429.5 20.7L428.6 19.1L430.3 17.1L432.3 17.1L429.8 21.0L432.5 22.3L433.2 21.1L438.8 23.8L438.7 25.6L442.4 25.6L445.5 39.6L461.9 45.7L461.8 43.5L492.9 54.3L490.3 58.0L488.3 65.6L485.8 67.0L483.0 72.0L482.1 69.2L481.1 71.1L482.5 73.9L479.5 74.0L476.8 71.1L478.6 74.4L480.5 75.1L480.8 77.3L482.5 76.8L482.4 78.5L487.9 69.6L491.1 68.3L492.7 63.0L491.5 62.2L493.0 59.9L496.5 57.2L496.6 60.3L501.9 61.1L499.0 68.9L501.2 67.8L501.0 70.3L502.7 67.5L503.2 71.8L500.6 75.0L500.2 73.3L498.2 72.9L494.6 75.3L493.3 80.8L494.1 85.3L491.3 88.0L491.5 91.3L486.9 93.5L487.9 97.6L485.4 102.8L481.3 95.6L480.5 84.2L479.4 83.8L479.2 86.6L477.4 86.0L477.6 88.5L471.0 80.8L468.5 84.8L471.2 85.7L472.3 88.0L472.8 94.5L468.0 95.4L467.7 98.5L469.8 101.4L468.8 105.1L471.3 104.0L469.9 106.3L471.8 105.4L471.8 106.8L472.2 105.3L472.2 106.9L472.8 105.0L472.5 107.2L473.4 104.8L472.4 108.2L472.5 107.2L470.8 107.4L471.7 108.8L470.6 109.8L469.3 108.0L466.6 108.1L468.3 108.6L470.2 112.1L470.7 114.5L468.4 117.2L470.1 126.4L472.3 130.2L475.3 130.3L471.2 132.2L472.1 132.8L471.2 134.3L473.0 133.9L471.0 135.7L477.6 133.4L480.8 142.9L484.9 144.2L488.3 147.4L486.6 147.7L484.1 152.1L481.8 151.8L480.9 149.5L482.3 150.5L480.1 147.4L480.8 149.1L478.4 146.8L483.3 155.0L484.6 154.3L484.1 155.1L493.7 159.7L495.2 159.0L496.0 161.6L495.0 163.2L492.5 163.3L483.6 156.7L481.5 157.3L475.3 151.3L471.1 150.4L470.5 151.3L468.7 150.0L460.5 152.3L459.1 153.9L454.1 154.2L452.0 157.4L452.6 162.3L446.5 160.5L443.4 151.8L445.0 138.6L441.4 129.1L445.1 122.7L444.1 114.6L444.3 122.2L440.6 128.1L443.9 141.6L441.8 143.2L437.4 154.4L432.2 149.3L430.4 149.1L429.9 150.4L427.8 149.4L434.3 152.2L433.5 157.3L434.7 157.6L436.0 161.6L434.8 162.6L426.9 162.7L423.8 160.5L424.1 154.9L422.8 155.9L423.6 157.8L422.3 155.8L415.0 154.5L411.7 149.1L405.7 146.9L405.5 147.9L410.0 149.8L411.9 152.4L414.5 159.8L410.1 168.8L409.7 167.5L404.0 167.3L403.7 165.4L396.8 166.2L392.5 161.0L391.5 162.3L392.3 160.9L388.8 160.4L389.9 162.1L388.8 160.4L386.6 161.2L386.3 159.6L386.1 161.1L385.8 160.0L385.5 161.1L385.3 160.1L378.9 162.3L369.0 173.7L361.3 170.5L357.3 165.8L352.4 165.4L352.4 163.6L347.5 157.6L346.8 120.0L351.3 107.6L357.7 95.8L368.4 81.5L374.3 64.8L370.4 60.3L364.7 64.8L362.7 64.9L357.5 60.4L355.2 60.5L359.9 48.4L369.2 12.4L370.4 10.0L409.5 25.3Z"><title>Bronx: overnight shipping</title></path><g class="zone-labels" aria-hidden="true"><text x="120" y="463" text-anchor="middle">Staten Island</text><text x="452" y="271" text-anchor="middle">Queens</text><text x="325" y="395" text-anchor="middle">Brooklyn</text><text x="232" y="172" text-anchor="middle">Manhattan</text><text x="448" y="110" text-anchor="middle">Bronx</text><circle class="shop-dot" cx="314.7" cy="282.6" r="7"/><text class="shop-label" x="326.7" y="287.6">The shop</text></g></svg>
+      <figcaption><span class="keyitem"><span class="key key--zone" aria-hidden="true"></span>Same-evening courier</span> <span class="keyitem"><span class="key key--ship" aria-hidden="true"></span>Overnight shipping</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="block block--story" id="about" aria-labelledby="about-title">
+  <div class="story__top">
+    <h2 id="about-title" class="block__h">From the farm to the block</h2>
+    <figure class="farmer">
+      <blockquote><p>He was the one who pushed to the front at feeding time. Grass his whole life, and a little grain at the end. Heavy for his age, and calm on the trailer, which matters more than people think.</p></blockquote>
+      <figcaption>Jen Kittle, Kittle Hollow Farm, on steer #2186</figcaption>
+    </figure>
+  </div>
+  <table class="farms">
+    <caption class="sr-only">Our farms</caption>
+    <thead><tr><th scope="col">Farm</th><th scope="col">Where</th><th scope="col" class="num">Miles</th><th scope="col">What we buy</th></tr></thead>
+    <tbody><tr><th scope="row">Kittle Hollow Farm</th><td>Delhi, NY</td><td class="num">156</td><td>Angus × Hereford steers, raised on grass, with a little grain in the last 90 days</td></tr><tr><th scope="row">Two Creeks Farm</th><td>Kutztown, PA</td><td class="num">114</td><td>Berkshire-cross pigs raised outdoors</td></tr><tr><th scope="row">Ridgeback Farm</th><td>Salem, NY</td><td class="num">207</td><td>Katahdin lambs on pasture, about 7 months old</td></tr><tr><th scope="row">Old Mill Poultry</th><td>Lancaster County, PA</td><td class="num">161</td><td>Pasture-raised chickens, air-chilled</td></tr></tbody>
+  </table>
+  <ol class="story">
+    <li><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/cutting.webp" alt="Gloved hands slicing a beef roast on a wooden block" width="1200" height="900" loading="lazy"><figcaption><b>Three weeks in the cooler.</b> Then the steer comes down onto the block.</figcaption></figure></li>
+    <li><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/scale.webp" alt="A hanging scale weighing ground meat, with sausage links on the steel counter" width="1200" height="900" loading="lazy"><figcaption><b>Weighed after it’s cut.</b> That’s the weight you pay for.</figcaption></figure></li>
+    <li><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/sausage.webp" alt="Hands twisting fresh sausage into links" width="1200" height="900" loading="lazy"><figcaption><b>The trim goes into sausage.</b> Bones go into stock, and the fat is rendered into tallow.</figcaption></figure></li>
+  </ol>
+  <blockquote class="quote">
+    <p>“We hang beef for 21 days. It keeps getting better after that, but so does the crust we trim off, and you’d be paying for both.”</p>
+    <footer>Marisol Vega, head butcher. 22 years at the block, the last seven here.</footer>
+  </blockquote>
+  <p><a class="btn btn--line" href="about.html">More about us and the farms</a></p>
+</section>
+
+</main>
+<footer class="footer">
+  <div class="footer__grid">
+    <div>
+      <h2 class="footer__h">Eat Your Meat</h2>
+      <address>Kent Ave &amp; N 4th St<br>Brooklyn, NY 11249<br><a href="tel:+17185550142">(718) 555-0142</a><br><a href="mailto:hello@eatyourmeat.example">hello@eatyourmeat.example</a><br><a href="https://www.openstreetmap.org/search?query=Kent%20Ave%20%26%20N%204th%20St%2C%20Brooklyn%2C%20NY" rel="noopener">Open in a map</a></address>
+    </div>
+    <div>
+      <h2 class="footer__h">Hours</h2>
+      <dl class="hours"><div><dt>Tue–Sat</dt><dd>9 AM–7 PM</dd></div><div><dt>Sun</dt><dd>10 AM–5 PM</dd></div><div><dt>Mon</dt><dd>Closed</dd></div></dl>
+      <p class="footer__small">Same-evening courier Tue–Sun. Overnight shipping Mon–Wed.</p>
+    </div>
+    <nav aria-label="Shop and help"><h2 class="footer__h">Shop</h2><ul><li><a href="index.html#board">The board</a></li><li><a href="index.html#box">Butcher’s Box</a></li><li><a href="gift-cards.html">Gift cards</a></li><li><a href="account.html">Your account</a></li></ul>
+      <h2 class="footer__h">Help</h2><ul><li><a href="delivery.html">Delivery</a></li><li><a href="faq.html">Common questions</a></li><li><a href="contact.html">Contact</a></li><li><a href="about.html">About us</a></li></ul></nav>
+    <nav aria-label="Policies"><h2 class="footer__h">Policies</h2><ul><li><a href="shipping.html">Shipping</a></li><li><a href="refunds.html">Refunds</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms of sale</a></li><li><a href="food-safety.html">Food safety</a></li><li><a href="accessibility.html">Accessibility</a></li></ul></nav>
+  </div>
+  <form class="newsletter" data-newsletter novalidate>
+    <label for="nl-email">A short email on Mondays, when the new board goes up.</label>
+    <div class="newsletter__row"><input id="nl-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com"><button class="btn btn--ink" type="submit">Sign up</button></div>
+    <p class="newsletter__msg" data-nl-msg aria-live="polite"></p>
+  </form>
+  <p class="footer__base">© 2026 Eat Your Meat. A concept store with sample data. Photos: Unsplash contributors.</p>
+</footer>
+<dialog class="drawer" data-dialog="cart" aria-labelledby="cart-title">
+  <div class="drawer__head"><h2 id="cart-title">Your ticket</h2><button class="iconbtn" data-close aria-label="Close your ticket"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+  <div class="drawer__body" data-cart-body></div>
+  <div class="drawer__foot" data-cart-foot></div>
+</dialog>
+<dialog class="palette" data-dialog="search" aria-label="Search">
+  <div class="palette__bar"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input type="text" role="combobox" aria-expanded="false" aria-controls="search-list" aria-autocomplete="list" aria-label="Search cuts, animals and pages" placeholder="Search cuts, animals and pages" data-search-input autocomplete="off" spellcheck="false"><button class="iconbtn" data-close aria-label="Close search"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+  <ul class="palette__list" id="search-list" role="listbox" aria-label="Results" data-search-list></ul>
+</dialog>
+<dialog class="sheet" data-dialog="checkout" aria-labelledby="co-title"><div data-checkout-body></div></dialog>
+<dialog class="drawer drawer--left" data-dialog="menu" aria-label="Menu">
+  <div class="drawer__head"><span class="logo__name">Eat Your Meat</span><button class="iconbtn" data-close aria-label="Close menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+  <nav class="menu" aria-label="Menu"><a href="index.html#board" data-close>The board</a><a href="index.html#box" data-close>Butcher’s Box</a><a href="delivery.html">Delivery</a><a href="about.html">About us</a><a href="faq.html">Common questions</a><a href="contact.html">Contact</a><a href="account.html">Your account</a><a href="gift-cards.html">Gift cards</a></nav>
+</dialog>
+<div class="toast" role="status" aria-live="polite" data-toast></div>
+<script src="js/data.js"></script>
+<script src="js/store.js"></script>
+<script src="js/render.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<div class="stage">
+  <section class="door" aria-labelledby="hero-title">
+    <img src="assets/img/shop/breakdown.webp" alt="A butcher in a flat cap breaking down a lamb on a wooden block" width="1600" height="1200" fetchpriority="high">
+    <span class="door__tag">Stand-in photo</span>
+    <p class="sign" data-sign><b>Open</b><small>Tuesday to Sunday</small></p>
+    <div class="door__cap">
+      <h1 id="hero-title">Kent Ave &amp; N 4th.<br>Whole animals since 2019.</h1>
+      <p>A block from the river, five minutes from the Bedford Ave L.</p>
+    </div>
+  </section>
+
+  <blockquote class="scrap">
+    <p>{{note}}</p>
+    <footer>{{butcherFirst}}, <span data-when="signed">{{signed}}</span></footer>
+  </blockquote>
+
+  <ul class="ways" aria-label="Getting it home">
+    <li data-way="courier">Courier in Brooklyn and Manhattan, 5–⁠9 PM</li>
+    <li data-way="ship">Overnight to the lower 48</li>
+    <li data-way="pickup">Pickup at the counter</li>
+    <li><a href="#delivery">Check your ZIP code</a></li>
+  </ul>
+
+  <aside class="tkt" aria-labelledby="tkt-k">
+    <p class="tkt__k" id="tkt-k">Your ticket</p>
+    <p class="tkt__no" data-ticket-no></p>
+    <div class="tkt__body" data-ticket-card><p>Nothing on it yet. Pick something off the board.</p></div>
+  </aside>
+
+  <section class="board" id="board" data-board-wrap data-mode="chalk" aria-label="This week’s board">
+    <div class="board__switch">
+      <div class="seg" role="group" aria-label="Show the board as"><button aria-pressed="true" data-view="chalk">Board</button><button aria-pressed="false" data-view="list">Full list</button><button aria-pressed="false" data-view="labels">Labels</button></div>
+      <p class="fine board__hint">Exact weights, stock and estimates are on the <button class="link" type="button" data-view="list">full list</button>.</p>
+    </div>
+    <div class="board__frame">
+      <div class="board__tools">
+        <div class="cutmap">
+          <div class="cutmap__head">
+            <h2 class="intro__h" id="cutmap-title">Shop by part of the animal</h2>
+            <div class="seg seg--sm" role="group" aria-labelledby="cutmap-title">
+              <button aria-pressed="true" data-cutmap-tab="beef">Beef</button><button aria-pressed="false" data-cutmap-tab="pork">Pork</button><button aria-pressed="false" data-cutmap-tab="lamb">Lamb</button>
+            </div>
+          </div>
+          {{diagrams}}
+          {{primalLists}}
+          <p class="fine cutmap__key"><span class="keyitem"><span class="key key--open" aria-hidden="true"></span>Cuts in stock</span> <span class="keyitem"><span class="key key--out" aria-hidden="true"></span>Sold out</span> <span class="keyitem"><span class="key key--none" aria-hidden="true"></span>Not sold</span></p>
+        </div>
+        <div class="board__bar">
+          <div class="seg" role="group" aria-label="Show">
+            <button aria-pressed="true" data-species="">All</button><button aria-pressed="false" data-species="beef">Beef</button><button aria-pressed="false" data-species="pork">Pork</button><button aria-pressed="false" data-species="lamb">Lamb</button><button aria-pressed="false" data-species="chicken">Chicken</button><button aria-pressed="false" data-species="house">Made here</button>
+          </div>
+          <label class="select"><span>Sort</span><select data-sort><option value="">Board order</option><option value="price-asc">Price per lb, low to high</option><option value="price-desc">Price per lb, high to low</option></select></label>
+        </div>
+        <p class="board__note" data-filter-note aria-live="polite"></p>
+      </div>
+      <div class="board__body" data-board>{{board}}</div>
+    </div>
+  </section>
+
+  <div class="slips">
+    <figure class="slip-note">
+      <blockquote><p>{{counterText}}</p></blockquote>
+      <figcaption>{{counterName}}, {{counterWhere}}</figcaption>
+    </figure>
+    <p class="slip-note slip-note--plain">Not on the board? We can usually get {{special}} within a week, and a whole suckling pig with 10 days’ notice. <a href="contact.html">Ask us</a>.</p>
+  </div>
+</div>
+
+
+
+<section class="block block--box" id="box" aria-labelledby="box-title">
+  <div class="block__head">
+    <h2 id="box-title">The Butcher’s Box</h2>
+    <p>Pick 6, 10 or 14 cuts from the board, or take {{butcherFirst}}’s pick. Subscribe and it’s 10% off.</p>
+  </div>
+  <ol class="week" aria-label="The shop’s week">
+    <li data-wd="1"><b>Mon</b><span>Animals in and cut. Closed to walk-ins.</span></li>
+    <li data-wd="2"><b>Tue</b><span>Open 9–7</span></li>
+    <li data-wd="3"><b>Wed</b><span>Boxes cut. Open 9–7</span></li>
+    <li data-wd="4"><b>Thu</b><span>Open 9–7</span></li>
+    <li data-wd="5"><b>Fri</b><span>Open 9–7</span></li>
+    <li data-wd="6"><b>Sat</b><span>Open 9–7</span></li>
+    <li data-wd="0"><b>Sun</b><span>Open 10–5. Box changes close at 11:59 PM.</span></li>
+  </ol>
+  <div class="box">
+    <div class="box__config">
+      <fieldset class="opt">
+        <legend>How many cuts</legend>
+        <div class="opt__row opt__row--3" data-box-size>
+          <label><input type="radio" name="bsize" value="6" checked><span>6 cuts<small>Dinner for two, about a week</small></span></label>
+          <label><input type="radio" name="bsize" value="10"><span>10 cuts<small>A family of four, about a week</small></span></label>
+          <label><input type="radio" name="bsize" value="14"><span>14 cuts<small>A family of four, plus leftovers</small></span></label>
+        </div>
+      </fieldset>
+      <fieldset class="opt">
+        <legend>How often</legend>
+        <div class="opt__row opt__row--4" data-box-freq>
+          <label><input type="radio" name="bfreq" value="2"><span>Every 2 weeks</span></label>
+          <label><input type="radio" name="bfreq" value="4" checked><span>Every 4 weeks</span></label>
+          <label><input type="radio" name="bfreq" value="8"><span>Every 8 weeks</span></label>
+          <label><input type="radio" name="bfreq" value="0"><span>One time</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="opt">
+        <legend>What goes in</legend>
+        <div class="opt__row opt__row--2" data-box-mode>
+          <label><input type="radio" name="bmode" value="pick" checked><span>{{butcherFirst}}’s pick<small>A fixed list, with her note</small></span></label>
+          <label><input type="radio" name="bmode" value="own"><span>I’ll choose<small>Any box cuts on the board</small></span></label>
+        </div>
+      </fieldset>
+      <div class="pick" data-box-pick></div>
+      <ul class="picker" data-box-picker hidden></ul>
+    </div>
+    <div class="box__summary" data-box-summary></div>
+  </div>
+  <div class="boxbar" data-box-bar hidden></div>
+</section>
+
+<section class="block block--delivery" id="delivery" aria-labelledby="delivery-title">
+  <h2 id="delivery-title" class="block__h">Getting it home</h2>
+  <div class="delivery">
+    <div class="delivery__main">
+      <form class="zip dtag" data-zip novalidate>
+        <span class="dtag__hole" aria-hidden="true"></span>
+        <label for="zip-input">Deliver to ZIP</label>
+        <div class="zip__row"><input id="zip-input" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="11211" aria-describedby="zip-out"><button class="btn btn--red" type="submit">Check</button></div>
+        <p class="zip__out" id="zip-out" data-zip-out aria-live="polite"></p>
+      </form>
+      <ul class="ways3" aria-label="Delivery options">
+        <li><h3>Same-evening courier</h3><p>Brooklyn and Manhattan. $8, free on $100 of meat or more.</p><p class="ways3__next" data-next="courier">Order by 2 PM, delivered 5–⁠9 PM</p></li>
+        <li><h3>Overnight shipping</h3><p>The lower 48 states. $19, free on $200 of meat or more.</p><p class="ways3__next" data-next="ship">Order by noon Mon–Wed, arrives the next day</p></li>
+        <li><h3>Pickup</h3><p>Kent Ave &amp; N 4th St. Free.</p><p class="ways3__next" data-next="pickup">Ready 2 hours after you order</p></li>
+      </ul>
+      <p class="fine">All times Eastern. We don’t ship to Alaska, Hawaii, US territories or outside the US, because the box only stays below 40°F for 48 hours. <a href="delivery.html">How delivery works</a></p>
+    </div>
+    <figure class="delivery__map">
+      {{map}}
+      <figcaption><span class="keyitem"><span class="key key--zone" aria-hidden="true"></span>Same-evening courier</span> <span class="keyitem"><span class="key key--ship" aria-hidden="true"></span>Overnight shipping</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="block block--story" id="about" aria-labelledby="about-title">
+  <div class="story__top">
+    <h2 id="about-title" class="block__h">From the farm to the block</h2>
+    <figure class="farmer">
+      <blockquote><p>{{farmerText}}</p></blockquote>
+      <figcaption>{{farmerName}}, {{farmerWhere}}, on steer #2186</figcaption>
+    </figure>
+  </div>
+  <table class="farms">
+    <caption class="sr-only">Our farms</caption>
+    <thead><tr><th scope="col">Farm</th><th scope="col">Where</th><th scope="col" class="num">Miles</th><th scope="col">What we buy</th></tr></thead>
+    <tbody>{{farms}}</tbody>
+  </table>
+  <ol class="story">
+    <li><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/cutting.webp" alt="Gloved hands slicing a beef roast on a wooden block" width="1200" height="900" loading="lazy"><figcaption><b>Three weeks in the cooler.</b> Then the steer comes down onto the block.</figcaption></figure></li>
+    <li><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/scale.webp" alt="A hanging scale weighing ground meat, with sausage links on the steel counter" width="1200" height="900" loading="lazy"><figcaption><b>Weighed after it’s cut.</b> That’s the weight you pay for.</figcaption></figure></li>
+    <li><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/sausage.webp" alt="Hands twisting fresh sausage into links" width="1200" height="900" loading="lazy"><figcaption><b>The trim goes into sausage.</b> Bones go into stock, and the fat is rendered into tallow.</figcaption></figure></li>
+  </ol>
+  <blockquote class="quote">
+    <p>“We hang beef for 21 days. It keeps getting better after that, but so does the crust we trim off, and you’d be paying for both.”</p>
+    <footer>{{butcher}}, head butcher. 22 years at the block, the last seven here.</footer>
+  </blockquote>
+  <p><a class="btn btn--line" href="about.html">More about us and the farms</a></p>
+</section>
