@@ -4,7 +4,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { pages } from './content/pages.mjs';
-import { drawCut } from './content/drawings.mjs';
+import * as DR from './content/drawings.mjs';
+const { drawCut } = DR, NOTES = DR.NOTES || {};
 
 const require = createRequire(import.meta.url);
 const D = require('./js/data.js');
@@ -151,10 +152,6 @@ const curlyHtml = (h) => h.replace(/>([^<]+)</g, (m, t) => '>' + curly(t) + '<')
 const tpl = fs.readFileSync(path.join(ROOT, 'src/home.html'), 'utf8');
 const farmsRows = Object.values(D.farms).map((f) => `<tr><th scope="row">${esc(f.name)}</th><td>${esc(f.place)}</td><td class="num">${f.miles}</td><td>${esc(f.raises)}</td></tr>`).join('');
 const diagrams = ['beef', 'pork', 'lamb'].map((sp, i) => `<div class="cutmap__view" data-cutmap="${sp}" ${i ? 'hidden' : ''}>${R.diagramSVG(D, sp)}</div>`).join('');
-const primalLists = ['beef', 'pork', 'lamb'].map((sp, i) => `<ul class="cutmap__list" data-cutlist="${sp}" ${i ? 'hidden' : ''}>${Object.entries(D.primals[sp]).filter(([k]) => D.items.some((it) => it.species === sp && it.primal === k)).map(([k, label]) => {
-  const n = D.items.filter((it) => it.species === sp && it.primal === k && it.stock).length;
-  return `<li><button class="chip" data-primal="${k}" data-species="${sp}">${esc(label)} <span>${n ? `${n} cut${n > 1 ? 's' : ''}` : 'sold out'}</span></button></li>`;
-}).join('')}</ul>`).join('');
 const home = tpl
   .replace('{{note}}', esc(shop.note))
   .replace('{{signed}}', esc(D.clock.signed))
@@ -163,7 +160,6 @@ const home = tpl
   .replaceAll('{{butcherFirst}}', esc(shop.butcher.split(' ')[0]))
   .replaceAll('{{butcher}}', esc(shop.butcher))
   .replace('{{diagrams}}', diagrams)
-  .replace('{{primalLists}}', primalLists)
   .replace('{{board}}', `${R.chalkHTML(D, '')}<div id="full-list">${R.boardHTML(D, '')}</div>`)
   .replace('{{map}}', fs.readFileSync(path.join(ROOT, 'content/nyc-map.svg'), 'utf8'))
   .replace('{{farms}}', farmsRows)
@@ -194,7 +190,7 @@ for (const it of D.items) {
     title: `${it.name} · ${R.perUnit(it)} · Eat Your Meat`,
     description: `${it.desc}`.slice(0, 155),
     jsonld: `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>`,
-    body: `<div class="wrap">${R.pdpHTML(D, it, '../')}</div>`,
+    body: `<div class="wrap">${R.pdpHTML(D, it, '../', NOTES[it.id] || [])}</div>`,
   }));
 }
 
@@ -208,6 +204,7 @@ for (const p of pages) {
 out('account.html', layout({ root: '', file: 'account.html', page: 'account', noindex: true, title: 'Your account · Eat Your Meat', description: 'Your orders and Butcher’s Box subscriptions: skip a box, cancel, or look up an order.',
   body: `<div class="wrap prose prose--app"><h1>Your account</h1><p>Your orders, subscriptions and gift cards are saved in this browser.</p>
   <section aria-labelledby="subs-h"><h2 id="subs-h">Butcher’s Box subscriptions</h2><div data-subs></div></section>
+  <section aria-labelledby="gift-h"><h2 id="gift-h">Gift cards</h2><div data-gifts></div></section>
   <section aria-labelledby="look-h"><h2 id="look-h">Find an order</h2><form class="lookup" data-lookup><label for="look">Ticket number</label><div class="lookup__row"><input id="look" name="n" inputmode="numeric" pattern="[0-9]{1,4}" maxlength="4" required placeholder="47"><button class="btn btn--ink" type="submit">Find</button></div></form><div data-lookup-out aria-live="polite"></div></section>
   <section aria-labelledby="ord-h"><h2 id="ord-h">Your orders</h2><div data-orders></div></section></div>` }));
 out('gift-cards.html', layout({ root: '', file: 'gift-cards.html', page: 'gift', title: 'Gift cards · Eat Your Meat', description: 'Eat Your Meat gift cards, sent by email. Good for anything on the board or the Butcher’s Box.',
@@ -218,6 +215,9 @@ out('gift-cards.html', layout({ root: '', file: 'gift-cards.html', page: 'gift',
   <p class="err" data-gift-err aria-live="polite"></p>
   <label class="field"><span>Note <small>(optional)</small></span><textarea name="note" rows="3" maxlength="200"></textarea></label>
   <button class="btn btn--red" type="submit">Put it on my ticket</button></form></div>` }));
+
+out('404.html', layout({ root: '/', file: '404.html', page: '404', noindex: true, title: 'Not on the board · Eat Your Meat', description: 'That page isn’t on the board.',
+  body: `<div class="gone"><h1 class="gone__line"><span class="gone__name">that page</span><span class="gone__note">gone</span></h1><p class="gone__text">Not on the board this week. Try the board, or ask at the counter.</p><p><a class="btn btn--paper" href="/index.html#board">See the board</a> <a class="btn btn--paper" href="/contact.html">Contact</a></p></div>` }));
 
 // ---------- sitemap + robots ----------
 const urls = ['', ...pages.map((p) => `${p.slug}.html`), 'gift-cards.html', ...D.items.map((i) => `cuts/${i.id}.html`)];

@@ -149,6 +149,7 @@ table { border-collapse: collapse; width: 100%; }
 /* until it's dismissed, nothing at the very bottom of a page or a bottom bar sits under it */
 @media (max-width: 1359px) {
   .sample { left: 8px; right: 8px; bottom: 8px; justify-content: space-between; }
+  html:not(.sample-ok) { scroll-padding-bottom: calc(var(--slip-h, 40px) + 16px); }
   html:not(.sample-ok) .footer { padding-bottom: calc(var(--slip-h, 40px) + 36px); }
   html:not(.sample-ok) .boxbar { bottom: calc(var(--slip-h, 40px) + 16px); }
 }
@@ -228,32 +229,32 @@ html:not(.js) .add, html:not(.js) .tkt, html:not(.js) .board__switch, html:not(.
 
 /* the cut map (full list and labels) */
 .intro__h { font: 700 22px/1.15 var(--sign); margin-bottom: 10px; }
-.cutmap { padding: 16px 20px 14px; background: var(--paper-2); color: var(--ink); box-shadow: 0 12px 20px -12px rgba(0, 0, 0, .65); transform: rotate(-.3deg); }
-.cutmap a { color: var(--ink) !important; }
+.cutmap { max-width: 760px; color: var(--chalk); }
+.cutmap__title { font: 700 30px/1 var(--hand); filter: url(#chalk); transform: rotate(-1deg); }
+.cutmap__head .seg { gap: 4px 18px; }
+.cutmap__head .seg button { min-height: 36px; padding: 0 2px; border: 0; background: none; color: #BDB9AF; font: 400 22px/1 var(--hand); }
+.cutmap__head .seg button[aria-pressed="true"] { background: none; color: var(--chalk); text-decoration: underline 2px; text-underline-offset: 6px; }
+.cutmap__head .seg button:hover { color: #fff; }
 .cutmap__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .cutmap__head .intro__h { margin: 0; }
-.cuts { width: 100%; height: auto; margin: 6px 0 4px; }
-.cuts .region path { fill: var(--label); stroke: var(--ink); stroke-width: 1.4; transition: fill .15s; }
-.cuts .region text { font: 600 15px var(--text); fill: var(--ink); text-anchor: middle; pointer-events: none; paint-order: stroke; stroke: var(--label); stroke-width: 4px; stroke-linejoin: round; }
+.cuts { width: 100%; height: auto; margin: 6px 0 4px; filter: url(#chalk); }
+.cuts .region path { fill: transparent; stroke: #DDD9CF; stroke-width: 1.5; transition: fill .15s; }
+.cuts .region text { font: 400 21px var(--hand); fill: var(--chalk); text-anchor: middle; pointer-events: none; }
+.cuts .region text.cuts__left { font-size: 12.5px; fill: var(--pink); }
+.cuts .region text.cuts__left .cuts__gone { text-decoration: line-through; opacity: .75; }
 .cuts a.region { cursor: pointer; }
-.cuts a.region:hover path, .cuts a.region:focus-visible path { fill: var(--red-tint); }
-.cuts a.region:hover text, .cuts a.region:focus-visible text { stroke: var(--red-tint); }
+.cuts a.region:hover path, .cuts a.region:focus-visible path { fill: rgba(255, 255, 255, .08); }
 .cuts a.region:focus:not(:focus-visible) { outline: none; }
 .cuts a.region:focus-visible path { stroke: var(--focus); stroke-width: 4; }
-.cuts a.region.is-active path { fill: var(--red); }
-.cuts a.region.is-active text { fill: #fff; stroke: var(--red); }
-.cuts .region--out path { fill: #D9D3C9; }
-.cuts .region--out text { text-decoration: line-through; stroke: #D9D3C9; }
-.cuts .region--none text { stroke: #ECE7DE; }
-.cuts .region--none path { fill: #ECE7DE; }
-.cuts .region--none text { fill: var(--muted); font-weight: 400; }
-.cuts__outline { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linejoin: round; pointer-events: none; }
-.cuts__deco { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; }
-.cuts__leg { font: 600 15px var(--text); fill: var(--ink); text-anchor: middle; }
-.cuts__leg.is-active { fill: var(--red); }
-.cuts__lead { stroke: var(--ink); stroke-width: 1.2; }
-.cutmap__list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-.cutmap__key { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin-top: 10px; }
+.cuts a.region.is-active path { fill: rgba(240, 167, 156, .22); stroke: var(--pink); stroke-width: 2.5; }
+.cuts .region--out text { text-decoration: line-through; opacity: .7; }
+.cuts .region--none text { opacity: .45; }
+.cuts__outline { fill: none; stroke: var(--chalk); stroke-width: 2.6; stroke-linejoin: round; pointer-events: none; }
+.cuts__deco { fill: none; stroke: var(--chalk); stroke-width: 2.6; stroke-linecap: round; }
+.cuts__leg { font: 400 21px var(--hand); fill: var(--chalk); text-anchor: middle; }
+.cuts__leg.is-active { fill: var(--pink); }
+.cuts__lead { stroke: var(--chalk); stroke-width: 1.4; }
+.cutmap__key { margin-top: 6px; font: 400 17px var(--hand); color: #CFCBC1; filter: url(#chalk); }
 .keyitem { white-space: nowrap; }
 .key { display: inline-block; width: 14px; height: 14px; border: 1.5px solid var(--ink); vertical-align: -2px; margin-right: 6px; }
 .key--open { background: var(--label); }
@@ -327,7 +328,9 @@ html:not(.js) .add, html:not(.js) .tkt, html:not(.js) .board__switch, html:not(.
 .drawn__sheet img { position: relative; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; }
 .drawn .tag { margin: -30px 0 0 auto; width: min(224px, 82%); } /* stuck on the paper's edge, so the cut stays in view */
 .drawn .stamp { top: auto; bottom: 20px; }
-.drawn__tag { position: absolute; z-index: 2; top: 0; left: 0; font: 600 11px/1 var(--text); letter-spacing: .06em; text-transform: uppercase; background: rgba(255, 255, 255, .92); padding: 4px 6px; }
+.drawn--big .drawn__sheet img { width: 71%; }
+.drawn__note { position: absolute; z-index: 2; font: 400 19px/1.1 var(--hand); color: #1D3F8A; transform: rotate(-3deg); }
+.drawn__note--do { font-family: var(--hand-t); font-size: 18px; } /* shortcut: Dani's notes borrow Theo's hand; give Dani a hand of his own when a fourth font is worth 20 KB */
 .tag { position: relative; z-index: 1; width: min(224px, 80%); padding: 10px 12px 8px; background: var(--label); color: #222; box-shadow: 0 1px 3px rgba(0, 0, 0, .3); font: 12px/1.3 var(--print); text-transform: uppercase; transform: rotate(calc(var(--tilt, 0deg) * -.5 + .8deg)); }
 .tag__shop { font: 800 12px/1.2 var(--sign); letter-spacing: .05em; border-bottom: 1px solid #222; padding-bottom: 3px; margin-bottom: 5px; }
 .tag__cut { font: 700 15px/1.15 var(--print); margin: 2px 34px 4px 0; }
@@ -388,7 +391,7 @@ html:not(.js) .add, html:not(.js) .tkt, html:not(.js) .board__switch, html:not(.
 .stepper { display: inline-grid; grid-template-columns: 38px 34px 38px; align-items: center; border: 1.5px solid var(--ink); border-radius: var(--r); height: 38px; background: var(--label); }
 .stepper button { height: 100%; border: 0; background: none; font-size: 20px; line-height: 1; }
 .stepper button:hover:not(:disabled) { background: var(--paper-2); }
-.stepper button:disabled { color: var(--line); cursor: not-allowed; }
+.stepper button:disabled, .stepper button[aria-disabled="true"] { color: var(--line); cursor: not-allowed; }
 .stepper output { text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
 .box__summary { position: sticky; top: 96px; display: grid; gap: 14px; }
 /* the kraft box fills with labelled packages */
@@ -531,7 +534,8 @@ html:not(.js) .add, html:not(.js) .tkt, html:not(.js) .board__switch, html:not(.
 .pdp { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(22px, 3.4vw, 48px); align-items: start; }
 .counter { position: relative; overflow: hidden; padding: 30px 26px 26px; background: var(--kraft-bg); } /* the stamp's ink filter would otherwise widen narrow pages */
 .drawn--big { padding: 16px 4px 0; }
-.drawn--big .tag { width: min(270px, 62%); margin-top: -60px; font-size: 13px; }
+.drawn--big .tag { width: min(250px, 48%); margin-top: -48px; font-size: 13px; }
+.drawn--big .drawn__note { max-width: 48%; }
 .drawn--big .tag__cut { font-size: 17px; }
 .drawn--big .stamp { font-size: 30px; left: 74%; bottom: 14px; }
 .pdp__label { display: grid; gap: 16px; align-content: start; }
@@ -575,16 +579,16 @@ html:not(.js) .add, html:not(.js) .tkt, html:not(.js) .board__switch, html:not(.
 dialog { border: 0; padding: 0; color: var(--ink); background: var(--paper); max-width: none; max-height: none; }
 dialog::backdrop { background: rgba(28, 25, 21, .55); }
 html:has(dialog[open]) { overflow: hidden; }
-.drawer { position: fixed; inset: 0 0 0 auto; width: min(460px, 100%); height: 100%; margin: 0; border-left: 2px solid var(--ink); display: none; flex-direction: column; }
+.drawer { position: fixed; inset: 0 0 0 auto; width: min(460px, 100%); height: 100%; margin: 0; border-left: 2px solid var(--ink); display: none; flex-direction: column; overflow-y: auto; }
 .drawer[open] { display: flex; animation: slideIn .22s ease-out; }
 .drawer--left { inset: 0 auto 0 0; border-left: 0; border-right: 2px solid var(--ink); }
 .drawer--left[open] { animation-name: slideInL; }
 @keyframes slideIn { from { transform: translateX(40px); opacity: 0; } }
 @keyframes slideInL { from { transform: translateX(-40px); opacity: 0; } }
-.drawer__head { display: flex; justify-content: space-between; align-items: center; padding: 12px 12px 12px 20px; border-bottom: 2px solid var(--ink); }
+.drawer__head { position: sticky; top: 0; z-index: 2; background: var(--paper); display: flex; justify-content: space-between; align-items: center; padding: 12px 12px 12px 20px; border-bottom: 2px solid var(--ink); }
 .drawer__head h2 { font: 700 28px/1 var(--sign); }
-.drawer__body { flex: 1; overflow-y: auto; padding: 8px 20px; }
-.drawer__foot { padding: 14px 20px 18px; border-top: 2px solid var(--ink); display: grid; gap: 12px; background: var(--paper); max-height: 62vh; overflow-y: auto; }
+.drawer__body { flex: 1; padding: 8px 20px; }
+.drawer__foot { padding: 14px 20px 18px; border-top: 2px solid var(--ink); display: grid; gap: 12px; background: var(--paper); }
 .menu { display: grid; padding: 8px 20px; }
 .menu a { padding: 12px 0; border-bottom: 1px solid var(--line); font: 700 22px/1.2 var(--sign); text-decoration: none; }
 /* your ticket, printed like a register receipt */
@@ -663,6 +667,13 @@ html:has(dialog[open]) { overflow: hidden; }
 .toast b { font-size: 14px; }
 .toast button { justify-self: start; background: var(--ink); color: var(--paper); border: 0; padding: 7px 12px; font: 700 14px var(--text); text-transform: none; }
 
+.gone { --focus: var(--focus-light); padding: 70px var(--pad) 90px; background: var(--tex-slate), var(--slate); color: var(--chalk); text-align: center; }
+.gone__line { display: inline-flex; align-items: baseline; gap: 14px; font: 400 44px/1 var(--hand); filter: url(#chalk); }
+.gone__name { text-decoration: line-through 3px rgba(239, 236, 228, .85); color: #ABA9A2; }
+.gone__note { font-size: 24px; color: var(--pink); transform: rotate(-4deg); }
+.gone__text { margin: 18px auto 24px; max-width: 40ch; font: 400 22px/1.3 var(--hand); color: #D9D5CB; }
+.gone .btn { margin: 4px; }
+.gifts li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px dashed var(--line); font: 14px/1.4 var(--print); }
 .redeem { display: flex; gap: 8px; align-items: end; }
 .redeem .field { flex: 1; }
 
@@ -764,8 +775,20 @@ html:has(dialog[open]) { overflow: hidden; }
   .cuts .region text, .cuts__leg, .cuts__lead { display: none; }
   .zone-labels text { font-size: 30px; stroke-width: 6px; }
   .zone-labels .shop-label { font-size: 26px; }
-  .pcs { grid-template-columns: 1fr; }
-  .drawn .tag, .drawn--big .tag { width: min(232px, 72%); margin-top: -36px; font-size: 11px; }
+  .pcs { grid-template-columns: 1fr 1fr; gap: 18px 10px; }
+  .pc .drawn { padding: 4px 2px 0; }
+  .pc .tag { width: 96%; margin-top: -16px; font-size: 9.5px; padding: 6px 8px 5px; }
+  .pc .tag__src, .pc .tag__foot { display: none; } /* the farm line and barcode are on the cut's own page */
+  .pc .tag__shop { font-size: 9px; letter-spacing: 0; }
+  .pc .tag__cut { font-size: 11.5px; margin-right: 24px; }
+  .pc .tag__big { font-size: 13px; }
+  .pc .tag__mv { font-size: 16px; top: 16px; right: 6px; }
+  .pc .tag__where { width: 36px; }
+  .pc__foot { padding: 0 2px; }
+  .pc .add { min-width: 52px; padding: 0 10px; }
+  .drawn__note { display: none; }
+  .drawn--big .drawn__sheet img { width: 100%; }
+  .drawn--big .tag { width: min(232px, 72%); margin-top: -36px; font-size: 11px; }
   .drawn .tag__cut { font-size: 14px; }
   .drawn .tag__big { font-size: 16px; }
   .drawn .tag__shop { font-size: 10.5px; letter-spacing: .02em; }

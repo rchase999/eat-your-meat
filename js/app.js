@@ -40,7 +40,11 @@
   };
   const loadZip = () => { const z = load('eym.zip', ''); return S.classifyZip(z).kind === 'invalid' ? '' : z; };
   const loadTicket = () => { const n = load('eym.ticket', 0); return Number.isInteger(n) && n >= 10 && n <= 99 ? n : 10 + (Date.now() % 80); };
-  const state = { cart: loadCart(), zip: loadZip(), method: load('eym.method', ''), ticket: loadTicket(), f: { species: '', primal: '', sort: '', view: 'chalk' }, box: { size: 6, freq: 4, mode: 'pick', own: [] } };
+  const nextNo = (n) => (n >= 99 ? 10 : n + 1); // the deli roll runs 10 to 99
+  // shortcut: a placed ticket is "yours" for 8 hours, long enough for today's pickup or courier; a real shop would clear it at handover
+  const loadPlaced = () => { const p = load('eym.placed', null); return p && Number.isInteger(p.no) && typeof p.text === 'string' && p.until > Date.now() ? p : null; };
+  const state = { cart: loadCart(), zip: loadZip(), method: load('eym.method', ''), ticket: loadTicket(), placed: loadPlaced(), f: { species: '', primal: '', sort: '', view: 'chalk' }, box: { size: 6, freq: 4, mode: 'pick', own: [] } };
+  if (!state.placed && load('eym.placed', null)) { state.ticket = nextNo(state.ticket); localStorage.removeItem('eym.placed'); } // the old order's time is up: the next visit gets a fresh number
   save('eym.ticket', state.ticket); // the number you pulled stays the same on every page
   const persist = () => { save('eym.cart', state.cart); save('eym.zip', state.zip); save('eym.method', state.method); save('eym.ticket', state.ticket); };
   const reserved = (id) => S.inCart(state.cart, id) + boxReserved(state.cart, id);
@@ -89,11 +93,13 @@
     return d;
   }
   $$('dialog').forEach((d) => {
+    const outside = (e) => { const r = d.getBoundingClientRect(); return e.target === d && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom); };
+    let pressedOutside = false;
+    d.addEventListener('pointerdown', (e) => { pressedOutside = outside(e); });
     d.addEventListener('click', (e) => {
       if (e.target.closest('[data-close]')) { d.close(); return; }
-      if (e.target !== d) return;
-      const r = d.getBoundingClientRect();
-      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) d.close();
+      if (pressedOutside && outside(e)) d.close();
+      pressedOutside = false;
     });
   });
   document.addEventListener('click', (e) => {
@@ -164,8 +170,9 @@
   let lastAdded = '';
   function showCart() { renderCart(); openDialog('cart'); }
   function afterCartChange(bump) {
+    if (state.placed && state.cart.length) { state.ticket = nextNo(state.ticket); state.placed = null; localStorage.removeItem('eym.placed'); showTicketNo(); } // a new order pulls the next number
     persist(); updateBadge(bump);
-    if (page === 'home') { renderBoard(); renderBox(); renderCutmapCounts(); renderTicketCard(); }
+    if (page === 'home') { renderBoard(); renderBox(); renderTicketCard(); }
     if (page === 'product') hydratePdpStock();
   }
   const physical = () => state.cart.some((l) => !l.digital);
@@ -201,7 +208,7 @@
       const v = lineView(l), key = esc(S.lineKey(l));
       const max = l.id === 'box' || l.id === 'gift' ? 1 : l.qty + Math.floor(available(l.id) / (l.units || 1));
       const stepper = max > 1 || l.qty > 1
-        ? `<div class="stepper"><button type="button" data-qty="${key}" data-d="-1" aria-label="One fewer ${esc(v.name)}" ${l.qty <= 1 ? 'disabled' : ''}>−</button><output aria-live="polite">${l.qty}</output><button type="button" data-qty="${key}" data-d="1" aria-label="One more ${esc(v.name)}" ${l.qty >= max ? 'disabled' : ''}>+</button></div>`
+        ? `<div class="stepper"><button type="button" data-qty="${key}" data-d="-1" aria-label="One fewer ${esc(v.name)}" ${l.qty <= 1 ? 'aria-disabled="true"' : ''}>−</button><output aria-live="polite">${l.qty}</output><button type="button" data-qty="${key}" data-d="1" aria-label="One more ${esc(v.name)}" ${l.qty >= max ? 'aria-disabled="true"' : ''}>+</button></div>`
         : '<span></span>';
       return `<div class="cline${S.lineKey(l) === lastAdded ? ' is-new' : ''}">
         <div><p class="cline__top"><span>${l.qty > 1 ? l.qty + ' × ' : ''}${esc(v.name)}</span><span>${l.weighed ? '≈ ' : ''}${S.money(S.round(l.price * l.qty))}</span></p>
@@ -214,7 +221,7 @@
       : zc.kind === 'courier' ? `${esc(zc.area)}: same-evening courier or pickup.`
         : zc.kind === 'overnight' ? (zc.nyc ? `We don’t courier to ${esc(zc.area)} yet. Pick it up at Kent Ave, or we ship it overnight.` : 'Overnight shipping or pickup.')
           : zc.kind === 'no' ? `We can’t deliver to ${esc(zc.area)}.` : /^\d{5}$/.test(state.zip) ? 'We don’t recognize that ZIP code.' : 'Enter a 5-digit US ZIP code.';
-    const methods = physical() ? `<details class="method" ${!state.zip || state.methodOpen ? 'open' : ''}><summary>Delivery: ${METHOD_LABEL[method]}${state.zip ? ` · ${esc(state.zip)}` : ''}</summary>
+    const methods = physical() ? `<details class="method" ${state.methodOpen ? 'open' : ''}><summary>Delivery: ${METHOD_LABEL[method]}${state.zip ? ` · ${esc(state.zip)}` : ' · add your ZIP for delivery'}</summary>
         <form class="method__zip" data-cart-zip novalidate><label class="field">ZIP code<input name="zip" inputmode="numeric" maxlength="5" autocomplete="postal-code" value="${esc(state.zip)}"></label><button class="btn btn--line" type="submit">Update</button></form>
         <p class="method__msg ${zc.kind === 'no' || (state.zip && zc.kind === 'invalid') ? 'is-no' : ''}" aria-live="polite">${zipMsg}</p>
         <fieldset class="opt"><legend>Delivery</legend><div class="opt__row opt__row--2">${methodsFor(state.zip).map((m) => {
@@ -235,13 +242,13 @@
     const box = dlg('cart'), hadFocus = box.contains(document.activeElement);
     renderCart();
     if (!hadFocus) return;
-    const el = focus.qty ? $$('[data-qty]', box).find((b) => b.dataset.qty === focus.qty && b.dataset.d === focus.d && !b.disabled) || $$('[data-qty]', box).find((b) => b.dataset.qty === focus.qty && !b.disabled)
-      : focus.method ? $('.method > summary', box) : focus.zip ? ($('.method', box)?.open ? $('[data-cart-zip] input', box) : $('.method > summary', box)) : null;
-    (el || $('[data-remove], [data-checkout], .cart-empty a, [data-close]', box)).focus();
+    const el = focus.qty ? $$('[data-qty]', box).find((b) => b.dataset.qty === focus.qty && b.dataset.d === focus.d) : focus.method ? $('.method > summary', box) : focus.zip ? ($('.method', box)?.open ? $('[data-cart-zip] input', box) : $('.method > summary', box)) : null;
+    (el || $('[data-remove]', box) || $('[data-checkout]', box) || $('.cart-empty a', box) || $('[data-close]', box)).focus();
   }
   const cartDlg = dlg('cart');
   cartDlg.addEventListener('click', (e) => {
     const q = e.target.closest('[data-qty]'), r = e.target.closest('[data-remove]');
+    if (q && q.getAttribute('aria-disabled') === 'true') return;
     if (q) {
       const line = state.cart.find((l) => S.lineKey(l) === q.dataset.qty);
       if (line) state.cart = S.setQty(state.cart, q.dataset.qty, line.qty + Number(q.dataset.d), line.id === 'box' || line.id === 'gift' ? 1 : byId[line.id].stock - boxReserved(state.cart, line.id));
@@ -261,6 +268,7 @@
 
   // ---------- checkout ----------
   const STATES = ['AL', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
+  let coDraft = {};
   function openCheckout() {
     if (!state.cart.length) return;
     const method = currentMethod(), t = S.totals(state.cart, method), ships = method === 'courier' || method === 'overnight', needsPhone = physical();
@@ -303,6 +311,8 @@
         <dl class="sum"><div><dt>Subtotal (estimate)</dt><dd>${S.money(t.subtotal)}</dd></div><div><dt>${METHOD_LABEL[method]}</dt><dd>${t.fee ? S.money(t.fee) : 'Free'}</dd></div><div data-credit-row hidden><dt>Gift card</dt><dd data-credit></dd></div><div class="is-total"><dt>Estimated total</dt><dd data-due>${S.money(t.total)}</dd></div></dl></aside>
     </div>`;
     const form = $('[data-co]');
+    for (const [k, v] of Object.entries(coDraft)) if (form.elements[k] && form.elements[k].type !== 'checkbox') form.elements[k].value = v;
+    form.addEventListener('input', () => { coDraft = Object.fromEntries(new FormData(form)); });
     const due = () => S.round(Math.max(0, t.total - credit.amount));
     $('[data-redeem]', form).addEventListener('click', () => {
       const code = form.elements.gift.value.trim().toUpperCase(), msg = $('[data-redeem-msg]', form);
@@ -370,9 +380,10 @@
     const hadSub = state.cart.some(S.isSubscription);
     const weighedOrder = state.cart.some((l) => l.weighed);
     state.cart = [];
-    state.ticket = state.ticket >= 99 ? 10 : state.ticket + 1; // the next visit pulls the next number; the roll runs 10 to 99
+    state.placed = { no, text: (next || 'Thanks.').split('. ')[0].replace(/\.?$/, '.'), until: Date.now() + 8 * 3600e3 };
+    save('eym.placed', state.placed);
+    coDraft = {};
     afterCartChange(false);
-    showTicketNo();
     $('[data-checkout-body]').innerHTML = `<div class="ticket" role="status">
       <p class="ticket__k">Your ticket</p><p class="ticket__no" id="co-title">${no}</p>
       ${next ? `<p>${esc(next)}</p>` : ''}
@@ -404,7 +415,7 @@
     ];
     sel = results.length ? 0 : -1;
     let g = '';
-    list.innerHTML = results.length ? results.map((r, i) => `${r.group !== g ? `<li class="grp" role="presentation">${esc((g = r.group))}</li>` : ''}<li role="option" id="opt-${i}" data-i="${i}" aria-selected="${i === sel}">${r.html}</li>`).join('')
+    list.innerHTML = results.length ? results.map((r, i) => `${r.group !== g ? `<li class="grp" role="presentation">${esc((g = r.group))}</li>` : ''}<li role="option" id="opt-${i}" data-i="${i}" aria-selected="${i === sel}">${r.html}</li>`).join('') + (cuts.length > 8 ? `<li class="palette__hint" role="presentation">${cuts.length - 8} more match. Keep typing, or see the <a href="${root}index.html#full-list">full list</a>.</li>` : '')
       : `<li class="palette__hint" role="presentation"><b>We don’t sell “${esc(raw.trim())}”.</b> We can order in ${esc(D.specialOrders.slice(0, -1).map((o) => (o.short || o.name).toLowerCase()).join(', ').replace(/, ([^,]*)$/, ' or $1'))} within a week, or a whole suckling pig with 10 days’ notice. <a href="${root}contact.html">Ask us</a>.</li>`;
     input.setAttribute('aria-expanded', String(results.length > 0));
     if (sel >= 0) input.setAttribute('aria-activedescendant', 'opt-0'); else input.removeAttribute('aria-activedescendant');
@@ -424,7 +435,8 @@
   list.addEventListener('click', (e) => { const li = e.target.closest('[data-i]'); if (li) location.href = results[Number(li.dataset.i)].go; });
   document.addEventListener('keydown', (e) => {
     const typing = /input|textarea|select/i.test(document.activeElement?.tagName || '');
-    if ((e.key.toLowerCase() === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !typing && !$('dialog[open]'))) { e.preventDefault(); openSearch(); }
+    if (typing) return;
+    if ((e.key.toLowerCase() === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !$('dialog[open]'))) { e.preventDefault(); openSearch(); }
   });
 
   // ---------- footer newsletter (concept: nothing is stored) ----------
@@ -456,17 +468,12 @@
       if (b.tagName === 'BUTTON') b.setAttribute('aria-pressed', String(on)); else b.classList.toggle('is-active', on);
     });
   }
-  function renderCutmapCounts() {
-    $$('.cutmap__list [data-primal]').forEach((b) => {
-      const open = D.items.filter((i) => i.species === b.dataset.species && i.primal === b.dataset.primal && i.stock);
-      const left = open.filter((i) => available(i.id) > 0).length;
-      $('span', b).textContent = !open.length ? 'sold out' : left ? `${left} cut${left > 1 ? 's' : ''}` : 'on your ticket';
-    });
-  }
   // the chalk wipes when the board changes
   function setFilter(f) {
+    const had = document.activeElement;
     Object.assign(state.f, f);
     renderBoard();
+    if (had && !had.isConnected) $('.board__switch .seg [aria-pressed="true"]').focus();
     const el = $('[data-board]');
     el.classList.remove('is-wiped'); void el.offsetWidth; el.classList.add('is-wiped');
   }
@@ -492,7 +499,7 @@
     const el = $('[data-ticket-card]');
     if (!el) return;
     const t = S.totals(state.cart, currentMethod()), n = t.count;
-    el.innerHTML = n ? `<p>${n} thing${n > 1 ? 's' : ''} on it, about ${S.money(t.subtotal)}.</p><button class="btn btn--paper" type="button" data-open="cart">View ticket</button>` : '<p>Nothing on it yet. Pick something off the board.</p>';
+    el.innerHTML = n ? `<p>${n} thing${n > 1 ? 's' : ''} on it, about ${S.money(t.subtotal)}.</p><button class="btn btn--paper" type="button" data-open="cart">View ticket</button>` : state.placed ? `<p>${esc(state.placed.text)}</p><p class="fine">Pick something off the board to start a new ticket.</p>` : '<p>Nothing on it yet. Pick something off the board.</p>';
   }
   function initHome() {
     const params = new URLSearchParams(location.search);
@@ -520,7 +527,6 @@
       if (tab) {
         $$('[data-cutmap-tab]').forEach((b) => b.setAttribute('aria-pressed', String(b === tab)));
         $$('[data-cutmap]').forEach((v) => (v.hidden = v.dataset.cutmap !== tab.dataset.cutmapTab));
-        $$('[data-cutlist]').forEach((v) => (v.hidden = v.dataset.cutlist !== tab.dataset.cutmapTab));
       }
     });
     document.addEventListener('click', (e) => {
@@ -547,7 +553,6 @@
 
     initBox();
     renderBoard();
-    renderCutmapCounts();
   }
 
   // ---------- butcher's box ----------
@@ -578,7 +583,7 @@
       $('[data-box-picker]').innerHTML = boxItems.map((it) => {
         const n = counts[it.id] || 0, left = available(it.id) - n;
         return `<li class="pk ${n ? 'is-in' : ''}"><p class="pk__name">${esc(it.name)}</p><p class="pk__meta">${esc(R.weightText(it, S.defaultCfg(it)))} · ${S.money(S.unitPrice(it, S.defaultCfg(it)))}${left <= 0 && !n ? ' · none left' : ''}</p>
-          <div class="stepper"><button type="button" data-pick="${it.id}" data-d="-1" aria-label="One fewer ${esc(it.name)}" ${n ? '' : 'disabled'}>−</button><output aria-live="polite">${n}</output><button type="button" data-pick="${it.id}" data-d="1" aria-label="One more ${esc(it.name)}" ${full || left <= 0 ? 'disabled' : ''}>+</button></div></li>`;
+          <div class="stepper"><button type="button" data-pick="${it.id}" data-d="-1" aria-label="One fewer ${esc(it.name)}" ${n ? '' : 'aria-disabled="true"'}>−</button><output aria-live="polite">${n}</output><button type="button" data-pick="${it.id}" data-d="1" aria-label="One more ${esc(it.name)}" ${full || left <= 0 ? 'aria-disabled="true"' : ''}>+</button></div></li>`;
       }).join('');
     }
     const slots = Array.from({ length: size }, (_, i) => list[i] || '');
@@ -609,22 +614,22 @@
     });
     sec.addEventListener('click', (e) => {
       const b = e.target.closest('[data-pick]');
-      if (b) {
+      if (b && b.getAttribute('aria-disabled') !== 'true') {
         const own = state.box.own;
         if (b.dataset.d === '1' && own.length < state.box.size) own.push(b.dataset.pick);
         if (b.dataset.d === '-1') { const i = own.lastIndexOf(b.dataset.pick); if (i > -1) own.splice(i, 1); }
         renderBox();
-        const again = $(`[data-pick="${b.dataset.pick}"][data-d="${b.dataset.d}"]`);
-        (again && !again.disabled ? again : $(`[data-pick="${b.dataset.pick}"]:not(:disabled)`) || $('[data-box-add]')).focus();
+        ($(`[data-pick="${b.dataset.pick}"][data-d="${b.dataset.d}"]`) || $('[data-box-add]')).focus();
       }
       if (e.target.closest('[data-box-add]')) {
         const { size, freq } = state.box, chosen = [...picks()];
         state.cart = [...state.cart, { id: 'box', box: 'b' + Date.now(), picks: chosen, size, freq, qty: 1, weighed: true, price: S.boxQuote(chosen.map((id) => byId[id]), freq).price }];
         state.box.own = [];
         afterCartChange(true);
+        $('.tool--cart').focus();
         toast(`<b>Butcher’s Box, ${size} cuts</b><br>about ${S.money(S.boxQuote(chosen.map((id) => byId[id]), freq).price)} a box`, { label: 'View ticket', run: showCart });
       }
-      if (e.target.closest('[data-box-jump]')) $('[data-box-summary]').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (e.target.closest('[data-box-jump]')) { const s = $('[data-box-summary]'); s.tabIndex = -1; s.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); s.focus({ preventScroll: true }); }
     });
     // mobile: a summary bar while choosing, hidden once the real summary is on screen
     const bar = $('[data-box-bar]');
@@ -667,6 +672,8 @@
       e.preventDefault();
       const fd = new FormData(form);
       if (addItem(it.id, opts(), Number(fd.get('qty') || 1), String(fd.get('note') || '').trim()) && form.elements.note) form.elements.note.value = '';
+      const b = $('button[type="submit"]', form);
+      if (b.disabled) { const st = $('[data-pdp-stock]', form); st.tabIndex = -1; st.focus(); }
     });
     hydratePdpStock();
   }
@@ -679,11 +686,14 @@
     const subsEl = $('[data-subs]'), ordersEl = $('[data-orders]');
     const render = () => {
       const ok = (x) => x && typeof x === 'object';
-      const rawSubs = load('eym.subs', []), subs = Array.isArray(rawSubs) ? rawSubs.map((x, i) => [x, i]).filter(([x]) => ok(x)) : [], orders = (load('eym.orders', []) || []).filter?.((o) => ok(o) && Number.isInteger(o.no)) || [];
+      const rawSubs = load('eym.subs', []), subs = Array.isArray(rawSubs) ? rawSubs.map((x, i) => [x, i]).filter(([x]) => ok(x)) : [];
+      const rawOrders = load('eym.orders', []), orders = Array.isArray(rawOrders) ? rawOrders.filter((o) => ok(o) && Number.isInteger(o.no)) : [];
+      const rawGifts = load('eym.gifts', []), gifts = Array.isArray(rawGifts) ? rawGifts.filter((g) => ok(g) && typeof g.code === 'string') : [];
+      $('[data-gifts]').innerHTML = gifts.length ? `<ul class="gifts">${gifts.map((g) => `<li><b>${esc(g.code)}</b><span>${S.money(Number(g.balance) || 0)} left${g.to ? ` · for ${esc(String(g.to))}` : ''}</span></li>`).join('')}</ul>` : '<p class="empty">No gift cards in this browser.</p>';
       subsEl.innerHTML = subs.length ? subs.map(([s, i]) => `<div class="sub ${s.status === 'cancelled' ? 'is-cancelled' : ''}">
           <p class="sub__head"><span>Butcher’s Box, ${Number(s.size) || ''} cuts · ${esc(own(D.box.freqs, s.freq))}</span><span>${s.status === 'cancelled' ? 'Canceled' : s.skip ? 'Next box skipped' : 'Active'}</span></p>
           <p class="fine">From ticket ${Number(s.order) || '?'}. Cut on Wednesdays. Changes must be in by Sunday 11:59 PM Eastern.</p>
-          ${s.status === 'cancelled' ? '' : `<div class="sub__actions"><button class="btn btn--line" type="button" data-sub-skip="${i}">${s.skip ? 'Undo skip' : 'Skip the next box'}</button><button class="btn btn--line" type="button" data-sub-cancel="${i}">Cancel subscription</button></div>`}</div>`).join('')
+          ${s.status === 'cancelled' ? '<p class="fine" tabindex="-1" data-sub-done>Canceled. No more boxes will be cut or charged.</p>' : `<div class="sub__actions"><button class="btn btn--line" type="button" data-sub-skip="${i}">${s.skip ? 'Undo skip' : 'Skip the next box'}</button><button class="btn btn--line" type="button" data-sub-cancel="${i}">Cancel subscription</button></div>`}</div>`).join('')
         : '<p class="empty">No subscriptions in this browser.</p>';
       ordersEl.innerHTML = Array.isArray(orders) && orders.length ? `<div class="ticket-list">${[...orders].reverse().map(ticketHTML).join('')}</div>` : '<p class="empty">No orders in this browser yet.</p>';
     };
@@ -693,8 +703,11 @@
       const sk = e.target.closest('[data-sub-skip]'), ca = e.target.closest('[data-sub-cancel]');
       const rec = subs[(sk || ca)?.dataset[sk ? 'subSkip' : 'subCancel']];
       if (!rec || typeof rec !== 'object') return; // only confirm a change that actually happened
+      if (ca && !confirm('Cancel this Butcher’s Box? No more boxes will be cut or charged.')) return;
       if (sk) rec.skip = !rec.skip; else rec.status = 'cancelled';
+      const i = (sk || ca).dataset[sk ? 'subSkip' : 'subCancel'];
       save('eym.subs', subs); render(); toast(ca ? 'Subscription canceled. No more boxes will be cut or charged.' : 'Saved.');
+      ($(`[data-sub-skip="${i}"]`) || $$('[data-sub-done]')[subsEl.querySelectorAll('.sub').length ? 0 : 0] || subsEl).focus();
     });
     $('[data-lookup]').addEventListener('submit', (e) => {
       e.preventDefault();
@@ -727,9 +740,9 @@
 
   addEventListener('storage', (e) => {
     if (!['eym.cart', 'eym.ticket', 'eym.zip', 'eym.method'].includes(e.key)) return;
-    Object.assign(state, { cart: loadCart(), ticket: loadTicket(), zip: loadZip(), method: load('eym.method', '') });
+    Object.assign(state, { cart: loadCart(), ticket: loadTicket(), zip: loadZip(), method: load('eym.method', ''), placed: loadPlaced() });
     updateBadge(false); showTicketNo();
-    if (page === 'home') { refreshBoard(); renderBox(); renderCutmapCounts(); renderTicketCard(); }
+    if (page === 'home') { refreshBoard(); renderBox(); renderTicketCard(); }
     if (page === 'product') hydratePdpStock();
     if (dlg('cart').open) renderCart();
     if ($('[data-co]') && dlg('checkout').open) { dlg('checkout').close(); $('.tool--cart').focus(); toast('Your ticket changed in another tab. Check out again to see the new total.', { label: 'View ticket', run: showCart }); }

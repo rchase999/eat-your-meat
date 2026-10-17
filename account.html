@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Your account · Eat Your Meat</title>
 <meta name="description" content="Your orders and Butcher’s Box subscriptions: skip a box, cancel, or look up an order.">
-<link rel="canonical" href="https://eatyourmeat.example/account.html">
+<link rel="canonical" href="https://eat-your-meat-iota.vercel.app/account.html">
 <meta name="robots" content="noindex">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Eat Your Meat">
 <meta property="og:title" content="Your account · Eat Your Meat">
 <meta property="og:description" content="Your orders and Butcher’s Box subscriptions: skip a box, cancel, or look up an order.">
-<meta property="og:url" content="https://eatyourmeat.example/account.html">
-<meta property="og:image" content="https://eatyourmeat.example/assets/img/shop/breakdown.webp">
+<meta property="og:url" content="https://eat-your-meat-iota.vercel.app/account.html">
+<meta property="og:image" content="https://eat-your-meat-iota.vercel.app/assets/img/shop/breakdown.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1C1915">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -46,6 +46,7 @@
 <main id="main">
 <div class="wrap prose prose--app"><h1>Your account</h1><p>Your orders, subscriptions and gift cards are saved in this browser.</p>
   <section aria-labelledby="subs-h"><h2 id="subs-h">Butcher’s Box subscriptions</h2><div data-subs></div></section>
+  <section aria-labelledby="gift-h"><h2 id="gift-h">Gift cards</h2><div data-gifts></div></section>
   <section aria-labelledby="look-h"><h2 id="look-h">Find an order</h2><form class="lookup" data-lookup><label for="look">Ticket number</label><div class="lookup__row"><input id="look" name="n" inputmode="numeric" pattern="[0-9]{1,4}" maxlength="4" required placeholder="47"><button class="btn btn--ink" type="submit">Find</button></div></form><div data-lookup-out aria-live="polite"></div></section>
   <section aria-labelledby="ord-h"><h2 id="ord-h">Your orders</h2><div data-orders></div></section></div>
 </main>

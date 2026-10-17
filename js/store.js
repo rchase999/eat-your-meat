@@ -98,7 +98,7 @@
     if (p3 === 969) return { kind: 'no', area: 'Guam and the Northern Mariana Islands' };
     if ((p3 >= 90 && p3 <= 98) || p3 === 340 || (p3 >= 962 && p3 <= 966)) return { kind: 'no', area: 'military addresses' };
     if (p3 === 112) return n >= 11201 && n <= 11256 ? { kind: 'courier', area: 'Brooklyn', state: 'NY' } : { kind: 'invalid' };
-    if (p3 >= 100 && p3 <= 102) return n >= 10001 && n <= 10282 ? { kind: 'courier', area: 'Manhattan', state: 'NY' } : { kind: 'invalid' };
+    if (p3 >= 100 && p3 <= 102) return n >= 10001 && n <= 10286 ? { kind: 'courier', area: 'Manhattan', state: 'NY' } : { kind: 'invalid' };
     // Queens is 11004–11005 and 111, 113, 114, 116; the rest of 110 and all of 115 are Nassau County
     const nyc = p3 === 103 ? 'Staten Island' : p3 === 104 ? 'the Bronx' : n === 11004 || n === 11005 || [111, 113, 114, 116].includes(p3) ? 'Queens' : null;
     const state = zipState(zip);

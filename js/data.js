@@ -2,7 +2,7 @@
 // Shared by the browser (window.EYM_DATA) and the Node build (module.exports).
 (function (root) {
   const data = {
-    site: 'https://eatyourmeat.example',
+    site: 'https://eat-your-meat-iota.vercel.app',
     shop: {
       name: 'Eat Your Meat',
       street: 'Kent Ave & N 4th St',
@@ -62,7 +62,7 @@
     // made: replaces the "Cut" line for things we cure, smoke or render, which aren't from this week's animals.
     // chalk: the name as written on the chalkboard (items without it are on the full list only).
     // ring / arrow: the butcher's marks on the chalkboard. says: Marisol, in her own words.
-    // img: a photo of this cut from our own shoot; without one, the cut is shown wrapped, with its label.
+    // img: a photo of this cut from our own shoot; without one, the build draws the cut (content/drawings.mjs).
     items: [
       // ---- Beef: Steer #2186 ----
       { id: 'ribeye-bone-in', name: 'Bone-in ribeye', short: 'Bone-in ribeye', chalk: 'Ribeye, bone in', species: 'beef', primal: 'rib', unit: 'lb', price: 34, stock: 4, bone: 'Bone-in', feeds: 'Feeds 2', cook: 'steak', box: false,
@@ -168,11 +168,11 @@
         options: [{ label: 'Cut', choices: [{ label: 'Whole', default: true }, { label: 'Spatchcocked' }, { label: 'Cut in 8' }] }],
         says: 'Ask for it spatchcocked and it’s dinner in forty-five minutes.',
         desc: 'Air-chilled, so the skin dries and crisps instead of steaming. Salt it the night before and leave it uncovered in the fridge.' },
-      { id: 'chicken-thighs', name: 'Chicken thighs, bone-in, skin-on', short: 'Chicken thighs', chalk: 'Thighs', species: 'chicken', primal: null, unit: 'lb', price: 7.5, lb: 1.5, stock: 5, bone: 'Bone-in', feeds: 'Feeds 3', cook: 'poultry', box: true,
+      { id: 'chicken-thighs', name: 'Chicken thighs, bone-in, skin-on', short: 'Chicken thighs', chalk: 'Thighs', species: 'chicken', primal: null, unit: 'lb', price: 7.5, lb: 1.5, stock: 5, bone: 'Bone-in', feeds: 'Feeds 3', cook: 'thigh', box: true,
         desc: 'Four to a pack. Skin-side down in a cold pan, leave them alone for 15 minutes, flip, finish in the oven.' },
-      { id: 'chicken-breasts', name: 'Chicken breasts, boneless', short: 'Chicken breasts', species: 'chicken', primal: null, unit: 'lb', price: 13, lb: 1.2, stock: 10, bone: 'Boneless', feeds: 'Feeds 2', cook: 'poultry', box: true,
+      { id: 'chicken-breasts', name: 'Chicken breasts, boneless', short: 'Chicken breasts', species: 'chicken', primal: null, unit: 'lb', price: 13, lb: 1.2, stock: 10, bone: 'Boneless', feeds: 'Feeds 2', cook: 'breast', box: true,
         desc: 'Two to a pack, skinless. Brine them for 30 minutes in salted water and they won’t dry out.' },
-      { id: 'chicken-wings', name: 'Chicken wings', short: 'Chicken wings', species: 'chicken', primal: null, unit: 'lb', price: 6, lb: 2, stock: 3, bone: 'Bone-in', feeds: 'Feeds 2–3', cook: 'poultry', box: true,
+      { id: 'chicken-wings', name: 'Chicken wings', short: 'Chicken wings', species: 'chicken', primal: null, unit: 'lb', price: 6, lb: 2, stock: 3, bone: 'Bone-in', feeds: 'Feeds 2–3', cook: 'wings', box: true,
         desc: 'Whole wings, ten to a pack. 425°F on a rack for 45 minutes, then toss them in whatever sauce you like.' },
 
       // ---- Made in the shop ----
@@ -193,6 +193,9 @@
       low: [['Fork-tender', 203]],
       ground: [['Safe minimum', 160]],
       poultry: [['Breast', 165], ['Thigh', 175]],
+      breast: [['Done', 165]],
+      thigh: [['Done', 175]],
+      wings: [['Crisp', 180]],
     },
 
     specialOrders: [

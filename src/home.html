@@ -1,8 +1,36 @@
 <div class="stage">
+  <section class="board" id="board" data-board-wrap data-mode="chalk" aria-label="This week’s board">
+    <div class="board__switch">
+      <div class="seg" role="group" aria-label="Show the board as"><button aria-pressed="true" data-view="chalk">Board</button><button aria-pressed="false" data-view="list">Full list</button><button aria-pressed="false" data-view="labels">Labels</button></div>
+      <p class="fine board__hint">Exact weights, stock and estimates are on the <button class="link" type="button" data-view="list">full list</button>.</p>
+    </div>
+    <div class="board__frame">
+      <div class="board__tools">
+        <div class="cutmap">
+          <div class="cutmap__head">
+            <h2 class="cutmap__title" id="cutmap-title">By part of the animal</h2>
+            <div class="seg seg--sm" role="group" aria-labelledby="cutmap-title">
+              <button aria-pressed="true" data-cutmap-tab="beef">Beef</button><button aria-pressed="false" data-cutmap-tab="pork">Pork</button><button aria-pressed="false" data-cutmap-tab="lamb">Lamb</button>
+            </div>
+          </div>
+          {{diagrams}}
+          <p class="cutmap__key">tap a part to see its cuts</p>
+        </div>
+        <div class="board__bar">
+          <div class="seg" role="group" aria-label="Show">
+            <button aria-pressed="true" data-species="">All</button><button aria-pressed="false" data-species="beef">Beef</button><button aria-pressed="false" data-species="pork">Pork</button><button aria-pressed="false" data-species="lamb">Lamb</button><button aria-pressed="false" data-species="chicken">Chicken</button><button aria-pressed="false" data-species="house">Made here</button>
+          </div>
+          <label class="select"><span>Sort</span><select data-sort><option value="">Board order</option><option value="price-asc">Price per lb, low to high</option><option value="price-desc">Price per lb, high to low</option></select></label>
+        </div>
+        <p class="board__note" data-filter-note aria-live="polite"></p>
+      </div>
+      <div class="board__body" data-board>{{board}}</div>
+    </div>
+  </section>
   <section class="door" aria-labelledby="hero-title">
     <img src="assets/img/shop/breakdown.webp" alt="A butcher in a flat cap breaking down a lamb on a wooden block" width="1600" height="1200" fetchpriority="high">
     <span class="door__tag">Stand-in photo</span>
-    <p class="sign" data-sign><b>Open</b><small>Tuesday to Sunday</small></p>
+    <p class="sign" data-sign><b>Tue–Sun</b><small>9–7 · Sunday 10–5</small></p>
     <div class="door__cap">
       <h1 id="hero-title">Kent Ave &amp; N 4th.<br>Whole animals since 2019.</h1>
       <p>A block from the river, five minutes from the Bedford Ave L.</p>
@@ -27,35 +55,6 @@
     <div class="tkt__body" data-ticket-card><p>Nothing on it yet. Pick something off the board.</p></div>
   </aside>
 
-  <section class="board" id="board" data-board-wrap data-mode="chalk" aria-label="This week’s board">
-    <div class="board__switch">
-      <div class="seg" role="group" aria-label="Show the board as"><button aria-pressed="true" data-view="chalk">Board</button><button aria-pressed="false" data-view="list">Full list</button><button aria-pressed="false" data-view="labels">Labels</button></div>
-      <p class="fine board__hint">Exact weights, stock and estimates are on the <button class="link" type="button" data-view="list">full list</button>.</p>
-    </div>
-    <div class="board__frame">
-      <div class="board__tools">
-        <div class="cutmap">
-          <div class="cutmap__head">
-            <h2 class="intro__h" id="cutmap-title">Shop by part of the animal</h2>
-            <div class="seg seg--sm" role="group" aria-labelledby="cutmap-title">
-              <button aria-pressed="true" data-cutmap-tab="beef">Beef</button><button aria-pressed="false" data-cutmap-tab="pork">Pork</button><button aria-pressed="false" data-cutmap-tab="lamb">Lamb</button>
-            </div>
-          </div>
-          {{diagrams}}
-          {{primalLists}}
-          <p class="fine cutmap__key"><span class="keyitem"><span class="key key--open" aria-hidden="true"></span>Cuts in stock</span> <span class="keyitem"><span class="key key--out" aria-hidden="true"></span>Sold out</span> <span class="keyitem"><span class="key key--none" aria-hidden="true"></span>Not sold</span></p>
-        </div>
-        <div class="board__bar">
-          <div class="seg" role="group" aria-label="Show">
-            <button aria-pressed="true" data-species="">All</button><button aria-pressed="false" data-species="beef">Beef</button><button aria-pressed="false" data-species="pork">Pork</button><button aria-pressed="false" data-species="lamb">Lamb</button><button aria-pressed="false" data-species="chicken">Chicken</button><button aria-pressed="false" data-species="house">Made here</button>
-          </div>
-          <label class="select"><span>Sort</span><select data-sort><option value="">Board order</option><option value="price-asc">Price per lb, low to high</option><option value="price-desc">Price per lb, high to low</option></select></label>
-        </div>
-        <p class="board__note" data-filter-note aria-live="polite"></p>
-      </div>
-      <div class="board__body" data-board>{{board}}</div>
-    </div>
-  </section>
 
   <div class="slips">
     <figure class="slip-note">

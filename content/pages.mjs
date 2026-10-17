@@ -24,7 +24,7 @@ export const pages = [
       },
       {
         heading: 'Our week',
-        html: `<p>The animals come in on Monday. The shop is closed to walk-ins that day, because that's when we cut. Dani does the pigs and the chickens, and Marisol the lambs and then the steer, which has already hung 21 days in our cooler. By Monday evening the new board is up, here and online.</p>
+        html: `<p>The animals come in on Monday. The shop is closed to walk-ins that day, because that's when we cut. Dani does the pigs and the chickens, and Marisol the lambs and then the steer, which has already hung 21 days in our cooler. By late Monday morning the new board is up, here and online.</p>
 <p>We buy the whole animal and pay for all of it, neck and shanks included, so everything on the board stays there until it sells. A steer has one hanger steak. When it's gone, the next one comes with the next steer.</p>
 <div class="about-photos"><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/cutting.webp" alt="Gloved hands slicing a beef roast on a wooden block" width="1200" height="900" loading="lazy"><figcaption>On the block</figcaption></figure><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/scale.webp" alt="A hanging scale weighing ground meat, with sausage links on the steel counter" width="1200" height="900" loading="lazy"><figcaption>On the scale</figcaption></figure><figure><span class="standin">Stand-in photo</span><img src="assets/img/shop/sausage.webp" alt="Hands twisting fresh sausage into links" width="1200" height="900" loading="lazy"><figcaption>Into sausage</figcaption></figure></div>
 <p>Butcher's Boxes are cut on Wednesday. Whatever's left at the end of the week becomes sausage and stock: the trim goes into the grinder, the bones simmer for 12 hours, and the fat is rendered into tallow.</p>`,
@@ -308,7 +308,7 @@ export const pages = [
 <li>Subscriptions get 10% off the estimated price. One-time boxes get no discount.</li>
 <li>A subscription renews automatically on the schedule you picked until you cancel it.</li>
 <li>Boxes are cut on Wednesdays and charged when cut, at actual weight, capped at the estimate plus 10%.</li>
-<li>You can skip, change or cancel any time before Sunday 11:59 PM Eastern for that week's box, in your <a href="/account.html">Account</a>, by email or by phone. There's no cancellation fee.</li>
+<li>You can skip or cancel any time before Sunday 11:59 PM Eastern for that week's box, in your <a href="/account.html">Account</a>, by email or by phone. There's no cancellation fee.</li>
 <li>These terms appear next to the order button, and you tick a checkbox to agree to them before a subscription starts.</li>
 </ul>`,
       },

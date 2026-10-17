@@ -112,7 +112,7 @@ const chick = { name: 'Whole chicken', options: [{ choices: [{ label: 'Whole', d
 assert.equal(S.optionLabel(chick, { opts: [0] }), '');
 assert.equal(S.optionLabel(chick, { opts: [1] }), 'Cut in 8');
 assert.equal(S.classifyZip('96799').area, 'American Samoa');
-assert.equal(S.classifyZip('10000').kind, 'invalid'); assert.equal(S.classifyZip('10283').kind, 'invalid');
+assert.equal(S.classifyZip('10000').kind, 'invalid'); assert.equal(S.classifyZip('10287').kind, 'invalid'); assert.equal(S.classifyZip('10286').kind, 'courier', 'Manhattan runs to 10286');
 assert.equal(S.classifyZip('11101').area, 'Queens'); assert.equal(S.classifyZip('11101').nyc, true);
 assert.equal(S.classifyZip('10451').area, 'the Bronx');
 assert.equal(S.classifyZip('94110').state, 'CA'); assert.equal(S.classifyZip('20001').state, 'DC'); assert.equal(S.classifyZip('07030').state, 'NJ');

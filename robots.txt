@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://eatyourmeat.example/sitemap.xml
+Sitemap: https://eat-your-meat-iota.vercel.app/sitemap.xml

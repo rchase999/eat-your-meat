@@ -122,7 +122,7 @@
     </div>`;
   }
   // inside: the label and the stamp, laid on the paper
-  const drawnHTML = (it, root, big, inside) => `<div class="drawn${big ? ' drawn--big' : ''}">${big ? '<span class="drawn__tag">Drawn, not photographed</span>' : ''}<div class="drawn__sheet"><img src="${it.img ? img(root, it.img) : `${root}assets/draw/${it.id}.svg`}" alt="${it.img ? '' : 'A drawing of '}${esc(it.name.toLowerCase())}" width="400" height="300"${big ? '' : ' loading="lazy"'}></div>${inside}</div>`;
+  const drawnHTML = (it, root, big, inside) => `<div class="drawn${big ? ' drawn--big' : ''}"><div class="drawn__sheet"><img src="${it.img ? img(root, it.img) : `${root}assets/draw/${it.id}.svg`}" alt="${it.img ? '' : 'A drawing of '}${esc(it.name.toLowerCase())}" width="400" height="300"${big ? '' : ' loading="lazy"'}></div>${inside}</div>`;
   const stampHTML = (it) => `<p class="stamp">Sold out<small data-when="stamp" data-id="${it.id}">${esc(it.soldStamp || '')}</small></p>`;
   function labelCard(D, it, root, reserved = () => 0) {
     const st = stockText(it, reserved(it.id));
@@ -192,7 +192,8 @@
       const state = !items.length ? 'none' : open.length ? '' : 'out';
       const title = !items.length ? `${label}: not sold` : open.length ? `${label}: ${open.length} cut${open.length > 1 ? 's' : ''} in stock` : `${label}: sold out this week`;
       const shape = `<path d="${path}" ${isExtra ? '' : `clip-path="url(#${id})"`}/>`;
-      const text = shank ? '' : `<text x="${lx}" y="${ly}">${esc(label)}</text>`;
+      const left = still || !items.length ? '' : `<text class="cuts__left" x="${shank ? sh.legLabel[0] : lx}" y="${(shank ? sh.legLabel[1] : ly) + 17}">${items.map((i, n) => `<tspan x="${shank ? sh.legLabel[0] : lx}" dy="${n ? 14 : 0}"${i.stock ? '' : ' class="cuts__gone"'}>${esc(i.chalk ? i.chalk.toLowerCase() : i.short.toLowerCase())}${i.stock === 1 ? ' (last)' : ''}</tspan>`).join('')}</text>`;
+      const text = (shank ? '' : `<text x="${lx}" y="${ly}">${esc(label)}</text>`) + left;
       const cls = `region ${state ? 'region--' + state : ''} ${active === k ? 'is-active' : ''}`;
       return items.length && !still
         ? `<a href="#board" class="${cls}" data-primal="${k}" data-species="${species}" aria-label="${esc(title)}"><title>${esc(title)}</title>${shape}${text}</a>`
@@ -207,23 +208,24 @@
   // ---------------- product page ----------------
   function similar(D, it) {
     if (it.species === 'house') return [];
-    return D.items.filter((x) => x.id !== it.id && x.species === it.species && x.cook === it.cook)
+    return D.items.filter((x) => x.id !== it.id && x.species === it.species && (x.cook === it.cook || it.species === 'chicken'))
       .sort((a, b) => (!a.stock - !b.stock) || Math.abs(a.price - it.price) - Math.abs(b.price - it.price)).slice(0, 3);
   }
-  function pdpHTML(D, it, root) {
+  const noteHTML = (n) => `<span class="drawn__note${n.by === 'DO' ? ' drawn__note--do' : ''}" style="left:${n.left}%;top:${n.top}%;width:${n.width}%">${esc(n.text)}</span>`;
+  function pdpHTML(D, it, root, notes = []) {
     const cfg = S.defaultCfg(it), a = D.animals[it.species], farm = a.farm ? D.farms[a.farm] : null, st = stockText(it);
     const first = D.shop.butcher.split(' ')[0];
     const opts = (it.options || []).map((o, oi) => o.choices.length < 2 ? '' : `<fieldset class="opt"><legend>${esc(o.label)}</legend><div class="opt__row">${o.choices.map((c, ci) =>
       `<label><input type="radio" name="opt${oi}" value="${ci}" ${ci === cfg.opts[oi] ? 'checked' : ''}><span>${esc(c.label)}${c.lb && it.unit === 'lb' ? `<small>≈ ${S.money(S.round(it.price * c.lb))}</small>` : ''}</span></label>`).join('')}</div></fieldset>`).join('');
     // temperatures only where a thermometer helps; a braise is done when it's tender
-    const temps = ['steak', 'pork', 'lamb', 'poultry', 'ground'].includes(it.cook) ? `<section class="pdp__sec"><h2>Take it off at</h2><ul class="temps">${D.cook[it.cook].map(([l, t]) => `<li><b>${t}°F</b><span>${esc(l)}</span></li>`).join('')}</ul>${['steak', 'pork', 'lamb'].includes(it.cook) ? `<p class="fine">Chef’s temperatures. The <a href="${root}food-safety.html">USDA’s</a> are higher.</p>` : ''}</section>` : '';
+    const temps = ['steak', 'pork', 'lamb', 'poultry', 'breast', 'thigh', 'wings', 'ground'].includes(it.cook) ? `<section class="pdp__sec"><h2>Take it off at</h2><ul class="temps">${D.cook[it.cook].map(([l, t]) => `<li><b>${t}°F</b><span>${esc(l)}</span></li>`).join('')}</ul>${['steak', 'pork', 'lamb'].includes(it.cook) ? `<p class="fine">Chef’s temperatures. The <a href="${root}food-safety.html">USDA’s</a> are higher.</p>` : ''}</section>` : '';
     const sim = similar(D, it);
     const store = it.storage || (it.frozen ? 'Thaw it in the fridge overnight.' : it.unit === 'each' ? 'Keep it in the fridge once opened.' : `Fridge, ${it.cook === 'ground' || it.species === 'chicken' ? '1 to 2 days' : '3 to 5 days'}. Freezer, vacuum-sealed, up to 6 months.`);
     const specs = [it.bone && ['Bone', it.bone], notFresh(it) && ['Kept', notFresh(it)], it.feeds && ['Feeds', it.feeds.replace('Feeds ', '')]].filter(Boolean); // the cut or made date is on the label
     const src = farm ? `${esc(a.label)} · ${esc(farm.name)}, ${esc(farm.place)}` : esc(D.speciesLabel[it.species]);
     return `<nav class="crumbs" aria-label="Breadcrumb"><a href="${root}index.html#board">The board</a> <span aria-hidden="true">/</span> <a href="${root}index.html?species=${it.species}#board">${esc(D.speciesLabel[it.species])}</a> <span aria-hidden="true">/</span> <span aria-current="page">${esc(it.name)}</span></nav>
     <div class="pdp">
-      <div class="pdp__media counter" style="--tilt:${tilt(it.id)}deg">${drawnHTML(it, root, true, tagHTML(D, it, { heading: 'p', link: false, priced: false }) + (it.stock ? '' : stampHTML(it)))}</div>
+      <div class="pdp__media counter" style="--tilt:${tilt(it.id)}deg">${drawnHTML(it, root, true, tagHTML(D, it, { heading: 'p', link: false, priced: false }) + (it.stock ? '' : stampHTML(it)) + notes.map(noteHTML).join(''))}</div>
       <form class="pdp__label" data-pdp="${it.id}">
         <p class="pdp__src">${src}</p>
         <h1 class="pdp__name">${esc(it.name)}</h1>
