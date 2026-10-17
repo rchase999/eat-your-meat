@@ -231,7 +231,7 @@
     const html = `<nav class="crumbs" aria-label="Breadcrumb"><a href="${root}index.html#board">The board</a> <span aria-hidden="true">/</span> <a href="${root}index.html?species=${it.species}#board">${esc(D.speciesLabel[it.species])}</a> <span aria-hidden="true">/</span> <span aria-current="page">${esc(it.name)}</span></nav>
     <div class="pdp">
       <div class="pdp__media counter" style="--tilt:${tilt(it.id)}deg">${drawnHTML(it, root, true, tagHTML(D, it, { heading: 'p', link: false, priced: false }) + (it.stock ? '' : stampHTML(it)), notes.map(noteHTML).join(''))}</div>
-      <form class="pdp__label" data-pdp="${it.id}">
+      <div class="pdp__col"><form class="pdp__label" data-pdp="${it.id}">
         <p class="pdp__src">${src}</p>
         <h1 class="pdp__name">${esc(it.name)}</h1>
         ${it.says ? `<blockquote class="says"><p>“${esc(it.says)}”</p><footer>${esc(first)}</footer></blockquote>` : ''}
@@ -244,7 +244,7 @@
         : `<p class="pdp__soldout"><span class="stock is-out">Sold out <span data-when="sold" data-id="${it.id}">${esc(it.soldText || '')}</span>.</span> Next ${esc({ beef: 'steer', pork: 'pigs', lamb: 'lambs', chicken: 'chickens' }[it.species] || 'batch')} Monday.</p>`}
         <dl class="pdp__specs">${specs.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
       </form>
-      ${it.stock ? '' : `<form class="notify" data-notify="${it.id}" novalidate><label class="field">Tell me when it’s back<input type="email" name="email" autocomplete="email" required placeholder="you@example.com"></label><button class="btn btn--ink" type="submit">Tell me</button><p class="fine" data-notify-msg aria-live="polite"></p></form>`}
+      ${it.stock ? '' : `<form class="notify" data-notify="${it.id}" novalidate><label class="field">Tell me when it’s back<input type="email" name="email" autocomplete="email" required placeholder="you@example.com"></label><button class="btn btn--ink" type="submit">Tell me</button><p class="fine" data-notify-msg aria-live="polite"></p></form>`}</div>
     </div>`;
     const good = goodFor(it), region = hasRegion(it);
     const where = region ? `<section class="pdp__sec pdp__where"><h2>Where it comes from</h2><div class="pdp__where__row">${diagramSVG(D, it.species, it.primal, true)}<p>From the ${esc(D.primals[it.species][it.primal].toLowerCase())}.${good.length ? ` <b>Good for:</b> ${esc(good.join(', '))}.` : ''}</p></div></section>` : good.length ? `<p class="pdp__good"><b>Good for:</b> ${esc(good.join(', '))}.</p>` : '';

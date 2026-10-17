@@ -120,8 +120,8 @@
     return o.open ? { open: true, text: `till ${clock(o.until)}` } : { open: false, text: `back ${dayLabel(t, o.day)} ${clock(o.at)}` };
   }
   function paintSign() {
-    const h = hoursText(), t = now(), c = S.nextCourier(t), sh = S.nextShip(t);
-    $$('[data-cutbar]').forEach((el) => (el.textContent = `${c === 0 ? 'Order by 2 PM for the courier tonight in Brooklyn and Manhattan' : `Next courier ${dayLabel(t, c)} evening, order by 2 PM`} · Pickup in 2 hours · ${sh.ship === 0 ? 'Ships today, order by noon' : `Ships ${dayLabel(t, sh.ship)}`} · Free courier on $100`));
+    const h = hoursText(), t = now(), c = S.nextCourier(t), sh = S.nextShip(t), pu = S.nextPickup(t);
+    $$('[data-cutbar]').forEach((el) => (el.innerHTML = `${c === 0 ? 'Order by 2 PM, courier tonight in Brooklyn and Manhattan' : `Next courier ${dayLabel(t, c)} evening, order by 2 PM`} · Pickup ${dayLabel(t, pu.day)} from ${clock(pu.minutes)} · ${sh.ship === 0 ? 'Ships today, order by noon' : `Ships ${dayLabel(t, sh.ship)}`}<span class="cutbar__free"> · Free courier over $100</span>`));
     $$('[data-status]').forEach((el) => (el.innerHTML = `<b class="${h.open ? 'is-open' : 'is-closed'}">${h.open ? 'Open' : 'Closed'}</b> ${esc(h.text)}<span class="logo__where"> · ${esc(D.shop.street)}</span>`));
     $$('[data-sign]').forEach((el) => { el.classList.toggle('is-closed', !h.open); el.innerHTML = `<b>${h.open ? 'Open' : 'Closed'}</b><small>${esc(h.text)}</small>`; });
   }
@@ -461,7 +461,7 @@
     const { species, primal } = state.f;
     const note = $('[data-filter-note]');
     if (primal) {
-      const n = D.items.filter((i) => i.species === species && i.primal === primal).length;
+      const n = D.items.filter((i) => i.species === species && i.primal === primal && (!state.f.good || R.goodFor(i).includes(state.f.good))).length;
       note.innerHTML = `Showing ${esc(D.speciesLabel[species])}, ${esc(D.primals[species][primal])}: ${n} cut${n > 1 ? 's' : ''}. <button class="link" type="button" data-clear>Show the whole board</button>`;
     } else note.textContent = '';
     $$('[data-board-wrap] .seg [data-species]').forEach((b) => b.setAttribute('aria-pressed', String(!primal && b.dataset.species === species)));
