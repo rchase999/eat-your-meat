@@ -365,6 +365,7 @@
     const no = state.ticket;
     const phone = String(form.elements.phone?.value || '').replace(/\D/g, '');
     const tt = now();
+    const etMidnight = (days, t) => { let u = Date.now() + days * 864e5 - (t.h * 60 + t.m) * 60e3; const p = S.etParts(new Date(u)), off = p.h * 60 + p.m; return u + (off > 720 ? 1440 - off : -off) * 60e3; }; // snap to 00:00 Eastern even across a clock change
     let next = '', untilDay = 0; // days from today until the order is in your hands
     const loose = state.cart.some((l) => l.id !== 'box' && !l.digital);
     if (loose && method === 'courier') { const d = S.nextCourier(tt); untilDay = d; next = d === 0 ? `We’ll cut it this afternoon and text the number ending ${phone.slice(-4)} when the courier leaves, between 5 and 9 PM tonight.` : `We’ll cut it ${dayLabel(tt, d)} morning and text the number ending ${phone.slice(-4)} when the courier leaves, between 5 and 9 PM.`; }
@@ -387,7 +388,7 @@
     const hadSub = state.cart.some(S.isSubscription);
     const weighedOrder = state.cart.some((l) => l.weighed);
     state.cart = [];
-    state.placed = { no, text: (next || 'Your gift card is on its way by email').split('. ')[0].replace(/\.?$/, '.'), until: Date.now() + (untilDay + 1) * 864e5 - (tt.h * 60 + tt.m) * 60e3 }; // through the end of that day, Eastern
+    state.placed = { no, text: (next || 'Your gift card is on its way by email').split('. ')[0].replace(/\.?$/, '.'), until: etMidnight(untilDay + 1, tt) }; // through the end of that day, Eastern
     save('eym.placed', state.placed);
     coDraft = {};
     afterCartChange(false);
@@ -711,12 +712,13 @@
     <p class="fine">${esc(own(METHOD_LABEL, o.method))} · Estimated ${S.money(Number(o.total) || 0)}. ${esc(o.next || '')}</p></div>`;
   function initAccount() {
     const subsEl = $('[data-subs]'), ordersEl = $('[data-orders]');
+    const notifyList = () => { const raw = load('eym.notify', []); return (Array.isArray(raw) ? raw : []).filter((x) => x && typeof x === 'object' && has(x.id) && typeof x.email === 'string').filter((x, i, a) => a.findIndex((y) => y.id === x.id && y.email === x.email) === i); }; // one row per cut and address, even for requests saved before the dedupe
     const render = () => {
       const ok = (x) => x && typeof x === 'object';
       const rawSubs = load('eym.subs', []), subs = Array.isArray(rawSubs) ? rawSubs.map((x, i) => [x, i]).filter(([x]) => ok(x)) : [];
       const rawOrders = load('eym.orders', []), orders = Array.isArray(rawOrders) ? rawOrders.filter((o) => ok(o) && Number.isInteger(o.no)) : [];
       const rawGifts = load('eym.gifts', []), gifts = Array.isArray(rawGifts) ? rawGifts.filter((g) => ok(g) && typeof g.code === 'string') : [];
-      const rawN = load('eym.notify', []), notes = Array.isArray(rawN) ? rawN.filter((x) => ok(x) && has(x.id) && typeof x.email === 'string') : [];
+      const notes = notifyList();
       $('[data-notify-list]').innerHTML = notes.length ? `<ul class="gifts">${notes.map((x, i) => `<li><span>${esc(byId[x.id].name)} · ${esc(x.email)}</span><button class="link" type="button" data-notify-drop="${i}">Remove</button></li>`).join('')}</ul>` : '<p class="empty">No requests in this browser.</p>';
       $('[data-gifts]').innerHTML = gifts.length ? `<ul class="gifts">${gifts.map((g) => `<li><b>${esc(g.code)}</b><span>${S.money(Number(g.balance) || 0)} left${g.to ? ` · for ${esc(String(g.to))}` : ''}</span></li>`).join('')}</ul>` : '<p class="empty">No gift cards in this browser.</p>';
       subsEl.innerHTML = subs.length ? subs.map(([s, i]) => `<div class="sub ${s.status === 'cancelled' ? 'is-cancelled' : ''}">
@@ -729,9 +731,7 @@
     $('[data-notify-list]').addEventListener('click', (e) => {
       const b = e.target.closest('[data-notify-drop]');
       if (!b) return;
-      const list = load('eym.notify', []);
-      if (!Array.isArray(list)) return;
-      const kept = list.filter((x) => x && typeof x === 'object' && has(x.id) && typeof x.email === 'string'); kept.splice(Number(b.dataset.notifyDrop), 1);
+      const kept = notifyList(); kept.splice(Number(b.dataset.notifyDrop), 1);
       save('eym.notify', kept); render(); ($('[data-notify-drop]') || $('#notify-h')).focus();
     });
     subsEl.addEventListener('click', (e) => {

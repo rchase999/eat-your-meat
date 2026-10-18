@@ -843,15 +843,15 @@ html:has(dialog[open]) { overflow: hidden; }
   .pc__foot { padding: 0 2px; }
   .pc .add { min-width: 52px; padding: 0 10px; }
   .drawn--big { display: flex; flex-direction: column; }
-  .drawn--big .drawn__sheet { order: 0; }
-  .drawn--big .drawn__note { order: 1; position: static; width: auto; max-width: none; margin: 10px 10px 0 4px; padding: 6px 10px 7px; background: #FBF6EC; box-shadow: 0 4px 8px -5px rgba(0, 0, 0, .55); transform: rotate(-1.2deg); }
+  .drawn--big .drawn__sheet { display: flex; flex-direction: column; align-items: flex-start; padding-bottom: 10px; } /* the notes live on the sheet; stack them under the drawing */
+  .drawn--big .drawn__note { order: 1; position: static; width: auto !important; max-width: none; margin: 18px 10px 0 4px; padding: 6px 10px 7px; background: #FBF6EC; box-shadow: 0 4px 8px -5px rgba(0, 0, 0, .55); transform: rotate(-1.2deg); }
   .drawn--big .drawn__note:nth-of-type(2) { margin-left: 26px; transform: rotate(1.4deg); }
   .drawn--big .tag { order: 2; margin-top: 12px; }
   .pc .drawn__note { display: none; }
   body[data-page="product"] .footer { padding-bottom: calc(var(--slip-h, 0px) + 96px); }
   .drawn--big .drawn__sheet { aspect-ratio: auto; }
   .drawn--big .drawn__sheet img { position: static; inset: auto; width: 100%; height: auto; }
-  .drawn--big .tag { width: min(232px, 72%); margin-top: -36px; font-size: 11px; }
+  .drawn--big .tag { width: min(232px, 72%); font-size: 11px; }
   .drawn .tag__cut { font-size: 14px; }
   .drawn .tag__big { font-size: 16px; }
   .drawn .tag__shop { font-size: 10.5px; letter-spacing: .02em; }
