@@ -53,11 +53,10 @@
     <div class="board__frame">
       <div class="board__tools">
         <div class="cutmap">
-          <div class="cutmap__head">
-            <h2 class="cutmap__title" id="cutmap-title">By part of the animal</h2>
-            <div class="seg seg--sm" role="group" aria-labelledby="cutmap-title">
-              <button aria-pressed="true" data-cutmap-tab="beef">Beef</button><button aria-pressed="false" data-cutmap-tab="pork">Pork</button><button aria-pressed="false" data-cutmap-tab="lamb">Lamb</button>
-            </div>
+          <h2 class="cutmap__title" id="cutmap-title"><button class="cutmap__toggle" type="button" aria-expanded="true" aria-controls="cutmap-body">By part of the animal<span class="cutmap__hint" aria-hidden="true">chart</span></button></h2>
+          <div class="cutmap__body" id="cutmap-body">
+          <div class="seg seg--sm" role="group" aria-labelledby="cutmap-title">
+            <button aria-pressed="true" data-cutmap-tab="beef">Beef</button><button aria-pressed="false" data-cutmap-tab="pork">Pork</button><button aria-pressed="false" data-cutmap-tab="lamb">Lamb</button>
           </div>
           <div class="cutmap__view" data-cutmap="beef" ><svg class="cuts" viewBox="0 0 640 340" role="group" aria-label="Beef cuts by part of the animal">
       <defs><clipPath id="clip-beef"><path d="M42 166 C38 158 38 148 44 140 L58 118 C64 108 72 100 84 96 L74 90 L66 82 L80 80 L96 88 C102 82 108 76 112 66 C116 72 116 80 114 86 L128 92 C150 100 168 98 186 94 C194 90 202 86 214 86 C232 90 260 94 300 96 L400 98 L498 100 C520 102 536 108 546 118 C548 136 546 158 540 182 C532 210 520 234 506 250 C500 262 496 276 494 292 L492 320 L466 318 L466 292 C462 274 458 256 452 242 L428 252 C390 264 346 268 300 266 C250 262 214 256 184 252 C180 262 178 278 176 296 L176 320 L150 318 L150 296 C152 280 152 262 150 244 L142 234 C136 228 130 220 124 210 C118 204 112 196 104 188 C94 192 82 192 70 188 C58 184 48 178 42 166 Z"/></clipPath></defs>
@@ -67,6 +66,7 @@
       <defs><clipPath id="clip-lamb"><path d="M40 152 C40 160 44 168 54 172 C66 178 78 180 90 182 C104 190 114 200 124 210 C134 220 142 230 148 240 L152 300 L150 320 L172 320 L174 290 L176 262 C210 256 250 256 300 258 C350 260 400 254 432 244 C438 260 442 280 444 300 L440 320 L464 320 L468 292 C470 276 474 262 480 248 C490 230 500 206 504 180 C508 160 510 146 512 136 L520 130 L512 122 C500 114 470 106 420 104 L300 100 C250 100 210 102 184 106 C168 108 152 108 138 102 L118 94 L92 82 L98 100 C88 106 76 112 66 120 C54 130 44 140 40 152 Z"/></clipPath></defs>
       <g class="region region--none "><title>Head: not sold</title><path d="M0 0 L100 0 L100 192 L0 192 Z" clip-path="url(#clip-lamb)"/><text x="76" y="148">Head</text></g><a href="#board" class="region  " data-primal="neck" data-species="lamb" aria-label="Neck: 1 cut in stock"><title>Neck: 1 cut in stock</title><path d="M100 0 L156 0 L156 216 L100 192 Z" clip-path="url(#clip-lamb)"/><text x="128" y="152">Neck</text><text class="cuts__left" x="128" y="169"><tspan x="128" dy="0">lamb neck</tspan></text></a><a href="#board" class="region  " data-primal="shoulder" data-species="lamb" aria-label="Shoulder: 1 cut in stock"><title>Shoulder: 1 cut in stock</title><path d="M156 0 L230 0 L230 192 L156 216 Z" clip-path="url(#clip-lamb)"/><text x="194" y="150">Shoulder</text><text class="cuts__left" x="194" y="167"><tspan x="194" dy="0">lamb chops</tspan></text></a><a href="#board" class="region  " data-primal="rack" data-species="lamb" aria-label="Rack: 1 cut in stock"><title>Rack: 1 cut in stock</title><path d="M230 0 L304 0 L304 176 L230 192 Z" clip-path="url(#clip-lamb)"/><text x="267" y="140">Rack</text><text class="cuts__left" x="267" y="157"><tspan x="267" dy="0">lamb rack</tspan></text></a><a href="#board" class="region region--out " data-primal="loin" data-species="lamb" aria-label="Loin: sold out this week"><title>Loin: sold out this week</title><path d="M304 0 L392 0 L392 170 L304 176 Z" clip-path="url(#clip-lamb)"/><text x="348" y="138">Loin</text><text class="cuts__left" x="348" y="155"><tspan x="348" dy="0" class="cuts__gone">loin chops</tspan></text></a><a href="#board" class="region  " data-primal="leg" data-species="lamb" aria-label="Leg: 1 cut in stock"><title>Leg: 1 cut in stock</title><path d="M392 0 L640 0 L640 340 L452 340 L452 264 L432 172 L392 170 Z" clip-path="url(#clip-lamb)"/><text x="458" y="170">Leg</text><text class="cuts__left" x="458" y="187"><tspan x="458" dy="0">leg of lamb</tspan></text></a><a href="#board" class="region  " data-primal="breast" data-species="lamb" aria-label="Breast: 1 cut in stock"><title>Breast: 1 cut in stock</title><path d="M156 216 L230 192 L304 176 L392 170 L432 172 L452 264 L156 264 Z" clip-path="url(#clip-lamb)"/><text x="304" y="226">Breast</text><text class="cuts__left" x="304" y="243"><tspan x="304" dy="0">lamb breast</tspan></text></a><a href="#board" class="region  " data-primal="shank" data-species="lamb" aria-label="Shank: 1 cut in stock"><title>Shank: 1 cut in stock</title><path d="M140 264 L200 264 L200 340 L140 340 Z M432 264 L480 264 L480 340 L432 340 Z" clip-path="url(#clip-lamb)"/><text class="cuts__left" x="86" y="317"><tspan x="86" dy="0">lamb shank</tspan></text></a><path class="cuts__outline" d="M40 152 C40 160 44 168 54 172 C66 178 78 180 90 182 C104 190 114 200 124 210 C134 220 142 230 148 240 L152 300 L150 320 L172 320 L174 290 L176 262 C210 256 250 256 300 258 C350 260 400 254 432 244 C438 260 442 280 444 300 L440 320 L464 320 L468 292 C470 276 474 262 480 248 C490 230 500 206 504 180 C508 160 510 146 512 136 L520 130 L512 122 C500 114 470 106 420 104 L300 100 C250 100 210 102 184 106 C168 108 152 108 138 102 L118 94 L92 82 L98 100 C88 106 76 112 66 120 C54 130 44 140 40 152 Z"/><text class="cuts__leg" x="86" y="300">Shank</text><path class="cuts__lead" d="M112 296 L150 290"/></svg></div>
           <p class="cutmap__key">tap a part to see its cuts</p>
+          </div>
         </div>
         <div class="board__bar">
           <div class="seg" role="group" aria-label="Show">
@@ -81,7 +81,7 @@
       </div>
       <div class="board__body" data-board><div class="chalk">
       <div class="chalk__head"><div><h2 class="chalk__title" id="board-title">On the block</h2><p class="chalk__sub">Steer #2186 from the Kittles, hung 21 days · 3 pigs · 2 lambs · 38 birds</p></div><p class="chalk__upd">updated Sat 10/17, 8:40 AM</p></div>
-      <ul class="pins"><li class="pin" style="--tilt:2.0999999999999996deg"><a href="cuts/short-rib.html"><img src="assets/draw/short-rib.svg" alt="A drawing of short ribs, 3-bone plate" width="400" height="300" loading="lazy"><span class="pin__name">Short ribs</span><span class="pin__price">14/lb</span></a><button class="add" data-add="short-rib" aria-label="Add Short ribs, 3-bone plate to your ticket">Add</button></li><li class="pin" style="--tilt:-2.0999999999999996deg"><a href="cuts/chuck-eye.html"><img src="assets/draw/chuck-eye.svg" alt="A drawing of chuck eye steak" width="400" height="300" loading="lazy"><span class="pin__name">Chuck eye</span><span class="pin__price">19/lb</span></a><button class="add" data-add="chuck-eye" aria-label="Add Chuck eye steak to your ticket">Add</button></li><li class="pin" style="--tilt:2.8deg"><a href="cuts/pork-sausage.html"><img src="assets/draw/pork-sausage.svg" alt="A drawing of sweet italian sausage" width="400" height="300" loading="lazy"><span class="pin__name">Sausage, sweet</span><span class="pin__price">13/lb</span></a><button class="add" data-add="pork-sausage" aria-label="Add Sweet Italian sausage to your ticket">Add</button></li><li class="pin pin--all"><button type="button" data-view="labels">Every cut, with pictures<b>43 →</b></button></li></ul>
+      <ul class="pins"><li class="pin" style="--tilt:2.0999999999999996deg"><a href="cuts/short-rib.html"><img src="assets/draw/short-rib.svg" alt="" width="400" height="300" loading="lazy"><span class="pin__name">Short ribs</span><span class="pin__price" aria-hidden="true">14/lb</span><span class="sr-only">, $14 a pound</span></a><button class="add" data-add="short-rib" aria-label="Add Short ribs, 3-bone plate to your ticket">Add</button></li><li class="pin" style="--tilt:-2.0999999999999996deg"><a href="cuts/chuck-eye.html"><img src="assets/draw/chuck-eye.svg" alt="" width="400" height="300" loading="lazy"><span class="pin__name">Chuck eye</span><span class="pin__price" aria-hidden="true">19/lb</span><span class="sr-only">, $19 a pound</span></a><button class="add" data-add="chuck-eye" aria-label="Add Chuck eye steak to your ticket">Add</button></li><li class="pin" style="--tilt:2.8deg"><a href="cuts/pork-sausage.html"><img src="assets/draw/pork-sausage.svg" alt="" width="400" height="300" loading="lazy"><span class="pin__name">Sausage, sweet</span><span class="pin__price" aria-hidden="true">13/lb</span><span class="sr-only">, $13 a pound</span></a><button class="add" data-add="pork-sausage" aria-label="Add Sweet Italian sausage to your ticket">Add</button></li><li class="pin pin--all"><button type="button" data-view="labels">Every cut, with pictures<b>43 →</b></button></li></ul>
       <div class="chalk__cols"><div><h3 class="chalk__h">Beef <small>per lb</small></h3>
       <ul class="chalk__list"><li class="cl"><a href="cuts/ribeye-bone-in.html"><span class="cl__n"><span class="cl__t">Ribeye, bone in</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">34</span><span class="sr-only">, $34 a pound</span></a></li><li class="cl"><a href="cuts/ribeye.html"><span class="cl__n"><span class="cl__t">Ribeye</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">38</span><span class="sr-only">, $38 a pound</span></a></li><li class="cl"><a href="cuts/strip.html"><span class="cl__n"><span class="cl__t">Strip</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">32</span><span class="sr-only">, $32 a pound</span></a></li><li class="cl"><a href="cuts/tenderloin.html"><span class="cl__n"><span class="cl__t">Tenderloin</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">48</span><span class="sr-only">, $48 a pound</span></a></li><li class="cl"><a href="cuts/hanger.html"><span class="cl__n"><span class="cl__t"><svg class="cl__ring" viewBox="0 0 108 40" preserveAspectRatio="none" aria-hidden="true"><path d="M8 22c2-12 40-17 70-15s30 14 18 22-60 9-80 3S2 18 22 10"/></svg>Hanger</span><span class="cl__note">last one</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">22</span><span class="sr-only">, $22 a pound</span></a></li><li class="cl"><a href="cuts/skirt.html"><span class="cl__n"><span class="cl__t">Skirt</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">20</span><span class="sr-only">, $20 a pound</span></a></li><li class="cl"><a href="cuts/short-rib.html"><span class="cl__n"><span class="cl__t">Short ribs</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">14</span><span class="sr-only">, $14 a pound</span></a></li><li class="cl"><a href="cuts/brisket.html"><span class="cl__n"><span class="cl__t">Brisket, whole</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">11</span><span class="sr-only">, $11 a pound</span></a></li><li class="cl"><a href="cuts/chuck-eye.html"><span class="cl__n"><span class="cl__t">Chuck eye</span><span class="cl__tip"><svg class="cl__arrow" viewBox="0 0 44 22" aria-hidden="true"><path d="M42 12C30 4 16 6 4 12m0 0 8-7m-8 7 9 5"/></svg>better than the ribeye</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">19</span><span class="sr-only">, $19 a pound</span></a></li><li class="cl is-gone"><a href="cuts/flat-iron.html"><span class="cl__n"><span class="cl__t">Flat iron</span><span class="cl__note">gone Mon 12:15</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">24</span><span class="sr-only">, $24 a pound, sold out</span></a></li><li class="cl"><a href="cuts/ground-beef.html"><span class="cl__n"><span class="cl__t">Ground, 80/20</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">10</span><span class="sr-only">, $10 a pound</span></a></li><li class="cl"><a href="cuts/oxtail.html"><span class="cl__n"><span class="cl__t">Oxtail</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">11</span><span class="sr-only">, $11 a pound</span></a></li></ul><h3 class="chalk__h">Chicken <small>Old Mill</small></h3>
       <ul class="chalk__list"><li class="cl"><a href="cuts/whole-chicken.html"><span class="cl__n"><span class="cl__t">Whole bird</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">6½</span><span class="sr-only">, $6.50 a pound</span></a></li><li class="cl"><a href="cuts/chicken-thighs.html"><span class="cl__n"><span class="cl__t">Thighs</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">7½</span><span class="sr-only">, $7.50 a pound</span></a></li></ul></div><div><h3 class="chalk__h">Pork <small>Two Creeks</small></h3>
@@ -89,7 +89,40 @@
       <ul class="chalk__list"><li class="cl"><a href="cuts/lamb-rack.html"><span class="cl__n"><span class="cl__t">Rack, frenched</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">34</span><span class="sr-only">, $34 a pound</span></a></li><li class="cl is-gone"><a href="cuts/lamb-loin-chops.html"><span class="cl__n"><span class="cl__t">Loin chops</span><span class="cl__note">gone Mon 5:30</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">26</span><span class="sr-only">, $26 a pound, sold out</span></a></li><li class="cl"><a href="cuts/lamb-shoulder-chops.html"><span class="cl__n"><span class="cl__t">Shoulder chops</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">16</span><span class="sr-only">, $16 a pound</span></a></li><li class="cl"><a href="cuts/lamb-neck.html"><span class="cl__n"><span class="cl__t">Neck</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">10</span><span class="sr-only">, $10 a pound</span></a></li></ul><h3 class="chalk__h">Made here</h3>
       <ul class="chalk__list"><li class="cl"><a href="cuts/bacon.html"><span class="cl__n"><span class="cl__t">Bacon, hickory</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">16</span><span class="sr-only">, $16 a pound</span></a></li><li class="cl"><a href="cuts/beef-stock.html"><span class="cl__n"><span class="cl__t">Stock, quart</span></span><span class="cl__d" aria-hidden="true"></span><span class="cl__p" aria-hidden="true">12 ea</span><span class="sr-only">, $12 each</span></a></li></ul></div></div>
       <p class="chalk__foot"><a class="chalk__more" href="#full-list" data-view="labels"><span>+ 18 more, with pictures</span></a><span aria-hidden="true">— M.</span></p>
-    </div><div id="full-list"><table class="board__table">
+    </div></div>
+    </div>
+  </section>
+  <section class="door" aria-labelledby="hero-title">
+    <img src="assets/img/shop/breakdown.webp" alt="A butcher in a flat cap breaking down a lamb on a wooden block" width="1600" height="1200" fetchpriority="high">
+    <span class="door__tag">Stand-in photo</span>
+    <p class="sign" data-sign><b>Tue–Sat 9–7</b><small>Sunday 10–5 · Monday closed</small></p>
+    <div class="door__cap">
+      <h1 id="hero-title">Kent Ave &amp; N 4th.<br>Whole animals since 2019.</h1>
+      <p>A block from the river, five minutes from the Bedford Ave L.</p>
+      <a class="btn btn--red door__cta" href="#board">Shop this week’s board</a>
+    </div>
+  </section>
+
+  <blockquote class="scrap">
+    <p>Good steer this week. The Kittles kept him on grass to the end, and the fat’s yellow and sweet. Two big pigs and a little one, so ask which shoulder you’re getting. Got a smoker? Ask me for the lamb breast.</p>
+    <footer>Marisol, <span data-when="signed">Mon 10/12, 11:20 AM</span></footer>
+  </blockquote>
+
+  <ul class="ways" aria-label="Getting it home">
+    <li data-way="courier">Courier in Brooklyn and Manhattan, 5–⁠9 PM</li>
+    <li data-way="ship">Overnight to the lower 48</li>
+    <li data-way="pickup">Pickup at the counter</li>
+    <li><a href="#delivery">Check your ZIP code</a></li>
+  </ul>
+
+  <aside class="tkt" aria-labelledby="tkt-k">
+    <p class="tkt__k" id="tkt-k">Your ticket</p>
+    <p class="tkt__no" data-ticket-no></p>
+    <div class="tkt__body" data-ticket-card><p>Nothing on it yet. Pick something off the board.</p></div>
+  </aside>
+
+
+  <div id="full-list"><table class="board__table">
         <caption><span class="board__species">Beef</span><span class="board__animal">Steer #2186 · Kittle Hollow Farm, Delhi, NY · hung 21 days</span></caption><colgroup><col class="c-cut"><col class="c-w"><col class="c-p"><col class="c-e"><col class="c-s"><col class="c-a"></colgroup>
         <thead><tr><th scope="col">Cut</th><th scope="col" class="num">Weight</th><th scope="col" class="num">Price</th><th scope="col" class="num">Estimate</th><th scope="col" class="num">Stock</th><th scope="col"><span class="sr-only">Add to your ticket</span></th></tr></thead>
         <tbody><tr class="" data-row="ribeye-bone-in">
@@ -362,39 +395,7 @@
         <td class="num">$8 each</td>
         <td class="num num--est">$8.00</td>
         <td class="num stock ">10 left</td>
-        <td class="act"><button class="add" data-add="beef-tallow" aria-label="Add Beef tallow to your ticket">Add</button></td></tr></tbody></table></div></div>
-    </div>
-  </section>
-  <section class="door" aria-labelledby="hero-title">
-    <img src="assets/img/shop/breakdown.webp" alt="A butcher in a flat cap breaking down a lamb on a wooden block" width="1600" height="1200" fetchpriority="high">
-    <span class="door__tag">Stand-in photo</span>
-    <p class="sign" data-sign><b>Tue–Sat 9–7</b><small>Sunday 10–5 · Monday closed</small></p>
-    <div class="door__cap">
-      <h1 id="hero-title">Kent Ave &amp; N 4th.<br>Whole animals since 2019.</h1>
-      <p>A block from the river, five minutes from the Bedford Ave L.</p>
-      <a class="btn btn--red door__cta" href="#board">Shop this week’s board</a>
-    </div>
-  </section>
-
-  <blockquote class="scrap">
-    <p>Good steer this week. The Kittles kept him on grass to the end, and the fat’s yellow and sweet. Two big pigs and a little one, so ask which shoulder you’re getting. Got a smoker? Ask me for the lamb breast.</p>
-    <footer>Marisol, <span data-when="signed">Mon 10/12, 11:20 AM</span></footer>
-  </blockquote>
-
-  <ul class="ways" aria-label="Getting it home">
-    <li data-way="courier">Courier in Brooklyn and Manhattan, 5–⁠9 PM</li>
-    <li data-way="ship">Overnight to the lower 48</li>
-    <li data-way="pickup">Pickup at the counter</li>
-    <li><a href="#delivery">Check your ZIP code</a></li>
-  </ul>
-
-  <aside class="tkt" aria-labelledby="tkt-k">
-    <p class="tkt__k" id="tkt-k">Your ticket</p>
-    <p class="tkt__no" data-ticket-no></p>
-    <div class="tkt__body" data-ticket-card><p>Nothing on it yet. Pick something off the board.</p></div>
-  </aside>
-
-
+        <td class="act"><button class="add" data-add="beef-tallow" aria-label="Add Beef tallow to your ticket">Add</button></td></tr></tbody></table></div>
   <div class="slips">
     <figure class="slip-note">
       <blockquote><p>Saturday mornings it’s short ribs and whole chickens. If you want the short ribs, order Friday.</p></blockquote>

@@ -48,7 +48,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: 88px; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--hdr, 88px) + 12px); scrollbar-gutter: stable; }
 body { margin: 0; background: var(--tex-paper), var(--paper); color: var(--ink); font: 400 16px/1.55 var(--text); }
 img, svg { display: block; max-width: 100%; }
 img { height: auto; }
@@ -162,7 +162,7 @@ table { border-collapse: collapse; width: 100%; }
 }
 
 /* ---------- home: the shop, first ---------- */
-.stage { --focus: var(--focus-light); position: relative; padding: 30px max(var(--pad), calc((100% - 1400px) / 2 + var(--pad))) 46px; display: grid; grid-template-columns: minmax(0, 1fr) 340px; grid-template-areas: "board door" "board scrap" "board ways" "board tkt" "slips slips"; grid-template-rows: auto auto auto 1fr auto; gap: 26px 48px; align-items: start; color: var(--chalk);
+.stage { --focus: var(--focus-light); position: relative; padding: 30px max(var(--pad), calc((100% - 1400px) / 2 + var(--pad))) 46px; display: grid; grid-template-columns: minmax(0, 1fr) 340px; grid-template-areas: "board door" "board scrap" "board ways" "board tkt" "list list" "slips slips"; grid-template-rows: auto auto auto 1fr auto auto; gap: 26px 48px; align-items: start; color: var(--chalk);
   background: radial-gradient(ellipse 38% 26% at 18% 20%, rgba(255, 255, 255, .055), transparent 70%), radial-gradient(ellipse 30% 30% at 62% 64%, rgba(255, 255, 255, .04), transparent 70%), radial-gradient(ellipse 22% 18% at 88% 30%, rgba(255, 255, 255, .035), transparent 70%), var(--tex-slate), var(--slate); }
 /* the chalk ledge along the bottom of the wall, with two sticks lying on it */
 .stage::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 18px; background: linear-gradient(180deg, #8F6743, #6A4A2D 55%, #4E3520); box-shadow: 0 4px 8px rgba(0, 0, 0, .3); }
@@ -181,7 +181,7 @@ table { border-collapse: collapse; width: 100%; }
 .door__cap { position: absolute; z-index: 2; left: 16px; right: 16px; bottom: 14px; }
 .door__cap h1 { font: 800 25px/1.02 var(--sign); }
 .door__cap p { font-size: 14px; margin-top: 6px; }
-.door__cta { display: none; }
+.door__cta { display: none; --focus: var(--focus-light); }
 .scrap { grid-area: scrap; position: relative; color: var(--ink); padding: 30px 20px 14px 46px; transform: rotate(1.4deg); box-shadow: 0 12px 20px -10px rgba(0, 0, 0, .65);
   background: linear-gradient(90deg, transparent 32px, #E3A3A3 32px 34px, transparent 34px), repeating-linear-gradient(#FDFBF5 0 27px, #C9DCEB 27px 28px); }
 .scrap::before { content: ''; position: absolute; top: -12px; left: 38%; width: 92px; height: 26px; background: rgba(233, 221, 191, .85); transform: rotate(-4deg); }
@@ -212,12 +212,14 @@ table { border-collapse: collapse; width: 100%; }
 .board__frame { position: relative; }
 .board[data-mode="chalk"] .board__tools { display: none; }
 .board__body.is-wiped { animation: wipe .32s ease-out; }
-#full-list { margin-top: 26px; }
+#full-list { grid-area: list; margin-top: 10px; }
+.board { min-height: 740px; }
 #full-list a { color: var(--chalk); }
 html:not(.js) .add, html:not(.js) .tkt, html:not(.js) .board__switch, html:not(.js) .sample .link, html:not(.js) .header__tools, html:not(.js) .header__menu, html:not(.js) .zip__row .btn, html:not(.js) .newsletter .btn, html:not(.js) .pdp__buy { display: none; }
 .js #full-list { display: none; }
 @keyframes wipe { from { opacity: .15; clip-path: inset(0 100% 0 0); } }
-.board__tools { display: grid; gap: 14px; margin-bottom: 6px; }
+.board__tools { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-bottom: 6px; } /* bounded, so a non-wrapping chip row scrolls instead of widening the page */
+.board__bar .seg { min-width: 0; }
 .board__bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; }
 .board__body a { color: var(--chalk); }
 .board__body a:hover { color: #fff; }
@@ -234,6 +236,9 @@ html:not(.js) .add, html:not(.js) .tkt, html:not(.js) .board__switch, html:not(.
 .intro__h { font: 700 22px/1.15 var(--sign); margin-bottom: 10px; }
 .cutmap { max-width: 760px; color: var(--chalk); }
 .cutmap__title { font: 700 30px/1 var(--hand); filter: url(#chalk); transform: rotate(-1deg); }
+.cutmap__toggle { display: inline-flex; align-items: baseline; gap: 10px; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: default; }
+.cutmap__hint { display: none; }
+.cutmap__body { margin-top: 8px; }
 .cutmap__head .seg { gap: 4px 18px; }
 .cutmap__head .seg button { min-height: 36px; padding: 0 2px; border: 0; background: none; color: #C9C5BB; font: 600 15px/1 var(--text); }
 .cutmap__head .seg button[aria-pressed="true"] { background: none; color: var(--chalk); text-decoration: underline 2px; text-underline-offset: 6px; }
@@ -697,7 +702,7 @@ html:has(dialog[open]) { overflow: hidden; }
 .ticket .btn--ink { justify-self: start; background: var(--receipt); color: var(--ink); }
 
 /* a label prints out under your ticket */
-.toast { position: fixed; top: 68px; right: max(16px, calc((100% - 1400px) / 2 + 16px)); z-index: 29; display: grid; gap: 8px; width: min(300px, calc(100% - 32px)); padding: 12px 14px 18px; background: var(--receipt); color: #222; font: 13px/1.4 var(--print); text-transform: uppercase; box-shadow: 0 8px 18px -8px rgba(0, 0, 0, .45); transform: translateY(calc(-100% - 80px)); visibility: hidden; transition: transform .2s ease-out, visibility 0s .2s; }
+.toast { position: fixed; top: calc(var(--hdr, 60px) + 8px); right: max(16px, calc((100% - 1400px) / 2 + 16px)); z-index: 29; display: grid; gap: 8px; width: min(300px, calc(100% - 32px)); padding: 12px 14px 18px; background: var(--receipt); color: #222; font: 13px/1.4 var(--print); text-transform: uppercase; box-shadow: 0 8px 18px -8px rgba(0, 0, 0, .45); transform: translateY(calc(-100% - 80px)); visibility: hidden; transition: transform .2s ease-out, visibility 0s .2s; }
 .toast::after { content: ''; position: absolute; left: 0; right: 0; bottom: -9px; height: 10px; background: linear-gradient(-45deg, transparent 6px, var(--receipt) 0) 0 0 / 12px 10px repeat-x, linear-gradient(45deg, transparent 6px, var(--receipt) 0) 0 0 / 12px 10px repeat-x; }
 .toast.is-on { transform: none; visibility: visible; transition: transform .2s ease-out; }
 .toast b { font-size: 14px; }
@@ -729,7 +734,8 @@ html:has(dialog[open]) { overflow: hidden; }
   .nav { display: none; }
   .logo__name { font-size: 24px; }
   /* phones walk in: the shop, the note, then the board */
-  .stage { grid-template-columns: minmax(0, 1fr); grid-template-areas: "door" "scrap" "ways" "board" "slips"; grid-template-rows: none; gap: 0; padding: 0 0 46px; }
+  .board { min-height: 0; }
+  .stage { grid-template-columns: minmax(0, 1fr); grid-template-areas: "door" "scrap" "ways" "board" "list" "slips"; grid-template-rows: none; gap: 0; padding: 0 0 46px; }
   .door { height: 430px; border: 0; box-shadow: none; transform: none; }
   .door__cap h1 { font-size: 34px; }
   .door__cta { display: inline-flex; margin-top: 12px; min-height: 42px; }
@@ -758,7 +764,7 @@ html:has(dialog[open]) { overflow: hidden; }
   .week { grid-template-columns: repeat(4, 1fr); }
   .week li:nth-child(5) { border-left: 0; }
   .week li:nth-child(n+5) { border-top: 1px solid var(--line); }
-  .toast { top: 62px; }
+  .toast { top: calc(var(--hdr, 54px) + 8px); }
 }
 @media (max-width: 720px) {
   .block { margin-top: 44px; }
@@ -802,6 +808,10 @@ html:has(dialog[open]) { overflow: hidden; }
   .story li:first-child { grid-column: auto; }
   .co__row, .co__row--3 { grid-template-columns: 1fr; }
   .board__bar { flex-direction: column; align-items: stretch; }
+  .board__bar { min-width: 0; }
+  .board__bar .seg, .board__bar .select { width: 100%; max-width: 100%; }
+  .board__bar .seg { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+  .board__bar .seg button { flex: none; }
   .board .select select { max-width: 200px; }
   .week { grid-template-columns: 1fr; }
   .week li { display: flex; gap: 10px; align-items: baseline; border-left: 0; border-top: 1px solid var(--line); padding: 6px 8px; }
@@ -811,8 +821,14 @@ html:has(dialog[open]) { overflow: hidden; }
   html:not(.sample-ok) .boxbar { bottom: calc(var(--slip-h, 40px) + 10px); }
 }
 @media (max-width: 600px) {
-  .cuts .region text.cuts__left, .cuts__lead { display: none; }
-  .cuts .region text, .cuts__leg { font-size: 26px; }
+  .cuts__lead { display: none; }
+  .cuts .region text, .cuts__leg { font-size: 24px; }
+  .cuts .region text.cuts__left { font-size: 15px; }
+  .cutmap__title { font-size: 24px; transform: none; }
+  .cutmap__toggle { width: 100%; justify-content: space-between; cursor: pointer; padding: 8px 10px; border: 1px dashed rgba(239, 236, 228, .45); }
+  .cutmap__hint { display: inline; font: 400 14px var(--text); color: #C9C5BB; }
+  .cutmap__hint::after { content: ' ▾'; }
+  .cutmap__toggle[aria-expanded="true"] .cutmap__hint::after { content: ' ▴'; }
   .zone-labels text { font-size: 30px; stroke-width: 6px; }
   .zone-labels .shop-label { font-size: 26px; }
   .pcs { grid-template-columns: 1fr 1fr; gap: 18px 10px; }
@@ -826,7 +842,13 @@ html:has(dialog[open]) { overflow: hidden; }
   .pc .tag__where { width: 36px; }
   .pc__foot { padding: 0 2px; }
   .pc .add { min-width: 52px; padding: 0 10px; }
-  .drawn__note { display: none; }
+  .drawn--big { display: flex; flex-direction: column; }
+  .drawn--big .drawn__sheet { order: 0; }
+  .drawn--big .drawn__note { order: 1; position: static; width: auto; max-width: none; margin: 10px 10px 0 4px; padding: 6px 10px 7px; background: #FBF6EC; box-shadow: 0 4px 8px -5px rgba(0, 0, 0, .55); transform: rotate(-1.2deg); }
+  .drawn--big .drawn__note:nth-of-type(2) { margin-left: 26px; transform: rotate(1.4deg); }
+  .drawn--big .tag { order: 2; margin-top: 12px; }
+  .pc .drawn__note { display: none; }
+  body[data-page="product"] .footer { padding-bottom: calc(var(--slip-h, 0px) + 96px); }
   .drawn--big .drawn__sheet { aspect-ratio: auto; }
   .drawn--big .drawn__sheet img { position: static; inset: auto; width: 100%; height: auto; }
   .drawn--big .tag { width: min(232px, 72%); margin-top: -36px; font-size: 11px; }
@@ -841,6 +863,7 @@ html:has(dialog[open]) { overflow: hidden; }
   .logo__tag { font-size: 12px; margin-top: 3px; }
   .logo__where { display: none; }
   .header { gap: 6px; padding-inline: 12px; }
+  .cutbar { margin-inline: -12px; }
   .logo__name { font-size: 22px; }
   .tool { padding: 0 10px; }
   .header__tools { gap: 6px; }

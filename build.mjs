@@ -162,7 +162,8 @@ const home = tpl
   .replaceAll('{{butcherFirst}}', esc(shop.butcher.split(' ')[0]))
   .replaceAll('{{butcher}}', esc(shop.butcher))
   .replace('{{diagrams}}', diagrams)
-  .replace('{{board}}', `${R.chalkHTML(D, '')}<div id="full-list">${R.boardHTML(D, '')}</div>`)
+  .replace('{{board}}', R.chalkHTML(D, ''))
+  .replace('{{fullList}}', `<div id="full-list">${R.boardHTML(D, '')}</div>`)
   .replace('{{map}}', fs.readFileSync(path.join(ROOT, 'content/nyc-map.svg'), 'utf8'))
   .replace('{{farms}}', farmsRows)
 ;
@@ -207,6 +208,7 @@ out('account.html', layout({ root: '', file: 'account.html', page: 'account', no
   body: `<div class="wrap prose prose--app"><h1>Your account</h1><p>Your orders, subscriptions and gift cards are saved in this browser.</p>
   <section aria-labelledby="subs-h"><h2 id="subs-h">Butcher’s Box subscriptions</h2><div data-subs></div></section>
   <section aria-labelledby="gift-h"><h2 id="gift-h">Gift cards</h2><div data-gifts></div></section>
+  <section aria-labelledby="notify-h"><h2 id="notify-h" tabindex="-1">Tell me when it’s back</h2><div data-notify-list></div></section>
   <section aria-labelledby="look-h"><h2 id="look-h">Find an order</h2><form class="lookup" data-lookup><label for="look">Ticket number</label><div class="lookup__row"><input id="look" name="n" inputmode="numeric" pattern="[0-9]{1,4}" maxlength="4" required placeholder="47"><button class="btn btn--ink" type="submit">Find</button></div></form><div data-lookup-out aria-live="polite"></div></section>
   <section aria-labelledby="ord-h"><h2 id="ord-h">Your orders</h2><div data-orders></div></section></div>` }));
 out('gift-cards.html', layout({ root: '', file: 'gift-cards.html', page: 'gift', title: 'Gift cards · Eat Your Meat', description: 'Eat Your Meat gift cards, sent by email. Good for anything on the board or the Butcher’s Box.',

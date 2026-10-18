@@ -119,11 +119,14 @@
     const o = S.openSign(t);
     return o.open ? { open: true, text: `till ${clock(o.until)}` } : { open: false, text: `back ${dayLabel(t, o.day)} ${clock(o.at)}` };
   }
+  const headerHeight = () => document.documentElement.style.setProperty('--hdr', `${$('.header').offsetHeight}px`);
+  addEventListener('resize', headerHeight);
   function paintSign() {
     const h = hoursText(), t = now(), c = S.nextCourier(t), sh = S.nextShip(t), pu = S.nextPickup(t);
     $$('[data-cutbar]').forEach((el) => (el.innerHTML = `${c === 0 ? 'Order by 2 PM, courier tonight in Brooklyn and Manhattan' : `Next courier ${dayLabel(t, c)} evening, order by 2 PM`} · Pickup ${dayLabel(t, pu.day)} from ${clock(pu.minutes)} · ${sh.ship === 0 ? 'Ships today, order by noon' : `Ships ${dayLabel(t, sh.ship)}`}<span class="cutbar__free"> · Free courier over $100</span>`));
     $$('[data-status]').forEach((el) => (el.innerHTML = `<b class="${h.open ? 'is-open' : 'is-closed'}">${h.open ? 'Open' : 'Closed'}</b> ${esc(h.text)}<span class="logo__where"> · ${esc(D.shop.street)}</span>`));
     $$('[data-sign]').forEach((el) => { el.classList.toggle('is-closed', !h.open); el.innerHTML = `<b>${h.open ? 'Open' : 'Closed'}</b><small>${esc(h.text)}</small>`; });
+    headerHeight();
   }
   paintSign();
   // a tab left open keeps the right time: the sign, "updated …" and the cutoffs
@@ -307,7 +310,7 @@
         ${consent}
         <p class="err" data-co-err aria-live="polite"></p>
         <button class="btn btn--red" type="submit" data-place>Place order · estimate ${S.money(t.total)}</button>
-        <p class="fine">${state.cart.some((l) => l.weighed) ? `You pay the actual weight after cutting, at most ${S.money(t.max)}. ` : ''}<a href="${root}terms.html" target="_blank" rel="noopener">Terms of sale</a></p>
+        <p class="fine">${state.cart.some((l) => l.weighed) ? `You pay the actual weight after cutting, at most <span data-co-max>${S.money(t.max)}</span>. ` : ''}<a href="${root}terms.html" target="_blank" rel="noopener">Terms of sale</a></p>
       </form>
       <aside class="co__side" aria-label="Order summary"><h3>Eat Your Meat · Kent Ave</h3><ul class="co__lines">${state.cart.map((l) => `<li><span>${l.qty > 1 ? l.qty + ' × ' : ''}${esc(lineView(l).name)}</span><span>${l.weighed ? '≈ ' : ''}${S.money(S.round(l.price * l.qty))}</span></li>`).join('')}</ul>
         <dl class="sum"><div><dt>Subtotal (estimate)</dt><dd>${S.money(t.subtotal)}</dd></div><div><dt>${METHOD_LABEL[method]}</dt><dd>${t.fee ? S.money(t.fee) : 'Free'}</dd></div><div data-credit-row hidden><dt>Gift card</dt><dd data-credit></dd></div><div class="is-total"><dt>Estimated total</dt><dd data-due>${S.money(t.total)}</dd></div></dl></aside>
@@ -316,6 +319,7 @@
     for (const [k, v] of Object.entries(coDraft)) if (form.elements[k] && form.elements[k].type !== 'checkbox' && k !== 'zip' && k !== 'state') form.elements[k].value = v;
     form.addEventListener('input', () => { coDraft = Object.fromEntries(new FormData(form)); });
     const due = () => S.round(Math.max(0, t.total - credit.amount));
+    if (form.elements.gift.value) queueMicrotask(() => $('[data-redeem]', form).click());
     $('[data-redeem]', form).addEventListener('click', () => {
       const code = form.elements.gift.value.trim().toUpperCase(), msg = $('[data-redeem-msg]', form);
       const gifts = load('eym.gifts', []), found = Array.isArray(gifts) ? gifts.find((x) => x && x.code === code) : null, g = found && found.balance > 0 ? found : null;
@@ -325,6 +329,7 @@
       $('[data-credit]').textContent = '−' + S.money(credit.amount);
       $('[data-due]').textContent = S.money(due());
       $('[data-place]', form).textContent = `Place order · estimate ${S.money(due())}`;
+      const mx = $('[data-co-max]', form); if (mx) mx.textContent = S.money(S.round(Math.max(0, t.max - credit.amount)));
       // a card is still needed if anything is weighed: the actual weight can come in up to 10% over
       for (const n of ['card', 'exp', 'cvc']) form.elements[n].required = due() > 0 || state.cart.some((l) => l.weighed);
     });
@@ -360,13 +365,13 @@
     const no = state.ticket;
     const phone = String(form.elements.phone?.value || '').replace(/\D/g, '');
     const tt = now();
-    let next = '';
+    let next = '', untilDay = 0; // days from today until the order is in your hands
     const loose = state.cart.some((l) => l.id !== 'box' && !l.digital);
-    if (loose && method === 'courier') { const d = S.nextCourier(tt); next = d === 0 ? `We’ll cut it this afternoon and text the number ending ${phone.slice(-4)} when the courier leaves, between 5 and 9 PM tonight.` : `We’ll cut it ${dayLabel(tt, d)} morning and text the number ending ${phone.slice(-4)} when the courier leaves, between 5 and 9 PM.`; }
-    if (loose && method === 'overnight') { const s = S.nextShip(tt); next = `We’ll cut and pack it ${dayLabel(tt, s.ship)} morning. It arrives ${dayLabel(tt, s.arrive)}, by end of day. We’ll text the tracking number to the number ending ${phone.slice(-4)}.`; }
-    if (loose && method === 'pickup') next = `${pickupText(tt)} Come to the counter at Kent Ave & N 4th St and we’ll call your number.`;
+    if (loose && method === 'courier') { const d = S.nextCourier(tt); untilDay = d; next = d === 0 ? `We’ll cut it this afternoon and text the number ending ${phone.slice(-4)} when the courier leaves, between 5 and 9 PM tonight.` : `We’ll cut it ${dayLabel(tt, d)} morning and text the number ending ${phone.slice(-4)} when the courier leaves, between 5 and 9 PM.`; }
+    if (loose && method === 'overnight') { const s = S.nextShip(tt); untilDay = s.arrive; next = `We’ll cut and pack it ${dayLabel(tt, s.ship)} morning. It arrives ${dayLabel(tt, s.arrive)}, by end of day. We’ll text the tracking number to the number ending ${phone.slice(-4)}.`; }
+    if (loose && method === 'pickup') { untilDay = S.nextPickup(tt).day; } if (loose && method === 'pickup') next = `${pickupText(tt)} Come to the counter at Kent Ave & N 4th St and we’ll call your number.`;
     if (state.cart.some((l) => l.id === 'box')) {
-      const day = etDate(S.firstBoxCut(tt));
+      const day = etDate(S.firstBoxCut(tt)); untilDay = Math.max(untilDay, S.firstBoxCut(tt) + (method === 'overnight' ? 1 : 0));
       const boxLine = method === 'courier' ? `Your Butcher’s Box is cut ${day} and delivered that evening, 5–⁠9 PM.` : method === 'overnight' ? `Your Butcher’s Box is cut and shipped ${day}, and arrives the next day.` : `Your Butcher’s Box is cut ${day} and ready at the counter from 11 AM.`;
       next = next ? `${next} ${boxLine}` : boxLine;
     }
@@ -382,7 +387,7 @@
     const hadSub = state.cart.some(S.isSubscription);
     const weighedOrder = state.cart.some((l) => l.weighed);
     state.cart = [];
-    state.placed = { no, text: (next || 'Your gift card is on its way by email').split('. ')[0].replace(/\.?$/, '.'), until: Date.now() + 8 * 3600e3 };
+    state.placed = { no, text: (next || 'Your gift card is on its way by email').split('. ')[0].replace(/\.?$/, '.'), until: Date.now() + (untilDay + 1) * 864e5 - (tt.h * 60 + tt.m) * 60e3 }; // through the end of that day, Eastern
     save('eym.placed', state.placed);
     coDraft = {};
     afterCartChange(false);
@@ -394,6 +399,7 @@
       ${hadSub ? `<p>Your Butcher’s Box renews on the schedule you chose. Skip or cancel it in <a href="${root}account.html">your account</a>.</p>` : ''}
       <p class="fine">Nothing was charged. Estimated total ${S.money(S.round(t.total - credit.amount))}${weighedOrder ? `; with actual weights it would be at most ${S.money(S.round(t.max - credit.amount))}` : ''}.</p>
       <a class="btn btn--ink" href="${root}index.html#board" data-close>Back to the board</a></div>`;
+    const tk = $('[data-checkout-body] .ticket'); tk.tabIndex = -1; tk.focus();
   }
 
   // ---------- search (combobox + listbox) ----------
@@ -437,7 +443,7 @@
   list.addEventListener('click', (e) => { const li = e.target.closest('[data-i]'); if (li) location.href = results[Number(li.dataset.i)].go; });
   document.addEventListener('keydown', (e) => {
     const typing = document.activeElement?.matches('input:not([type=radio]):not([type=checkbox]), textarea, select');
-    if (typing) return;
+    if (typing || dlg('checkout').open) return;
     if ((e.key.toLowerCase() === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !$('dialog[open]'))) { e.preventDefault(); openSearch(); }
   });
 
@@ -460,9 +466,9 @@
     $$('[data-board-wrap] .seg [data-view]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
     const { species, primal } = state.f;
     const note = $('[data-filter-note]');
-    if (primal) {
-      const n = D.items.filter((i) => i.species === species && i.primal === primal && (!state.f.good || R.goodFor(i).includes(state.f.good))).length;
-      note.innerHTML = `Showing ${esc(D.speciesLabel[species])}, ${esc(D.primals[species][primal])}: ${n} cut${n > 1 ? 's' : ''}. <button class="link" type="button" data-clear>Show the whole board</button>`;
+    if (v !== 'chalk' && (species || primal || state.f.good)) {
+      const n = $$('[data-board] .pc').length, what = [species && D.speciesLabel[species], primal && D.primals[species][primal], state.f.good && { grill: 'good on the grill', skillet: 'good in a skillet', oven: 'good in the oven', braise: 'low and slow' }[state.f.good]].filter(Boolean).join(', ');
+      note.innerHTML = `${n ? `${n} cut${n > 1 ? 's' : ''}` : 'No cuts'}: ${esc(what)}. <button class="link" type="button" data-clear>Show every cut</button>`;
     } else note.textContent = '';
     $$('[data-board-wrap] .seg [data-species]').forEach((b) => b.setAttribute('aria-pressed', String(!primal && b.dataset.species === species)));
     $$('[data-board-wrap] .seg [data-good]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.good === state.f.good)));
@@ -506,6 +512,12 @@
   }
   function initHome() {
     const params = new URLSearchParams(location.search);
+    if (location.hash === '#full-list') state.f.view = 'labels';
+    // the chart folds behind its heading on phones
+    const tog = $('.cutmap__toggle'), body = $('#cutmap-body');
+    const setFold = (open) => { tog.setAttribute('aria-expanded', String(open)); body.hidden = !open; };
+    if (matchMedia('(max-width: 720px)').matches) setFold(false);
+    tog.addEventListener('click', () => setFold(body.hidden));
     if (D.speciesOrder.includes(params.get('species'))) Object.assign(state.f, { species: params.get('species'), view: 'labels' });
     paintHomeTimes();
     renderTicketCard();
@@ -667,8 +679,8 @@
       e.preventDefault();
       const email = nf.elements.email.value.trim(), msg = $('[data-notify-msg]');
       if (!isEmail(email)) { msg.textContent = 'Enter an email address, like you@example.com.'; nf.elements.email.focus(); return; }
-      const list = load('eym.notify', []);
-      save('eym.notify', [...(Array.isArray(list) ? list : []), { id: nf.dataset.notify, email }]);
+      const list = load('eym.notify', []), kept = (Array.isArray(list) ? list : []).filter((x) => x && !(x.id === nf.dataset.notify && x.email === email));
+      save('eym.notify', [...kept, { id: nf.dataset.notify, email }]);
       nf.reset(); msg.textContent = 'Thanks. We’ll email you when the next one is on the board.';
     });
     const form = $('[data-pdp]');
@@ -704,14 +716,24 @@
       const rawSubs = load('eym.subs', []), subs = Array.isArray(rawSubs) ? rawSubs.map((x, i) => [x, i]).filter(([x]) => ok(x)) : [];
       const rawOrders = load('eym.orders', []), orders = Array.isArray(rawOrders) ? rawOrders.filter((o) => ok(o) && Number.isInteger(o.no)) : [];
       const rawGifts = load('eym.gifts', []), gifts = Array.isArray(rawGifts) ? rawGifts.filter((g) => ok(g) && typeof g.code === 'string') : [];
+      const rawN = load('eym.notify', []), notes = Array.isArray(rawN) ? rawN.filter((x) => ok(x) && has(x.id) && typeof x.email === 'string') : [];
+      $('[data-notify-list]').innerHTML = notes.length ? `<ul class="gifts">${notes.map((x, i) => `<li><span>${esc(byId[x.id].name)} · ${esc(x.email)}</span><button class="link" type="button" data-notify-drop="${i}">Remove</button></li>`).join('')}</ul>` : '<p class="empty">No requests in this browser.</p>';
       $('[data-gifts]').innerHTML = gifts.length ? `<ul class="gifts">${gifts.map((g) => `<li><b>${esc(g.code)}</b><span>${S.money(Number(g.balance) || 0)} left${g.to ? ` · for ${esc(String(g.to))}` : ''}</span></li>`).join('')}</ul>` : '<p class="empty">No gift cards in this browser.</p>';
       subsEl.innerHTML = subs.length ? subs.map(([s, i]) => `<div class="sub ${s.status === 'cancelled' ? 'is-cancelled' : ''}">
           <p class="sub__head"><span>Butcher’s Box, ${Number(s.size) || ''} cuts · ${esc(own(D.box.freqs, s.freq))}</span><span>${s.status === 'cancelled' ? 'Canceled' : s.skip ? 'Next box skipped' : 'Active'}</span></p>
           <p class="fine">From ticket ${Number(s.order) || '?'}. Cut on Wednesdays. Changes must be in by Sunday 11:59 PM Eastern.</p>
-          ${s.status === 'cancelled' ? '<p class="fine" tabindex="-1" data-sub-done="${i}">Canceled. No more boxes will be cut or charged.</p>' : `<div class="sub__actions"><button class="btn btn--line" type="button" data-sub-skip="${i}">${s.skip ? 'Undo skip' : 'Skip the next box'}</button><button class="btn btn--line" type="button" data-sub-cancel="${i}">Cancel subscription</button></div>`}</div>`).join('')
+          ${s.status === 'cancelled' ? `<p class="fine" tabindex="-1" data-sub-done="${i}">Canceled. No more boxes will be cut or charged.</p>` : `<div class="sub__actions"><button class="btn btn--line" type="button" data-sub-skip="${i}">${s.skip ? 'Undo skip' : 'Skip the next box'}</button><button class="btn btn--line" type="button" data-sub-cancel="${i}">Cancel subscription</button></div>`}</div>`).join('')
         : '<p class="empty">No subscriptions in this browser.</p>';
       ordersEl.innerHTML = Array.isArray(orders) && orders.length ? `<div class="ticket-list">${[...orders].reverse().map(ticketHTML).join('')}</div>` : '<p class="empty">No orders in this browser yet.</p>';
     };
+    $('[data-notify-list]').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-notify-drop]');
+      if (!b) return;
+      const list = load('eym.notify', []);
+      if (!Array.isArray(list)) return;
+      const kept = list.filter((x) => x && typeof x === 'object' && has(x.id) && typeof x.email === 'string'); kept.splice(Number(b.dataset.notifyDrop), 1);
+      save('eym.notify', kept); render(); ($('[data-notify-drop]') || $('#notify-h')).focus();
+    });
     subsEl.addEventListener('click', (e) => {
       const subs = load('eym.subs', []);
       if (!Array.isArray(subs)) return;
@@ -759,7 +781,7 @@
     updateBadge(false); showTicketNo();
     if (page === 'home') { refreshBoard(); renderBox(); renderTicketCard(); }
     if (page === 'product') hydratePdpStock();
-    if (dlg('cart').open) renderCart();
+    if (dlg('cart').open) rerenderCart({});
     if ($('[data-co]') && dlg('checkout').open) { dlg('checkout').close(); $('.tool--cart').focus(); toast('Your ticket changed in another tab. Check out again to see the new total.', { label: 'View ticket', run: showCart }); }
   });
 

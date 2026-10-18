@@ -18,7 +18,7 @@
     return { text: left === 1 ? 'Last one' : `${left} left`, cls: left <= 2 ? 'is-low' : '' };
   }
   const GOOD = { steak: ['grill', 'skillet'], pork: ['skillet', 'oven'], lamb: ['oven', 'grill'], low: ['braise', 'smoke'], ground: ['skillet', 'grill'], poultry: ['oven'], breast: ['skillet', 'oven'], thigh: ['skillet', 'oven'], wings: ['oven', 'grill'] };
-  const goodFor = (item) => GOOD[item.cook] || (item.id === 'bacon' ? ['skillet'] : []);
+  const goodFor = (item) => item.good || GOOD[item.cook] || (item.id === 'bacon' ? ['skillet'] : []);
   const notFresh = (item) => item.kept || (item.frozen ? 'Frozen' : null); // fresh is the default, so only the exceptions are shown
   const facts = (item) => [item.bone, notFresh(item), item.feeds].filter(Boolean).join(' · ');
 
@@ -52,7 +52,7 @@
     const sub = D.speciesOrder.map((sp) => D.animals[sp].chalk).filter(Boolean).join(' · ');
     const cols = D.chalkCols.map((sps) => `<div>${sps.map((sp) => `<h3 class="chalk__h">${esc(D.chalkLabel[sp])}${D.chalkNote[sp] ? ` <small>${esc(D.chalkNote[sp])}</small>` : ''}</h3>
       <ul class="chalk__list">${D.items.filter((i) => i.species === sp && i.chalk).map((it) => chalkLine(it, root, reserved)).join('')}</ul>`).join('')}</div>`).join('');
-    const pins = D.items.filter((i) => i.pin).map((it) => `<li class="pin" style="--tilt:${tilt(it.id)}deg"><a href="${root}cuts/${it.id}.html"><img src="${root}assets/draw/${it.id}.svg" alt="A drawing of ${esc(it.name.toLowerCase())}" width="400" height="300" loading="lazy"><span class="pin__name">${esc(it.chalk || it.short)}</span><span class="pin__price">${chalkPrice(it)}${it.unit === 'lb' ? '/lb' : ''}</span></a>${it.stock && reserved(it.id) < it.stock ? `<button class="add" data-add="${it.id}" aria-label="Add ${esc(it.name)} to your ticket">Add</button>` : ''}</li>`).join('');
+    const pins = D.items.filter((i) => i.pin).map((it) => `<li class="pin" style="--tilt:${tilt(it.id)}deg"><a href="${root}cuts/${it.id}.html"><img src="${root}assets/draw/${it.id}.svg" alt="" width="400" height="300" loading="lazy"><span class="pin__name">${esc(it.chalk || it.short)}</span><span class="pin__price" aria-hidden="true">${chalkPrice(it)}${it.unit === 'lb' ? '/lb' : ''}</span><span class="sr-only">, ${spokenPrice(it)}</span></a>${it.stock && reserved(it.id) < it.stock ? `<button class="add" data-add="${it.id}" aria-label="Add ${esc(it.name)} to your ticket">Add</button>` : ''}</li>`).join('');
     return `<div class="chalk">
       <div class="chalk__head"><div><h2 class="chalk__title" id="board-title">On the block</h2><p class="chalk__sub">${esc(sub)}</p></div><p class="chalk__upd">updated ${esc(D.clock.updated)}</p></div>
       <ul class="pins">${pins}<li class="pin pin--all"><button type="button" data-view="labels">Every cut, with pictures<b>${D.items.length} →</b></button></li></ul>

@@ -7,14 +7,14 @@
     <div class="board__frame">
       <div class="board__tools">
         <div class="cutmap">
-          <div class="cutmap__head">
-            <h2 class="cutmap__title" id="cutmap-title">By part of the animal</h2>
-            <div class="seg seg--sm" role="group" aria-labelledby="cutmap-title">
-              <button aria-pressed="true" data-cutmap-tab="beef">Beef</button><button aria-pressed="false" data-cutmap-tab="pork">Pork</button><button aria-pressed="false" data-cutmap-tab="lamb">Lamb</button>
-            </div>
+          <h2 class="cutmap__title" id="cutmap-title"><button class="cutmap__toggle" type="button" aria-expanded="true" aria-controls="cutmap-body">By part of the animal<span class="cutmap__hint" aria-hidden="true">chart</span></button></h2>
+          <div class="cutmap__body" id="cutmap-body">
+          <div class="seg seg--sm" role="group" aria-labelledby="cutmap-title">
+            <button aria-pressed="true" data-cutmap-tab="beef">Beef</button><button aria-pressed="false" data-cutmap-tab="pork">Pork</button><button aria-pressed="false" data-cutmap-tab="lamb">Lamb</button>
           </div>
           {{diagrams}}
           <p class="cutmap__key">tap a part to see its cuts</p>
+          </div>
         </div>
         <div class="board__bar">
           <div class="seg" role="group" aria-label="Show">
@@ -60,6 +60,7 @@
   </aside>
 
 
+  {{fullList}}
   <div class="slips">
     <figure class="slip-note">
       <blockquote><p>{{counterText}}</p></blockquote>
